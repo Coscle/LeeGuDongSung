@@ -36,7 +36,7 @@ export default function Header() {
           {isLoggedIn ? (
             <div>
               <button onClick={handleLogout} className="LogoutBtn">로그아웃</button>
-              <Link to="/Message">
+              <Link to="/messageboard">
                 <button className="messageBtn">쪽지함</button>
               </Link>
               <Link to="/MyProfile">

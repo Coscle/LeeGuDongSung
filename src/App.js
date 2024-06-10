@@ -16,6 +16,8 @@ import RecruitBoardModify from './components/recruitboard/RecruitBoardModify';
 import ReviewBoardModify from './components/reviewboard/ReviewBoardModify'; 
 import ReviewBoard from './components/reviewboard/ReviewBoard'; 
 import ReviewBoardWrite from './components/reviewboard/ReviewBoardWrite'; 
+import MessageBoard from './components/message/MessageBoard'; 
+import ProfileToMessage from './components/message/ProfileToMessage';
 import './App.css';
 import './fonts/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -41,6 +43,8 @@ const App = () => {
 		  <Route path="/recruitboardwrite" element={<RecruitBoardWrite />} />
 		  <Route path="/recruitboard/:boardNo/modify" element={<RecruitBoardModify />} />
 		  <Route path="/reviewboard/:boardNo/modify" element={<ReviewBoardModify />} />
+		  <Route path="/profiletomessage" element={<ProfileToMessage />} />
+		  <Route path="/messageboard" element={<MessageBoard />} />
 		  <Route path="*" element={<NotFound />} />
 		</Routes>
         <Footer className="footer" />

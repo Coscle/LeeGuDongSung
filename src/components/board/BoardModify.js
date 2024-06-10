@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown } from 'react-bootstrap';
 import './boardWrite.css';
 
-function BoardWrite({ onSubmit, onCancel }) {
+function BoardModify({ onSubmit, onCancel }) {
   const [formData, setFormData] = useState({
     title: '',
     tags: '',
@@ -46,21 +46,19 @@ function BoardWrite({ onSubmit, onCancel }) {
       <form onSubmit={handleSubmit}>
         <div className="form-container">
           <div className="d-flex align-items-center mb-3">
-            {(window.location.pathname === '/recruitboardwrite') && (
-              <Dropdown className="recruitDoneButton">
-                <Dropdown.Toggle variant="primary">
-                  {formData.isRecruitmentDone ? '구인 완료' : '구인 중'}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => handleRecruitmentStatusChange(false)}>
-                    구인 중
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleRecruitmentStatusChange(true)}>
-                    구인 완료
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            )}
+            <Dropdown className="recruitDoneButton">
+              <Dropdown.Toggle variant="primary">
+                {formData.isRecruitmentDone ? '구인 완료' : '구인 중'}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => handleRecruitmentStatusChange(false)}>
+                  구인 중
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => handleRecruitmentStatusChange(true)}>
+                  구인 완료
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
             <label htmlFor="startDate" className="me-2">
               여행 시작일:
             </label>
@@ -128,4 +126,4 @@ function BoardWrite({ onSubmit, onCancel }) {
   );
 }
 
-export default BoardWrite;
+export default BoardModify;

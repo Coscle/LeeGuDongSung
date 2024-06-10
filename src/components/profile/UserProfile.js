@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './profile.css';
+import { Link } from 'react-router-dom';
 
 const UserProfile = () => {
   const [heartClicked, setHeartClicked] = useState(false); // 상태 추가
@@ -61,7 +62,7 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
-      <button className="btn-right1" onClick={handleEditProfile}>쪽지 보내기</button>
+      <Link to="/profiletomessage" className="btn-right1">쪽지 보내기</Link>
       <div className="tags">
         <h2>테그</h2>
         <ul>

@@ -1,0 +1,56 @@
+.message-detail-container {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 10px;
+}
+
+.message-list {
+  margin-bottom: 20px;
+}
+
+.message-box {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.message-box p {
+  margin: 0;
+}
+
+.message-sender {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.message-content {
+  margin-bottom: 0;
+}
+
+.message-input {
+  margin-top: 20px;
+  text-align: right; 
+}
+
+.message-input input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.send-button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top : 10px;
+}
+
+.send-button:hover{
+	background-color: blue;
+}
