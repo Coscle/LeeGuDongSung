@@ -1,0 +1,101 @@
+.signup-container {
+  height: 600px;
+  width: 45%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px; 
+  background-color: #f9f9f9;
+  margin-top: 60px;
+  margin: 0 auto;
+}
+.info-container {
+  height: 400px;
+  width: 45%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px; 
+  background-color: #f9f9f9;
+  margin-top: 60px;
+  margin-left: 70px;
+}
+.tag-container {
+  width: 45%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px; 
+  background-color: #f9f9f9;
+  margin-top: 60px;
+  margin-right: 70px;
+  overflow-y: auto; /* 세로 스크롤바 추가 */
+}
+.tag-selection-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tag-row {
+  display: flex;
+}
+
+.tag-button {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tag-button.selected {
+  background-color: #e67e22;
+  color: white;
+  border: 1px solid #e67e22;
+}
+
+.signup-container h2 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type='email'],
+input[type='password'],
+input[type='date'],
+select {
+  width: calc(100% - 20px); 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type='tel'],
+select {
+  width: calc(33.5% - 20px); 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 0px;
+}
+
+.signup-button {
+  width: calc(100% - 20px); 
+  background-color: #e67e22;
+  color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px !important;
+}
+
+.signup-button:hover {
+  background-color: #d35400;
+}

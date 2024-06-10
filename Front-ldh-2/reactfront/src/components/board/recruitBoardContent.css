@@ -1,0 +1,35 @@
+.recruit-board-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px; 
+}
+
+.recruit-board-item {
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  width: 40%;
+  margin: 2%;
+}
+
+.recruit-board-item h2 {
+  margin-bottom: 5px;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+.recruit-board-item p {
+  margin: 5px 0;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+@media (max-width: 768px) {
+  .recruit-board-container {
+    grid-template-columns: 1fr;
+    width: 20%;
+  	margin: 2%;
+  }
+}
