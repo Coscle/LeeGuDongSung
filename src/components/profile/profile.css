@@ -108,12 +108,11 @@
   border-radius: 5px;
   cursor: pointer;
   position: absolute; /* 절대 위치 설정 */
-  width: 144px !important;
+  width: 12.1% ;
 }
 .btn-right1 {
   right: 20px; /* 부모 요소의 오른쪽 끝에서 20px만큼 왼쪽으로 이동 */
   top: 20px; /* 부모 요소의 위쪽에서 20px만큼 아래쪽으로 이동 */
-  
 }
 .btn-right2 {
   right: 165px; 

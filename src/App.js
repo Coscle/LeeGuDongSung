@@ -9,6 +9,7 @@ import RecruitBoard from './components/recruitboard/RecruitBoard';
 import NotFound from './components/NotFound';
 import MyProfile from './components/profile/MyProfile';
 import UserProfile from './components/profile/UserProfile';
+import TagSelection from './components/signUp/TagSelection';
 import RecruitBoardDetail from './components/recruitboard/RecruitBoardDetail'; 
 import ReviewBoardDetail from './components/reviewboard/ReviewBoardDetail'; 
 import RecruitBoardWrite from './components/recruitboard/RecruitBoardWrite'; 
@@ -21,34 +22,38 @@ import ProfileToMessage from './components/message/ProfileToMessage';
 import './App.css';
 import './fonts/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { AuthProvider } from './contexts/AuthContext'; // Import AuthProvider
 
 const App = () => {
 	 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header className="header" />
-        <Routes>
-		  <Route path="/" element={<Main />} />
-		  <Route path="/Login" element={<Login />} />
-		  <Route path="/SignUp" element={<SignUp />} />
-		  <Route path="/main" element={<Main />} />
-		  <Route path="/recruitboard" element={<RecruitBoard />} />
-		  <Route path="/reviewboard" element={<ReviewBoard />} />
-		  <Route path="/reviewboardwrite" element={<ReviewBoardWrite />} />
-		  <Route path="/recruitboard/:boardNo" element={<RecruitBoardDetail />} />
-		  <Route path="/reviewboard/:boardNo" element={<ReviewBoardDetail />} />
-		  <Route path="/userprofile/:userId" element={<UserProfile />} />
-		  <Route path="/myprofile" element={<MyProfile />} />
-		  <Route path="/recruitboardwrite" element={<RecruitBoardWrite />} />
-		  <Route path="/recruitboard/:boardNo/modify" element={<RecruitBoardModify />} />
-		  <Route path="/reviewboard/:boardNo/modify" element={<ReviewBoardModify />} />
-		  <Route path="/profiletomessage" element={<ProfileToMessage />} />
-		  <Route path="/messageboard" element={<MessageBoard />} />
-		  <Route path="*" element={<NotFound />} />
-		</Routes>
-        <Footer className="footer" />
-      </BrowserRouter>
+	  <AuthProvider>
+		<BrowserRouter>
+			<Header className="header" />
+			<Routes>
+			<Route path="/" element={<Main />} />
+			<Route path="/Login" element={<Login />} />
+			<Route path="/SignUp" element={<SignUp />} />
+			<Route path="/SignUp/TagSelection" element={<TagSelection />} />
+			<Route path="/main" element={<Main />} />
+			<Route path="/recruitboard" element={<RecruitBoard />} />
+			<Route path="/reviewboard" element={<ReviewBoard />} />
+			<Route path="/reviewboardwrite" element={<ReviewBoardWrite />} />
+			<Route path="/recruitboard/:boardNo" element={<RecruitBoardDetail />} />
+			<Route path="/reviewboard/:boardNo" element={<ReviewBoardDetail />} />
+			<Route path="/userprofile/:userId" element={<UserProfile />} />
+			<Route path="/myprofile" element={<MyProfile />} />
+			<Route path="/recruitboardwrite" element={<RecruitBoardWrite />} />
+			<Route path="/recruitboard/:boardNo/modify" element={<RecruitBoardModify />} />
+			<Route path="/reviewboard/:boardNo/modify" element={<ReviewBoardModify />} />
+			<Route path="/profiletomessage" element={<ProfileToMessage />} />
+			<Route path="/messageboard" element={<MessageBoard />} />
+			<Route path="*" element={<NotFound />} />
+			</Routes>
+			<Footer className="footer" />
+		</BrowserRouter>
+	  </AuthProvider>
     </div>
   );
 };
