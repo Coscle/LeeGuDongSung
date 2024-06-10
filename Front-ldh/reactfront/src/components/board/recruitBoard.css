@@ -1,0 +1,35 @@
+.recruit-board-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* 첫 번째 열은 side filter, 두 번째 열은 content */
+  gap: 20px; /* 열 사이의 간격 */
+}
+
+.recruit-board-item {
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.recruit-board-item h2 {
+  margin-bottom: 5px;
+}
+
+.recruit-board-item p {
+  margin: 5px 0;
+}
+
+.side-filter {
+  order: -1; 
+}
+
+.filterContainer {
+  margin: 20px;
+  overflow-y: auto; 
+  margin-bottom : 70px;
+}
+
+@media (max-width: 768px) {
+  .recruit-board-container {
+    grid-template-columns: 1fr; 
+  }
+}
