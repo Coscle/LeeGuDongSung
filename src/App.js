@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -25,6 +25,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider } from './contexts/AuthContext'; // Import AuthProvider
 
 const App = () => {
+	
+const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch('/db/dummy.json')
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
 	 
   return (
     <div className="App">
@@ -38,9 +47,9 @@ const App = () => {
 			<Route path="/SignUp/TagSelection" element={<TagSelection />} />
 			<Route path="/main" element={<Main />} />
 			<Route path="/recruitboard" element={<RecruitBoard />} />
-			<Route path="/reviewboard" element={<ReviewBoard />} />
+			<Route path="/reviewboard" element={<ReviewBoard data={data} />} />
 			<Route path="/reviewboardwrite" element={<ReviewBoardWrite />} />
-			<Route path="/recruitboard/:boardNo" element={<RecruitBoardDetail />} />
+			<Route path="/recruitboard/:boardNo" element={<RecruitBoardDetail data={data} />} />
 			<Route path="/reviewboard/:boardNo" element={<ReviewBoardDetail />} />
 			<Route path="/userprofile/:userId" element={<UserProfile />} />
 			<Route path="/myprofile" element={<MyProfile />} />

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import hifive from '../images/hifive.png';
 import './header.css';
 import '../fonts/fonts.css';
@@ -8,9 +8,9 @@ import { AuthContext } from '../contexts/AuthContext';
 export default function Header() {
   const { isLoggedIn, logout } = useContext(AuthContext);
   const location = useLocation();
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // 현재 경로가 '/Login'인지 확인
+
   const isLoginPage = location.pathname === '/Login';
 
   return (
@@ -27,7 +27,7 @@ export default function Header() {
         <>
           {isLoggedIn ? (
             <div>
-              <button onClick={logout} className="LogoutBtn">로그아웃</button>
+              <button onClick={()=>{logout(); navigate('/');}} className="LogoutBtn">로그아웃</button>
               <Link to="/messageboard">
                 <button className="messageBtn">쪽지함</button>
               </Link>

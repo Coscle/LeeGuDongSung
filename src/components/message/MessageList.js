@@ -1,45 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './messageList.css'; 
 
 function MessageList({ onSelectMessage }) {
-  // 임시 데이터
-  const messages = [
-    {
-      message_no: 1,
-      sender_no: 1,
-      receiver_no: 2,
-      message_content: "첫 번째 메시지입니다.",
-      SEND_DATE:"2024-01-25"
-    },
-    {
-      message_no: 2,
-      sender_no: 2,
-      receiver_no: 1,
-      message_content: "두 번째 메시지입니다.",
-      SEND_DATE:"2024-01-26"
-    },
-    {
-      message_no: 3,
-      sender_no: 1,
-      receiver_no: 2,
-      message_content: "세 번째 메시지입니다.",
-      SEND_DATE:"2024-01-26"
-    },
-    {
-      message_no: 4,
-      sender_no: 3,
-      receiver_no: 5,
-      message_content: "네 번째 메시지입니다.",
-      SEND_DATE:"2024-01-28"
-    },
-        {
-      message_no: 5,
-      sender_no: 3,
-      receiver_no: 1,
-      message_content: "네 번째 메시지입니다.",
-      SEND_DATE:"2024-01-15"
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
+  const fetchMessages = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/messages");
+      setMessages(response.data);
+    } catch (error) {
+      console.error('Error fetching messages:', error);
     }
-  ];
+  };
 
   // 대화방 목록 생성
   const chatRooms = {};
@@ -88,4 +65,5 @@ function MessageList({ onSelectMessage }) {
     </div>
   );
 }
+
 export default MessageList;

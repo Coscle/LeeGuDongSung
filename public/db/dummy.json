@@ -1,0 +1,50 @@
+{
+  "board": [
+    {
+      "board_no": 1,
+      "board_title": "Introduction to Programming",
+      "board_content": "This is a beginner's guide to programming.",
+      "board_category": 1,
+      "board_writeday": "2024-06-10",
+      "board_views": 10,
+      "boardrepl_cnt": 2,
+      "author_no": 101,
+      "author_my_no": 201,
+      "board_report": 0,
+      "ispost": true
+    },
+    {
+      "board_no": 2,
+      "board_title": "Advanced Python Techniques",
+      "board_content": "This post discusses advanced techniques in Python programming.",
+      "board_category": 2,
+      "board_writeday": "2024-06-11",
+      "board_views": 25,
+      "boardrepl_cnt": 5,
+      "author_no": 102,
+      "author_my_no": 202,
+      "board_report": 1,
+      "ispost": true
+    },
+    {
+      "board_no": 3,
+      "board_title": "Database Optimization",
+      "board_content": "Tips and tricks for optimizing your database queries.",
+      "board_category": 3,
+      "board_writeday": "2024-06-12",
+      "board_views": 15,
+      "boardrepl_cnt": 3,
+      "author_no": 103,
+      "author_my_no": 203,
+      "board_report": 0,
+      "ispost": true
+    }
+  ],
+  "reviewboard": [
+    {
+      "vboard_no": 1,
+      "board_category": 2,
+      "board_no": 2
+    }
+  ]
+}

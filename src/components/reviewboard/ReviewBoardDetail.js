@@ -4,6 +4,8 @@ import './reviewBoardDetail.css';
 import reviewData from './tempData2.json';
 import Comment from '../board/Comment';
 
+
+//수정해야함 
 const ReviewBoardDetail = () => {
   const { boardNo } = useParams();
   const [liked, setLiked] = useState(false); 
