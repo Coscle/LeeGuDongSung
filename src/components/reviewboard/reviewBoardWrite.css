@@ -1,0 +1,19 @@
+.d-flex.align-items-center.mb-3 {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+
+.d-flex.align-items-center.mb-3 label {
+  margin-right: 10px; 
+}
+
+#startDate, #endDate {
+  margin-left: 10px; 
+}
+
+
+.write-board-container form .form-container {
+  margin-top: 20px; 
+}
