@@ -1,0 +1,70 @@
+[
+  {
+    "VBOARD_NO": "V001",
+    "BOARD_NO": "B001",
+    "BOARD_CATEGORY": 2,
+    "BOARD_TITLE": "첫 번째 게시물",
+    "BOARD_CONTENT": "이것은 첫 번째 게시물의 내용입니다.",
+    "BOARD_REPL": "첫 번째 댓글",
+    "BOARD_WRITEDAY": "2024-06-10",
+    "BOARD_VIEWS": 20,
+    "MEMBER_NICKNAME": "user123"
+    
+  },
+  {
+    "VBOARD_NO": "V002",
+    "BOARD_NO": "B002",
+    "BOARD_CATEGORY": 1,
+    "BOARD_TITLE": "두 번째 게시물",
+    "BOARD_CONTENT": "두 번째 게시물은 더 긴 내용을 포함합니다.",
+    "BOARD_REPL": "두 번째 댓글",
+    "BOARD_WRITEDAY": "2024-06-11",
+    "BOARD_VIEWS": 15,
+    "MEMBER_NICKNAME": "user456"
+  },
+  {
+    "VBOARD_NO": "V003",
+    "BOARD_NO": "B003",
+    "BOARD_CATEGORY": 3,
+    "BOARD_TITLE": "세 번째 게시물",
+    "BOARD_CONTENT": "세 번째 게시물의 내용은 간단합니다.",
+    "BOARD_REPL": "세 번째 댓글",
+    "BOARD_WRITEDAY": "2024-06-12",
+    "BOARD_VIEWS": 10,
+    "MEMBER_NICKNAME": "user789"
+  },
+    {
+    "VBOARD_NO": "V004",
+    "BOARD_NO": "B003",
+    "BOARD_CATEGORY": 3,
+    "BOARD_TITLE": "세 번째 게시물",
+    "BOARD_CONTENT": "세 번째 게시물의 내용은 간단합니다.",
+    "BOARD_REPL": "세 번째 댓글",
+    "BOARD_WRITEDAY": "2024-06-12",
+    "BOARD_VIEWS": 10,
+    "MEMBER_NICKNAME": "user789"
+  },
+    {
+    "VBOARD_NO": "V005",
+    "BOARD_NO": "B003",
+    "BOARD_CATEGORY": 3,
+    "BOARD_TITLE": "세 번째 게시물",
+    "BOARD_CONTENT": "세 번째 게시물의 내용은 간단합니다.",
+    "BOARD_REPL": "세 번째 댓글",
+    "BOARD_WRITEDAY": "2024-06-12",
+    "BOARD_VIEWS": 10,
+    "MEMBER_NICKNAME": "user789"
+  },
+    {
+    "VBOARD_NO": "V006",
+    "BOARD_NO": "B003",
+    "BOARD_CATEGORY": 3,
+    "BOARD_TITLE": "세 번째 게시물",
+    "BOARD_CONTENT": "세 번째 게시물의 내용은 간단합니다.",
+    "BOARD_REPL": "세 번째 댓글",
+    "BOARD_WRITEDAY": "2024-06-12",
+    "BOARD_VIEWS": 10,
+    "MEMBER_NICKNAME": "user789"
+  }
+  
+]

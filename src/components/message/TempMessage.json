@@ -1,0 +1,42 @@
+[
+  {
+    "message_no": 1,
+    "message_content": "첫 번째 메시지입니다.",
+    "send_date": "2024-06-10",
+    "sender_no": 1,
+    "receiver_no": 2,
+    "member_no": 1
+  },
+  {
+    "message_no": 2,
+    "message_content": "두 번째 메시지입니다.",
+    "send_date": "2024-06-11",
+    "sender_no": 2,
+    "receiver_no": 1,
+    "member_no": 2
+  },
+  {
+    "message_no": 3,
+    "message_content": "세 번째 메시지입니다.",
+    "send_date": "2024-06-12",
+    "sender_no": 3,
+    "receiver_no": 1,
+    "member_no": 3
+  },
+  {
+    "message_no": 4,
+    "message_content": "네 번째 메시지입니다.",
+    "send_date": "2024-06-13",
+    "sender_no": 1,
+    "receiver_no": 3,
+    "member_no": 1
+  },
+  {
+    "message_no": 5,
+    "message_content": "다섯 번째 메시지입니다.",
+    "send_date": "2024-06-14",
+    "sender_no": 2,
+    "receiver_no": 3,
+    "member_no": 2
+  }
+]

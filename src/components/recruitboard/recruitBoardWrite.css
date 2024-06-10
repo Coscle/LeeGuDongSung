@@ -1,0 +1,29 @@
+/* recruitBoardWrite.css */
+
+.write-board-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  margin-bottom : 150px;
+}
+
+
+.side-filter {
+  width: 300px; 
+  padding: 10px;
+  box-sizing: border-box;
+  height: 100%; 
+  overflow-y: auto; 
+}
+.write-board-container {
+  width: 100%; 
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+
+  .side-filter {
+    display: none; 
+  }
+}
