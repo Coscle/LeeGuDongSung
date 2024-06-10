@@ -119,7 +119,7 @@ function BoardWrite({ onSubmit, onCancel }) {
           <button type="submit" className="writeSubmitBtn">
             게시물 작성
           </button>
-          <button type="button" className="btn btn-secondary" onClick={onCancel}>
+          <button type="button" className="canclewriteBtn" onClick={onCancel}>
             취소하기
           </button>
         </div>

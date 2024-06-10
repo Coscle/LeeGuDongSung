@@ -4,21 +4,20 @@ import './comment.css';
 const Comment = ({ comments, setComments }) => {
   const [newComment, setNewComment] = useState('');
   const [replyText, setReplyText] = useState('');
-  const [replyingTo, setReplyingTo] = useState(null); // 대댓글 입력 상태 추가
+  const [replyingTo, setReplyingTo] = useState(null); 
 
-  // comments를 배열로 변환
   const commentList = Array.isArray(comments) ? comments : [];
 
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
   };
 
-  const handleAddComment = () => {
-    const newId = commentList.length + 1;
-    const newCommentObj = { id: newId, text: newComment, author: '사용자', profilePic: '/profile.jpg', replies: [] };
-    setComments([...commentList, newCommentObj]);
-    setNewComment('');
-  };
+	const handleAddComment = () => {
+	  const newId = commentList.length + 1;
+	  const newCommentObj = { id: newId, text: newComment, author: '사용자', profilePic: '/profile.jpg', replies: [] };
+	  setComments([...commentList, newCommentObj]);
+	  setNewComment('');
+	};
 
   const handleToggleReply = (commentId) => {
     setReplyingTo(commentId === replyingTo ? null : commentId); 

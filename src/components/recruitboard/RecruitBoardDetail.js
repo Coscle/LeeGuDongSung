@@ -45,7 +45,7 @@ const RecruitBoardDetail = () => {
 
   return (
     <div className="detail-container">
-      <header className="header">
+      <header className="back-link-header">
         <Link to="/recruitboard" className="back-link">여행 메이트 구인 목록으로</Link>
       </header>
       <main className="detail-main">

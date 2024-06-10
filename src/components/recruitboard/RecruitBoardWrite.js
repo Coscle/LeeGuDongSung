@@ -21,6 +21,7 @@ function RecruitBoardWrite() {
         <SideFilter showTopSearch={false} />
       </div>
       <div className="board-write-container">
+      	<h1>여행 메이트 찾기</h1>
         <BoardWrite onSubmit={handleSubmit} onCancel={() => navigate('/recruitboard')} />
       </div>
     </div>

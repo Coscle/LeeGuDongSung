@@ -84,12 +84,26 @@
   border: none;
   padding: 10px 20px;
   margin-bottom: 10px;
-  float: right;
   border-radius: 15px;
-
+  float: right;
 }
 
 .writeSubmitBtn:hover {
+  background-color: #0056b3;
+}
+
+.canclewriteBtn {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  float: right; 
+  margin-right: 30px;
+}
+
+.canclewriteBtn:hover {
   background-color: #0056b3;
 }
 

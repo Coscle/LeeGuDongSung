@@ -12,7 +12,6 @@ const ReviewBoardContent = ({ data }) => {
     navigate(`/reviewboard/${boardNo}`);
   };
 
-  // 데이터가 배열로 구성되어 있지 않다면 빈 배열로 초기화합니다.
   const dataArray = Array.isArray(data) ? data : [];
 
   const uniqueData = dataArray.filter((value, index, self) => {

@@ -39,6 +39,7 @@ const ReviewBoardModify = () => {
         <SideFilter showTopSearch={false} />
       </div>
       <div className="board-write-container">
+      	<h1>여행 후기 작성</h1>
         <BoardWrite initialValues={initialValues} onSubmit={handleSubmit} />
       </div>
     </div>
