@@ -78,4 +78,3 @@ const ReviewBoardDetail = () => {
 };
 
 export default ReviewBoardDetail;
-

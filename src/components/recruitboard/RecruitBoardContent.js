@@ -18,6 +18,7 @@ const RecruitBoardContent = () => {
   // const uniqueData = tempData.filter((value, index, self) => {
   //   return self.findIndex(item => item.CBOARD_NO === value.CBOARD_NO) === index;
   // });
+  
   useEffect(()=>{
     axios.get("/getCboardAll").then((res)=>{
       console.log(res.data);

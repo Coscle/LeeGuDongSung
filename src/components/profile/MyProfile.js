@@ -3,6 +3,7 @@ import { openDatabase, getUserData } from '../../db'; // 수정된 경로
 import './profile.css';
 import { useNavigate } from 'react-router-dom';
 
+
 const MyProfile = () => {
   const [heartClicked, setHeartClicked] = useState(false);
   const [user, setUser] = useState({

@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
 import './boardWrite.css';
 
 function BoardModify({ onSubmit, onCancel }) {
+  const location = useLocation();
+  const boardData = location.state?.boardData;
+
   const [formData, setFormData] = useState({
     title: '',
     tags: '',
@@ -13,6 +17,20 @@ function BoardModify({ onSubmit, onCancel }) {
     isRecruitmentDone: false,
     photo: null,
   });
+
+  useEffect(() => {
+    if (boardData) {
+      setFormData({
+        title: boardData.board_title,
+        tags: boardData.cboard_tags,
+        content: boardData.board_content,
+        startDate: boardData.trip_start,
+        endDate: boardData.trip_end,
+        isRecruitmentDone: boardData.recruit_done,
+        photo: null,
+      });
+    }
+  }, [boardData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -115,7 +133,7 @@ function BoardModify({ onSubmit, onCancel }) {
             />
           </div>
           <button type="submit" className="writeSubmitBtn">
-            게시물 작성
+            게시물 수정
           </button>
           <button type="button" className="canclewriteBtn" onClick={onCancel}>
             취소하기
