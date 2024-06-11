@@ -1,0 +1,43 @@
+.message-list-container {
+  margin-top: 20px;
+}
+
+.chat-list-box {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.chat-list-box:hover {
+  background-color: #f0f0f0;
+}
+
+.chat-list {
+  justify-content: space-between;
+}
+
+.chat-ib {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-ib h5 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.chat-ib p {
+  font-size: 14px;
+  color: #666;
+}
+
+.message-content {
+  margin-top: 5px;
+}
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

@@ -1,0 +1,22 @@
+.modify-board-container {
+  display: flex; 
+}
+
+.side-filter {
+  width: 25%; 
+  padding: 30px;
+  box-sizing: border-box;
+  height: 100%; 
+  overflow-y: auto;
+}
+
+.board-write-container {
+  flex: 1; 
+}
+
+@media (max-width: 768px) {
+
+  .side-filter {
+    display: none; 
+  }
+}

@@ -1,0 +1,210 @@
+.detail-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.back-link-header {
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+  text-align: right;
+  background-color: yellow;
+}
+
+.back-link {
+  color: #007bff;
+  text-decoration: none;
+  margin-right: 40px;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.detail-main {
+  margin-top: 20px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+}
+
+.board-detail {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.board-title {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.board-info-container {
+  margin-bottom: 20px;
+}
+
+.author-profile-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.profile-picture {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.board-detail-item {
+  margin-bottom: 8px;
+}
+
+.tag {
+  margin-right: 4px;
+  background-color: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.recruitment-status {
+  font-weight: bold;
+  font-size: 14px;
+  color: #777;
+  margin-right: 15px;
+}
+
+.board-photo {
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.board-content {
+  white-space: pre-line;
+  margin-bottom: 20px;
+}
+
+.comment-wrapper {
+  width: 50%;
+  margin: 0 auto;
+  overflow-y: auto;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.comment-section {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.comment {
+  margin-bottom: 16px;
+}
+
+.comment-author {
+  font-weight: bold;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.comment .profile-picture {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.comment-text,
+.reply-text {
+  margin-left: 32px;
+}
+
+.reply {
+  margin-left: 32px;
+}
+
+.reply-input {
+  margin-left: 64px;
+}
+
+.comment-input,
+.reply-input {
+  width: calc(100% - 64px);
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.comment-button,
+.reply-button,
+.toggle-reply {
+  background-color: #3897f0;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comment-button:hover,
+.reply-button:hover,
+.toggle-reply:hover {
+  background-color: #36a3f7;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between; /* 양쪽 정렬 */
+  align-items: center;
+}
+
+.left-buttons {
+  display: flex;
+  gap: 10px; /* 버튼 사이의 간격 */
+}
+
+.right-buttons {
+  display: flex;
+  gap: 10px; /* 버튼 사이의 간격 */
+}
+
+.like-button,
+.scrap-button,
+.edit-button,
+.delete-button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.like-button:hover,
+.scrap-button:hover,
+.edit-button:hover,
+.delete-button:hover {
+  background-color: #0056b3;
+}
+
+.comment-button,
+.reply-button {
+  margin-left: 8px;
+}
+
+.date-info {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.date-info-label {
+  margin-right: 4px;
+  color: #777;
+}
+
+.date-info-value {
+  font-weight: bold;
+}

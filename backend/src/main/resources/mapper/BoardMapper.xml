@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.myweb.mapper.BoardMapper">
+	<resultMap id="boardResultMap" type="com.example.myweb.board.BoardDTO">
+		<id property="board_no" column="board_no" />
+		<result property="board_title" column="board_title" />
+		<result property="board_content" column="board_content" />
+		<result property="board_category" column="board_category" />
+		<result property="board_writeday" column="board_writeday" />
+		<result property="board_views" column="board_views" />
+		<result property="boardrepl_cnt" column="boardrepl_cnt" />
+		<result property="author_no" column="author_no" />
+		<result property="board_report" column="board_report" />
+		<result property="ispost" column="ispost" />
+		<result property="cboard_no" column="cboard_no" />
+		<result property="cboard_tags" column="cboard_tags" />
+		<result property="recruit_done" column="recruit_done" />
+		<result property="trip_start" column="trip_start" />
+		<result property="trip_end" column="trip_end" />
+        <result property="member_no" column="member_no" />
+        <result property="member_id" column="member_id" />
+		<result property="member_nickname" column="member_nickname" />
+		<result property="boardrepl_no" column="boardrepl_no" />
+		<result property="replauthor_no" column="replauthor_no" />
+		<result property="replauthor_nickname" column="replauthor_nickname" />
+		<result property="boardrepl_group" column="boardrepl_group" />
+		<result property="boardrepl_repl_seq" column="boardrepl_repl_seq" />
+		<result property="boardrepl_writeday" column="boardrepl_writeday" />
+		<result property="boardrepl_content" column="boardrepl_content" />
+    </resultMap>
+	
+	<select id="findAll" resultMap="boardResultMap">
+		select b.board_title, b.board_writeday, c.recruit_done from board as b
+		join recruitboard as c on b.board_no=c.board_no
+		union distinct
+		select b.board_title, b.board_writeday, null from board as b
+		join reviewboard as v on b.board_no=v.board_no;
+	</select>
+	<select id="findAllRecruit" resultMap="boardResultMap">
+		select * from board as b
+		join recruitboard as c on b.board_no=c.board_no
+		order by c.cboard_no desc
+	</select>
+	<select id="findAllReview" resultMap="boardResultMap">
+		select * from board as b
+		join reviewboard as v on b.board_no=v.board_no
+	</select>
+
+	<select id="findById" resultMap="boardResultMap">
+		select * from board as b
+		join recruitboard as c on c.board_no=#{board_no} and b.board_no=#{board_no}
+		join member as m on b.author_no=m.member_no
+		order by boardrepl_group asc
+	</select>
+	<select id="findByIdRepls" resultMap="boardResultMap">
+		select * from boardrepls as br
+		join board as b on br.board_no=#{board_no} and b.board_no=#{board_no}
+	</select>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="board_no">
+		INSERT INTO board(board_title, board_content, board_category, board_writeday, author_no) 
+		VALUES (#{board_title}, #{board_content}, #{board_category}, now(), #{author_no})
+	</insert>
+	<insert id="recruitInsert" useGeneratedKeys="true" keyProperty="board_no">
+		INSERT INTO recruitboard(cboard_tags, recruit_done, trip_start, trip_end, board_no) 
+		VALUES (#{cboard_tags}, #{recruit_done}, #{trip_start}, #{trip_end},
+		(select board_no from board order by board_no desc limit 1))
+	</insert>
+
+	<update id="update">
+		UPDATE board SET board_title=#{board_title}, board_content=#{board_content} WHERE board_no=#{board_no}
+	</update>
+	
+	<update id="recruit_update">
+		UPDATE recruitboard AS r
+		INNER JOIN board AS b ON r.board_no = b.board_no
+		SET r.recruit_done = #{recruit_done},
+    	r.trip_start = #{trip_start},
+    	r.trip_end = #{trip_end},
+    	b.board_title = #{board_title},
+    	b.board_content = #{board_content}
+		WHERE b.board_no = #{board_no}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM board WHERE board_no=#{board_no}
+	</delete>
+</mapper>

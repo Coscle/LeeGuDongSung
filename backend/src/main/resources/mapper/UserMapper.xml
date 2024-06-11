@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.myweb.mapper.UserMapper">
+    <resultMap id="userResultMap" type="com.example.myweb.user.UserDTO">
+        <id property="member_no" column="member_no" />
+		<result property="member_name" column="member_name" />
+		<result property="member_id" column="member_id" />
+		<result property="member_pw" column="member_pw" />
+		<result property="member_birth" column="member_birth" />
+		<result property="member_gender" column="member_gender" />
+		<result property="member_tel" column="member_tel" />
+		<result property="member_nickname" column="member_nickname" />
+		<result property="member_rgday" column="member_rgday" />
+		<result property="member_snsurl" column="member_snsurl" />
+		<result property="member_like" column="member_like" />
+		<result property="member_dcrt" column="member_dcrt" />
+    </resultMap>
+
+    <select id="findAll" resultMap="userResultMap">
+        SELECT * FROM member
+    </select>
+
+    <select id="findByMemberNo" resultMap="userResultMap">
+        SELECT * FROM member WHERE member_no=#{member_no}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="member_no">
+        INSERT INTO member(member_name, member_id, member_pw, member_birth,
+		member_gender, member_tel, member_nickname, member_rgday,
+		member_snsurl, member_dcrt) VALUES
+		(#{member_name},#{member_id},#{member_pw},#{member_birth},
+		#{member_gender},#{member_tel},#{member_nickname},now(),
+		#{member_snsurl},#{member_dcrt})
+    </insert>
+
+    <update id="update">
+		UPDATE member SET member_pw=#{member_pw}, member_tel=#{member_tel}, member_nickname=#{member_nickname}, member_snsurl=#{member_snsurl} WHERE member_no=#{member_no}
+	</update>
+
+    <delete id="delete">
+        DELETE FROM member WHERE member_no=#{member_no}
+    </delete>
+</mapper>
