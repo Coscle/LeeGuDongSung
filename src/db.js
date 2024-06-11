@@ -60,3 +60,38 @@ export const getUserData = (db, email) => {
     };
   });
 };
+
+export const getUserDataBySnsAddress = (db, snsAddress) => {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(['users'], 'readonly');
+    const objectStore = transaction.objectStore('users');
+    const index = objectStore.index('snsAddress');
+    const request = index.get(snsAddress);
+
+    request.onsuccess = (event) => {
+      resolve(event.target.result);
+    };
+
+    request.onerror = (event) => {
+      console.error('Get error:', event.target.error);
+      reject('Get error');
+    };
+  });
+};
+export const getUserDataByPhoneNumber = (db, phoneNumber) => {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(['users'], 'readonly');
+    const objectStore = transaction.objectStore('users');
+    const index = objectStore.index('phoneNumber');
+    const request = index.get(phoneNumber);
+
+    request.onsuccess = (event) => {
+      resolve(event.target.result);
+    };
+
+    request.onerror = (event) => {
+      console.error('Get error:', event.target.error);
+      reject('Get error');
+    };
+  });
+};

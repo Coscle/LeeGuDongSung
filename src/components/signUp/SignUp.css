@@ -75,7 +75,10 @@ select {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
+input[type='text'],
+select{
+	margin-top: 10px;
+}
 input[type='tel'],
 select {
   width: calc(33.5% - 20px); 
@@ -94,6 +97,7 @@ select {
   padding: 10px;
   cursor: pointer;
   border-radius: 5px !important;
+  margin-top: 5px;
 }
 
 .signup-button:hover {

@@ -1,15 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { openDatabase, getUserData } from '../../db'; // 수정된 경로
+import { openDatabase, getUserData } from '../../db';
 import './login.css';
 import { AuthContext } from '../../contexts/AuthContext'; // Import AuthContext
-
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const { login } = useContext(AuthContext); // Use AuthContext
-
+  
+  
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -69,11 +69,9 @@ const Login = () => {
           로그인하기
         </button>
         <button type="button" className="btn-second">SNS연동</button>
-        <button type="button" className="btn-second">ID찾기</button>
+        <button type="button" className="btn-second" onClick = {()=>{navigate('/FindId');}}>ID찾기</button>
         <button type="button" className="btn-second">비밀번호 찾기</button>
-        <div className="btn-third">
-          <Link to="/SignUp" className="link">회원가입하기</Link>
-        </div>
+        <button type = "button" className = "btn-third" onClick={()=>{ navigate('/SignUp');} }>회원가입하기</button>
       </form>
     </div>
   );

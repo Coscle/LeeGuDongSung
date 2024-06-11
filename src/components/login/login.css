@@ -58,7 +58,7 @@ input[type='password'] {
   margin-top: 15px;
   width: calc(80% - 20px);
   border-radius: 20px;
-  margin-left: 60px;
+  margin-left: 20px;
 }
 
 .btn-third:hover {
