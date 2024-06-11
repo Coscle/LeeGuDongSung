@@ -4,7 +4,6 @@ import './reviewBoardDetail.css';
 import reviewData from './tempData2.json';
 import Comment from '../board/Comment';
 
-
 const ReviewBoardDetail = () => {
   const { boardNo } = useParams();
   const [liked, setLiked] = useState(false); 
@@ -26,6 +25,7 @@ const ReviewBoardDetail = () => {
     setLikedCount(prevCount => liked ? prevCount - 1 : prevCount + 1);
   };
 
+
   const isOwner = loggedInUserId === boardData?.member_nickname;
 
   return (
@@ -43,13 +43,15 @@ const ReviewBoardDetail = () => {
               <div className="board-detail-item date-info">
                 <span className="date-info-label">작성일 : </span>
                 <span className="date-info-value">{boardData?.board_writeday}</span>
+
               </div>
             </div>
             <div className="author-profile">
               <span className="author-profile-label">작성자: </span>
-              <span className="author-profile-value">{boardData?.member_nickname}</span>
+           <span className="author-profile-value">{boardData?.member_nickname}</span>
             </div>
             <div className="board-content">{boardData?.board_content}</div>
+
             <div className="button-container">
               <div className="left-buttons">
                 <button className="like-button" onClick={toggleLike}>
@@ -67,6 +69,7 @@ const ReviewBoardDetail = () => {
           </div>
           <div className="comment-wrapper">
             <Comment comments={boardData?.board_repl} setComments={() => {}} />
+
           </div>
         </section>
       </main>
@@ -75,3 +78,4 @@ const ReviewBoardDetail = () => {
 };
 
 export default ReviewBoardDetail;
+

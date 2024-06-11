@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { openDatabase, getUserData } from '../../db'; 
+import { openDatabase, getUserData } from '../../db'; // 수정된 경로
 import './profile.css';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import './recruitBoardDetail.css';
 import tempData from './tempData';
 import Comment from '../board/Comment';
+import axios from 'axios';
 
 const RecruitBoardDetail = () => {
   const { boardNo } = useParams();
   const [liked, setLiked] = useState(false); 
   const [likedCount, setLikedCount] = useState(0); 
   const [isScrapped, setIsScrapped] = useState(false);
-  const boardData = tempData.find(data => data.CBOARD_NO === boardNo);
+  const [tags, setTags] = useState({})
+  const [boardData, setBoardData] = useState([]);
+  useEffect(()=>{
+    axios.get("/findRecruitBoard/"+boardNo).then((res)=>{
+      console.log(res.data);
+      setBoardData(res.data);
+    });
+  },[]);
+  useEffect(()=>{
+    if (boardData.cboard_tags != null){
+      setTags(JSON.parse(boardData.cboard_tags));
+      console.log(boardData);
+    }
+  },[boardData]);
   const loggedInUserId = "user123"; // 임시아이디
   const navigate = useNavigate();
 
@@ -41,7 +55,7 @@ const RecruitBoardDetail = () => {
     
   };
 
-  const isOwner = loggedInUserId === boardData?.MEMBER_ID;
+  const isOwner = loggedInUserId === boardData?.member_id;
 
   return (
     <div className="detail-container">
@@ -53,30 +67,37 @@ const RecruitBoardDetail = () => {
           <div className="board-detail">
             <div className="board-info-container">
               <h2 className="board-title">
-                {boardData?.BOARD_TITLE}
-                <span className="recruitment-status">{boardData?.RECRUIT_DONE ? '구인중' : '구인 완료'}</span>
+                {boardData?.board_title}
+                <span className="recruitment-status">{boardData?.recruit_done ? '구인 완료' : '구인중'}</span>
               </h2>
               <div className="board-detail-item tag-list">
-                {Array.isArray(parseTags(boardData?.BOARD_TAGS)) && parseTags(boardData.BOARD_TAGS).map((tag, index) => (
-                  <span key={index} className="tag">{tag}</span>
+                {Array.isArray(tags) && tags.map((tag, index) => (
+                  <>
+                  <span key={index} className="tag" hidden={tag.지역?false:true}>지역 : {tag.지역}</span>
+                  <span key={index} className="tag" hidden={tag.성별?false:true}>성별 : {tag.성별}</span>
+                  <span key={index} className="tag" hidden={tag.타입?false:true}>타입 : {tag.타입}</span>
+                  <span key={index} className="tag" hidden={tag.같이즐겨요?false:true}>같이즐겨요 : {tag.같이즐겨요.map((toget,idx)=>( //
+                    <span key={idx} className="tag">{toget}</span>
+                  ))}</span>
+                  </>
                 ))}
               </div>
               <div className="board-detail-item date-info">
                 <span className="date-info-label">여행 시작 날짜 : </span>
-                <span className="date-info-value">{boardData?.TRIP_START}</span>
+                <span className="date-info-value">{boardData?.trip_start}</span>
               </div>
               <div className="board-detail-item date-info">
                 <span className="date-info-label">여행 종료 날짜 : </span>
-                <span className="date-info-value">{boardData?.TRIP_END}</span>
+                <span className="date-info-value">{boardData?.trip_end}</span>
               </div>
             </div>
             <div className="author-profile">
-              <Link to={`/userProfile/${boardData?.MEMBER_ID}`} className="author-profile-link">
+              <Link to={`/userProfile/${boardData?.author_no}`} className="author-profile-link">
                 <img src={boardData?.MEMBER_PROFILE_PICTURE} alt="Profile" className="profile-picture" />
-                {boardData?.MEMBER_NICKNAME}
+                {boardData?.member_nickname}
               </Link>
             </div>
-            <div className="board-content">{boardData?.BOARD_CONTENT}</div>
+            <div className="board-content">{boardData?.board_content}</div>
             {boardData?.photo && (
               <div className="board-photo-container">
                 <img src={boardData.photo} alt="Board" className="board-photo" />

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './reviewBoardContent.css';
+import axios from 'axios';
 
 const ITEMS_PER_PAGE = 10;
 
-const ReviewBoardContent = ({ data }) => {
+const ReviewBoardContent = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const [mergedData, setMergedData] = useState([]);
+//  const [mergedData, setMergedData] = useState([]);
 
+/*
   useEffect(() => {
     if (data && data.board && data.reviewboard) {
       console.log('Received data:', data);
@@ -22,14 +24,36 @@ const ReviewBoardContent = ({ data }) => {
       console.error('Data format is incorrect.');
     }
   }, [data]);
+*/
 
   const handleEnterDetail = boardNo => {
     navigate(`/reviewboard/${boardNo}`);
   };
-
+/*
   const uniqueData = mergedData.filter((value, index, self) => {
     return self.findIndex(item => item.vboard_no === value.vboard_no) === index;
   });
+
+  const totalPages = Math.ceil(uniqueData.length / ITEMS_PER_PAGE);
+
+  const currentData = uniqueData.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+*/
+
+
+ const [uniqueData, setUD] = useState([]);
+   useEffect(()=>{
+    axios.get("/getBoardAll").then((res)=>{
+      setUD(res.data);
+    })
+  },[]);
+  console.log(uniqueData);
 
   const totalPages = Math.ceil(uniqueData.length / ITEMS_PER_PAGE);
 

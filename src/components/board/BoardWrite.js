@@ -2,16 +2,27 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown } from 'react-bootstrap';
 import './boardWrite.css';
+import axios from 'axios';
 
 function BoardWrite({ onSubmit, onCancel }) {
+  // const [formData, setFormData] = useState({
+  //   board_title: '',
+  //   tags: '',
+  //   board_content: '',
+  //   startDate: '',
+  //   endDate: '',
+  //   isRecruitmentDone: false,
+  //   photo: null,
+  // });
   const [formData, setFormData] = useState({
-    title: '',
-    tags: '',
-    content: '',
-    startDate: '',
-    endDate: '',
-    isRecruitmentDone: false,
-    photo: null,
+    board_title: "",
+    board_content: "",
+    board_category: 1,
+    author_no: 1,
+    cboard_tags: "[]",
+    recruit_done: false,
+    trip_start: "2024-07-01",
+    trip_end: "2024-07-04"
   });
 
   const handleChange = (e) => {
@@ -31,6 +42,7 @@ function BoardWrite({ onSubmit, onCancel }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios.post("/postRecruitBoard", formData);
     onSubmit(formData);
   };
 
@@ -49,7 +61,7 @@ function BoardWrite({ onSubmit, onCancel }) {
             {(window.location.pathname === '/recruitboardwrite') && (
               <Dropdown className="recruitDoneButton">
                 <Dropdown.Toggle variant="primary">
-                  {formData.isRecruitmentDone ? '구인 완료' : '구인 중'}
+                  {formData.recruit_done ? '구인 완료' : '구인 중'}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item onClick={() => handleRecruitmentStatusChange(false)}>
@@ -61,27 +73,27 @@ function BoardWrite({ onSubmit, onCancel }) {
                 </Dropdown.Menu>
               </Dropdown>
             )}
-            <label htmlFor="startDate" className="me-2">
+            <label htmlFor="trip_start" className="me-2">
               여행 시작일:
             </label>
             <input
               type="date"
-              name="startDate"
-              id="startDate"
+              name="trip_start"
+              id="trip_start"
               className="form-control me-2"
-              value={formData.startDate}
+              value={formData.trip_start}
               onChange={handleChange}
               placeholder="여행 시작일"
             />
-            <label htmlFor="endDate" className="me-2">
+            <label htmlFor="trip_end" className="me-2">
               여행 종료일:
             </label>
             <input
               type="date"
-              name="endDate"
-              id="endDate"
+              name="trip_end"
+              id="trip_end"
               className="form-control"
-              value={formData.endDate}
+              value={formData.trip_end}
               onChange={handleChange}
               placeholder="여행 종료일"
             />
@@ -89,20 +101,20 @@ function BoardWrite({ onSubmit, onCancel }) {
           <div className="mb-1">
             <input
               type="text"
-              name="title"
+              name="board_title"
               id="titleInput"
               className="form-control"
-              value={formData.title}
+              value={formData.board_title}
               onChange={handleChange}
               placeholder="제목을 입력하세요"
             />
           </div>
           <div className="mb-1">
             <textarea
-              name="content"
+              name="board_content"
               id="contentTextarea"
               className="form-control contentTextarea"
-              value={formData.content}
+              value={formData.board_content}
               onChange={handleChange}
               rows="3"
               placeholder="내용을 입력하세요"
