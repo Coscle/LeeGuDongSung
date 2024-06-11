@@ -40,6 +40,7 @@ const UserProfile = () => {
           </a>
         </div>
       </div>
+      <button className = "btn-right2" onClick ={()=>alert('유저가 차단되었습니다.')}>차단하기</button>
       <div className="posts-container">
         <div className="my-posts">
           <h2> {user.nickname} 님의 게시물</h2>

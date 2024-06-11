@@ -14,6 +14,7 @@ import RecruitBoard from './components/recruitboard/RecruitBoard';
 import NotFound from './components/NotFound';
 import MyProfile from './components/profile/MyProfile';
 import UserProfile from './components/profile/UserProfile';
+import ProfilePictureViewer from './components/profile/ProfilePictureViewer';
 import TagSelection from './components/signUp/TagSelection';
 import RecruitBoardDetail from './components/recruitboard/RecruitBoardDetail'; 
 import ReviewBoardDetail from './components/reviewboard/ReviewBoardDetail'; 
@@ -64,6 +65,7 @@ const [data, setData] = useState(null);
 			<Route path="/reviewboard/:boardNo" element={<ReviewBoardDetail />} />
 			<Route path="/userprofile/:userId" element={<UserProfile />} />
 			<Route path="/myprofile" element={<MyProfile />} />
+			<Route path="profilePictureViewer/:email" element={<ProfilePictureViewer/>}/>
 			<Route path="/recruitboardwrite" element={<RecruitBoardWrite />} />
 			<Route path="/recruitboard/:boardNo/modify" element={<RecruitBoardModify />} />
 			<Route path="/reviewboard/:boardNo/modify" element={<ReviewBoardModify />} />

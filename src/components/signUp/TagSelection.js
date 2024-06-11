@@ -43,6 +43,16 @@ const TagSelection = () => {
     const isAnyTagUnselected = tags.some((tag, index) => !selectedTags[index]);
     if (isAnyTagUnselected) return;
 
+    let profilePictureBlob = null;
+    if (profilePicture) {
+      profilePictureBlob = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(profilePicture);
+      });
+    }
+
     const userData = {
       email,
       phoneNumber,
@@ -51,7 +61,7 @@ const TagSelection = () => {
       nickname,
       snsType,
       snsAddress,
-      profilePicture,
+      profilePicture: profilePictureBlob,
       password,
       tags: selectedTags // `tags`로 저장
     };
