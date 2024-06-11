@@ -22,7 +22,6 @@ export default function Header() {
       {isLoginPage ? (
         <Link to="/Main">
           <button className="MainBtn">메인으로</button>
-          <button>샘플</button>
         </Link>
       ) : (
         <>
