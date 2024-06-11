@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate, redirect } from 'react-router-dom';
 import './recruitBoardDetail.css';
-import tempData from './tempData';
 import Comment from '../board/Comment';
 import axios from 'axios';
 
@@ -24,7 +23,7 @@ const RecruitBoardDetail = () => {
       console.log(boardData);
     }
   },[boardData]);
-  const loggedInUserId = "user123"; // 임시아이디
+  const loggedInUserId = 1; // 임시아이디
   const navigate = useNavigate();
 
   const parseTags = (tagsString) => {
@@ -44,6 +43,8 @@ const RecruitBoardDetail = () => {
 
   const handleDelete = () => {
     console.log('Delete button clicked');
+    axios.get("/deleteBoard/"+boardNo);
+    navigate("/recruitBoard", ()=>{window.location.reload()});
   };
 
   const toggleLike = () => {
@@ -55,7 +56,7 @@ const RecruitBoardDetail = () => {
     
   };
 
-  const isOwner = loggedInUserId === boardData?.member_id;
+  const isOwner = loggedInUserId;
 
   return (
     <div className="detail-container">
@@ -73,10 +74,10 @@ const RecruitBoardDetail = () => {
               <div className="board-detail-item tag-list">
                 {Array.isArray(tags) && tags.map((tag, index) => (
                   <>
-                  <span key={index} className="tag" hidden={tag.지역?false:true}>지역 : {tag.지역}</span>
-                  <span key={index} className="tag" hidden={tag.성별?false:true}>성별 : {tag.성별}</span>
-                  <span key={index} className="tag" hidden={tag.타입?false:true}>타입 : {tag.타입}</span>
-                  <span key={index} className="tag" hidden={tag.같이즐겨요?false:true}>같이즐겨요 : {tag.같이즐겨요.map((toget,idx)=>( //
+                  <span key={index} className="tag" hidden={tag.지역?false:true}>{tag.지역}</span>
+                  <span key={index} className="tag" hidden={tag.성별?false:true}>{tag.성별}</span>
+                  <span key={index} className="tag" hidden={tag.타입?false:true}>{tag.타입}</span>
+                  <span key={index} className="tag" hidden={tag.같이즐겨요?false:true}>{tag.같이즐겨요.map((toget,idx)=>( //
                     <span key={idx} className="tag">{toget}</span>
                   ))}</span>
                   </>
@@ -110,11 +111,13 @@ const RecruitBoardDetail = () => {
                 </button>
                 <button className="scrap-button">스크랩</button>
               </div>
-              {isOwner && (
+              {(
+                <>
                 <div className="right-buttons">
                   <button onClick={handleEdit} className="edit-button">수정</button>
                   <button onClick={handleDelete} className="delete-button">삭제</button>
                 </div>
+                </>
               )}
             </div>
           </div>

@@ -31,7 +31,6 @@ const Comment = ({ comments, setComments }) => {
       });
     }
   },[tempList]);
-  console.log(commentList)
 
   //댓글
   const replList = (comment, idx) => {

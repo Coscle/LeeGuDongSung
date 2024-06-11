@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TopSearch from './TopSearch';
 import TagFilter from './TagFilter';
 import './sideFilter.css';
 
-function SideFilter({ products, showTopSearch }) {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [passingTags, setPassingTags] = useState({
+function SideFilter({ products, showTopSearch, setTags, tags }) {
+  const initTag = {
     region: {
       서유럽: false,
       동유럽: false,
@@ -70,21 +69,48 @@ function SideFilter({ products, showTopSearch }) {
       근교투어: false,
       가이드투어: false
     }
-  });
+  };
+  const [searchTerm, setSearchTerm] = useState("");
+  const [passingTags, setPassingTags] = useState(initTag);
+  const [tag, setTag] = useState();
+  const [filterProp, setFP] = useState();
 
   const handleSearchInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
   const handleTagItemClick = (tag, filterProp) => {
-    setPassingTags(prevState => ({
-      ...prevState,
-      [filterProp]: {
-        ...prevState[filterProp],
-        [tag]: !prevState[filterProp][tag]
-      }
-    }));
+    console.log(filterProp, tag);
+    if (filterProp == 'tour' || filterProp == 'timeOfDay' || 
+      filterProp == 'selfPR' || filterProp == 'activities'){
+      setPassingTags(prevState => ({
+        ...prevState,
+        [filterProp]: {
+          ...prevState[filterProp],
+          [tag]: !prevState[filterProp][tag]
+        }
+      }));
+    } else {
+      const onePick = initTag.filterProp;
+      setPassingTags(prevState => ({
+        ...prevState,
+        [filterProp]: {onePick}
+      }));
+      
+      setPassingTags(prevState => ({
+        ...prevState,
+        [filterProp]: {
+          ...prevState[filterProp],
+          [tag]: !prevState[filterProp][tag]
+        }
+      }));
+    }
   };
+
+  useEffect(()=>{
+    setTags(passingTags);
+  },[passingTags]);
+  console.log(tags);
 
   const filteredCollected = () => {
     const collectedTrueKeys = {

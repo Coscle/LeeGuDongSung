@@ -44,4 +44,16 @@ module.exports = function (app) {
     })
   );
 
+  app.use('/putUpdateBoard', createProxyMiddleware({
+    target: 'http://localhost:8080/board/updateBoard/',
+    changeOrigin: true,
+    })
+  );
+
+  app.use('/deleteBoard', createProxyMiddleware({
+    target: 'http://localhost:8080/board/deleteBoard/',
+    changeOrigin: true,
+    })
+  );
+
 };

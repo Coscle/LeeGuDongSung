@@ -4,7 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 import './boardWrite.css';
 import axios from 'axios';
 
-function BoardWrite({ onSubmit, onCancel }) {
+function BoardWrite({ onSubmit, onCancel, tags }) {
   // const [formData, setFormData] = useState({
   //   board_title: '',
   //   tags: '',
@@ -14,7 +14,7 @@ function BoardWrite({ onSubmit, onCancel }) {
   //   isRecruitmentDone: false,
   //   photo: null,
   // });
-  
+
   // 임시 데이터, member 테이블에 member_no가 1이라는 데이터가 있어야함
   // 그러면 동작
   const [formData, setFormData] = useState({
@@ -45,7 +45,9 @@ function BoardWrite({ onSubmit, onCancel }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("/postRecruitBoard", formData);
+    formData.tags = 
+    console.log(formData)
+    //axios.post("/postRecruitBoard", formData);
     onSubmit(formData);
   };
 
