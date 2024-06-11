@@ -5,47 +5,20 @@ import './messageBoard.css';
 import axios from 'axios';
 
 function MessageBoard() {
-  const [messages, setMessages] = useState([]);
+  const [messageList, setMessageList] = useState([]);
   const [selectedMessage, setSelectedMessage] = useState(null);
 
   useEffect(() => {
-    fetchMessageList();
-  }, []);
-
-  const fetchMessageList = async () => {
-    try {
-      const response = await axios.get("/api/messages");
-      setMessages(response.data);
-    } catch (error) {
+    axios.get("/getMessageList").then((res) => {
+      const filteredMessages = res.data.filter(message => message.receiver_no === 1);
+      setMessageList(filteredMessages);
+    }).catch((error) => {
       console.error('Error fetching message list:', error);
-    }
-  };
+    });
+  }, []);
 
   const selectMessage = (message) => {
     setSelectedMessage(message);
-  };
-
-  const sendMessage = async (content) => {
-    try {
-      // 새로운 메시지 
-      const newMessage = {
-        message_no: messages.length + 1,
-        sender_no: 1, // 임시
-        receiver_no: 2, // 임시
-        message_content: content,
-      };
-
-      // 새로운 메시지를 임시 데이터에 추가
-      setMessages([...messages, newMessage]);
-
-      // 새로운 메시지를 서버에 전송
-      await axios.post("/api/messages/send", newMessage);
-
-      // 메시지를 선택하지 않은 상태로 초기화
-      setSelectedMessage(null);
-    } catch (error) {
-      console.error('Error sending message:', error);
-    }
   };
 
   return (
@@ -69,7 +42,7 @@ function MessageBoard() {
                       </div>
                     </div>
                   </div>
-                  <MessageList messages={messages} onSelectMessage={selectMessage} />
+                  <MessageList messages={messageList} onSelectMessage={selectMessage} />
                 </div>
               </div>
             </div>
@@ -81,7 +54,9 @@ function MessageBoard() {
               <MessageDetail message={selectedMessage} />
             </div>
           ) : (
-			<div className="noMessage">함께 하고 싶은 <br/>여행 메이트에게 <br/>메시지를 보내보세요!</div>
+            <div className="noMessage">
+              함께 하고 싶은 <br/>여행 메이트에게 <br/>메시지를 보내보세요!
+            </div>
           )}
         </div>
       </div>

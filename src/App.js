@@ -64,7 +64,6 @@ const App = () => {
 			<Footer className="footer" />
 		</BrowserRouter>
 	  </AuthProvider>
-	  <h2>변경함</h2>
     </div>
   );
 };

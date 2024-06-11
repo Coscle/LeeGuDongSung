@@ -38,4 +38,16 @@ module.exports = function (app) {
     })
   );
 
+  app.use('/getMessageList', createProxyMiddleware({
+    target: 'http://localhost:8080/message/',
+    changeOrigin: true,
+    })
+  );
+
+  app.use('/getMessageList', createProxyMiddleware({
+    target: 'http://localhost:8080/message/',
+    changeOrigin: true,
+    })
+  );
+
 };
