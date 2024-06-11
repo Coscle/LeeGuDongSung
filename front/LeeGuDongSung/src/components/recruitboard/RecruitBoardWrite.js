@@ -12,7 +12,7 @@ function RecruitBoardWrite() {
     console.log('Form data:', formData);
 
     // 데이터 저장 후 목록 페이지로 이동
-    navigate('/recruitboard', ()=>{window.location.reload()});
+    navigate('/recruitboard');
   };
 
   return (

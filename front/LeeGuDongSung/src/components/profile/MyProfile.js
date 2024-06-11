@@ -1,36 +1,73 @@
-import React, { useState } from 'react';
-//import './profile.css';
+import React, { useState, useEffect } from 'react';
+import { openDatabase, getUserData } from '../../db'; 
+import './profile.css';
+import { useNavigate } from 'react-router-dom';
 
-const Profile = () => {
-  const [heartClicked, setHeartClicked] = useState(false); // 상태 추가
+const MyProfile = () => {
+  const [heartClicked, setHeartClicked] = useState(false);
+  const [user, setUser] = useState({
+    nickname: '',
+    posts: [],
+    savedPosts: [],
+    tags: [],
+  });
+  const [loading, setLoading] = useState(true); // 로딩 상태 추가
+  const navigate = useNavigate();
 
-  const user = {
-    nickname: '닉네임',
-    posts: [
-      { id: 1, title: 'Post 1', content: 'Content of post 1' },
-      { id: 2, title: 'Post 2', content: 'Content of post 2' },
-    ],
-    savedPosts: [
-      { id: 3, title: 'Saved Post 1', content: 'Content of saved post 1' },
-      { id: 4, title: 'Saved Post 2', content: 'Content of saved post 2' },
-    ],
-    tags: ['intp', '정적인', '즉흥', '남자', '뚜벅이', '찍어주기만', '쇼핑좋음'],
+  useEffect(() => {
+    const loadUserData = async () => {
+      try {
+        const db = await openDatabase();
+        const email = sessionStorage.getItem('loggedInUserEmail'); // 세션에서 이메일 가져오기
+        if (email) {
+          const userData = await getUserData(db, email); // 이메일로 사용자 데이터 가져오기
+          if (userData) {
+            setUser({
+              ...userData,
+              posts: userData.posts || [],
+              savedPosts: userData.savedPosts || [],
+              tags: userData.tags || [],
+            });
+          } else {
+            console.error('No user data found for email:', email);
+          }
+        } else {
+          console.error('No email found in session');
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      } finally {
+        setLoading(false); // 데이터 로드 완료 후 로딩 상태 해제
+      }
+    };
+
+    loadUserData();
+  }, []);
+
+  const handleHeartClick = () => {
+    setHeartClicked(!heartClicked);
+    console.log('Heart clicked!');
   };
 
   const handleEditProfile = () => {
     console.log('Editing profile...');
+    navigate('/VerifyPassword');
+    // 추가적인 프로필 수정 로직을 여기서 처리합니다.
   };
 
-  const handleHeartClick = () => {
-    setHeartClicked(!heartClicked); // 클릭 상태 업데이트
-    console.log('Heart clicked!');
-  };
+  if (loading) {
+    return <div>Loading...</div>; // 로딩 상태 표시
+  }
+
+  if (!user) {
+    return <div>No user data found.</div>; // 유저 데이터가 없을 때 표시
+  }
 
   return (
     <div className="profile">
       <div className="profile-details">
         <div>
-          <a className="pic" href = "/Myprofile"></a>
+          <a className="pic" href="/Myprofile"></a>
           <a className="info">
             <strong></strong> {user.nickname}
           </a>
@@ -81,4 +118,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default MyProfile;
