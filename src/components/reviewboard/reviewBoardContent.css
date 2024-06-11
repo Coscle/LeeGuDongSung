@@ -1,0 +1,76 @@
+.review-board-container {
+  gap: 20px;
+  justify-content: center;
+}
+
+.review-board-items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 30px;
+  width: 80%;
+  margin: 0 auto;
+}
+.review-board-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px; 
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  max-width: 100%; 
+  min-width: 200px; 
+  width: 300px;
+}
+
+.review-board-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.review-board-item h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-board-item p {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin: 0 5px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.page-button.active {
+  background-color: #0056b3;
+}
+
+.page-button:hover:not(.active) {
+  background-color: #0056b3;
+}
+
+.page-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
