@@ -1,0 +1,120 @@
+@media (max-width: 768px) {
+  .form-container {
+    width: 50%;
+    max-width: 400px;
+  }
+
+  #startDate,
+  #endDate {
+    width: 100%;
+  }
+}
+
+.form-container {
+  padding: 50px 50px 80px 50px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 1000px;
+  box-sizing: border-box;
+  margin: 30px 64px;;
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+}
+
+.contentTextarea {
+  height: 400px;
+  width: calc(100% - 10px);
+  padding: 10px;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.dropdown-toggle {
+  background-color: #007bff;
+  border: none;
+}
+
+.dropdown-menu {
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+#titleInput,
+#contentTextarea {
+  width: 100%;
+}
+
+#inputGroupFile02 {
+  cursor: pointer;
+}
+
+#startDate,
+#endDate {
+  width: 30%;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  float: right;
+  margin: 0 20px;
+  border-radius: 15px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.writeSubmitBtn {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  float: right;
+}
+
+.writeSubmitBtn:hover {
+  background-color: #0056b3;
+}
+
+.canclewriteBtn {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  float: right; 
+  margin-right: 30px;
+}
+
+.canclewriteBtn:hover {
+  background-color: #0056b3;
+}
+
+.write-board-container {
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.form-container .form-control {
+  margin-bottom: 8px;
+}
