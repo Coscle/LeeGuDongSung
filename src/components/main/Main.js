@@ -33,11 +33,21 @@ function Main() {
   };
 
   const handleMateClick = () => {
-    navigate('/RecruitBoard');
+	  const loggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+	  if(loggedIn) {
+		  navigate('/RecruitBoard');
+	  }else{
+		 navigate('/login'); 
+	  }
   };
 
   const handleReviewClick = () => {
-    navigate('/ReviewBoard');
+	  const loggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+	  if(loggedIn){
+		  navigate('/ReviewBoard');
+	  }else{
+	    navigate('/login');
+	  }
   };
 
   return (
