@@ -9,6 +9,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserDTO {
 
-	private int id;
-	private String name;
+	private int member_no;
+	private String member_name;
+	private String member_id;
+	private String member_pw;
+	private String member_birth;
+	private int member_gender;
+	private String member_tel;
+	private String member_nickname;
+	private String member_rgday;
+	private String member_snsurl;
+	private int member_like;
+	private String member_dcrt;
+	
 }

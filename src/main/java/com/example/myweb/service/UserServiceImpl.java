@@ -10,7 +10,7 @@ import com.example.myweb.mapper.UserMapper;
 import com.example.myweb.user.UserDTO;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 	
 	private final UserMapper userMapper;
 	
@@ -25,21 +25,23 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public Optional<UserDTO> findById(Long id) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+	public Optional<UserDTO> findByMemberNo(int member_no) {
+		return userMapper.findByMemberNo(member_no);
 	}
 
 	@Override
-	public void save(UserDTO user) {
-		// TODO Auto-generated method stub
-		
+	public void insert(UserDTO user) {
+		userMapper.insert(user);
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
-		
+	public void update(UserDTO user) {
+		userMapper.update(user);
+	}
+	
+	@Override
+	public void delete(int member_no) {
+		userMapper.delete(member_no);
 	}
 
 }

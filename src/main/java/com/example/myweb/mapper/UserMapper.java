@@ -1,6 +1,7 @@
 package com.example.myweb.mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.annotations.*;
 
@@ -10,11 +11,11 @@ import com.example.myweb.user.UserDTO;
 public interface UserMapper {
 	List<UserDTO> findAll();
 	
-    UserDTO findById(Long id);
+    Optional<UserDTO> findByMemberNo(int member_no);
 
     void insert(UserDTO user);
 
     void update(UserDTO user);
 
-    void delete(Long id);
+    void delete(int member_no);
 }

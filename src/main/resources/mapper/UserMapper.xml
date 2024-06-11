@@ -4,27 +4,42 @@
 
 <mapper namespace="com.example.myweb.mapper.UserMapper">
     <resultMap id="userResultMap" type="com.example.myweb.user.UserDTO">
-        <id property="id" column="id"/>
-        <result property="name" column="name"/>
+        <id property="member_no" column="member_no" />
+		<result property="member_name" column="member_name" />
+		<result property="member_id" column="member_id" />
+		<result property="member_pw" column="member_pw" />
+		<result property="member_birth" column="member_birth" />
+		<result property="member_gender" column="member_gender" />
+		<result property="member_tel" column="member_tel" />
+		<result property="member_nickname" column="member_nickname" />
+		<result property="member_rgday" column="member_rgday" />
+		<result property="member_snsurl" column="member_snsurl" />
+		<result property="member_like" column="member_like" />
+		<result property="member_dcrt" column="member_dcrt" />
     </resultMap>
 
     <select id="findAll" resultMap="userResultMap">
-        SELECT * FROM dbtest
+        SELECT * FROM member
     </select>
 
-    <select id="findById" resultMap="userResultMap">
-        SELECT * FROM users WHERE id = #{id}
+    <select id="findByMemberNo" resultMap="userResultMap">
+        SELECT * FROM member WHERE member_no=#{member_no}
     </select>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO users(name, email) VALUES(#{name})
+    <insert id="insert" useGeneratedKeys="true" keyProperty="member_no">
+        INSERT INTO member(member_name, member_id, member_pw, member_birth,
+		member_gender, member_tel, member_nickname, member_rgday,
+		member_snsurl, member_dcrt) VALUES
+		(#{member_name},#{member_id},#{member_pw},#{member_birth},
+		#{member_gender},#{member_tel},#{member_nickname},now(),
+		#{member_snsurl},#{member_dcrt})
     </insert>
 
     <update id="update">
-        UPDATE users SET name=#{name} WHERE id=#{id}
-    </update>
+		UPDATE member SET member_pw=#{member_pw}, member_tel=#{member_tel}, member_nickname=#{member_nickname}, member_snsurl=#{member_snsurl} WHERE member_no=#{member_no}
+	</update>
 
     <delete id="delete">
-        DELETE FROM users WHERE id = #{id}
+        DELETE FROM member WHERE member_no=#{member_no}
     </delete>
 </mapper>
