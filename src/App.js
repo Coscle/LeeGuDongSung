@@ -7,6 +7,9 @@ import Login from './components/login/Login';
 import SignUp from './components/signUp/SignUp.js';
 import FindId from './components/signUp/FindId';
 import FindPassword from './components/signUp/FindPassword';
+import VerifyPassword from './components/signUp/VerifyPassword';
+import EditProfile from './components/signUp/EditProfile';
+import TagSelectionForEdit from './components/signUp/TagSelectionForEdit';
 import RecruitBoard from './components/recruitboard/RecruitBoard';
 import NotFound from './components/NotFound';
 import MyProfile from './components/profile/MyProfile';
@@ -25,6 +28,7 @@ import './App.css';
 import './fonts/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider } from './contexts/AuthContext'; // Import AuthProvider
+
 
 const App = () => {
 	
@@ -49,6 +53,9 @@ const [data, setData] = useState(null);
 			<Route path="/SignUp/TagSelection" element={<TagSelection />} />
 			<Route path="/findId" element={<FindId/>}/>
 			<Route path="/findPassword" element={<FindPassword/>}/>
+			<Route path = "/VerifyPassword" element ={<VerifyPassword/>}/>
+			<Route path = "/EditProfile" element = {<EditProfile/>}/>
+			<Route path = "/TagSelectionForEdit" element = {<TagSelectionForEdit/>}/>
 			<Route path="/main" element={<Main />} />
 			<Route path="/recruitboard" element={<RecruitBoard />} />
 			<Route path="/reviewboard" element={<ReviewBoard data={data} />} />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { openDatabase, getUserData } from '../../db'; // 수정된 경로
 import './profile.css';
+import { useNavigate } from 'react-router-dom';
 
 const MyProfile = () => {
   const [heartClicked, setHeartClicked] = useState(false);
@@ -11,6 +12,7 @@ const MyProfile = () => {
     tags: [],
   });
   const [loading, setLoading] = useState(true); // 로딩 상태 추가
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -49,6 +51,7 @@ const MyProfile = () => {
 
   const handleEditProfile = () => {
     console.log('Editing profile...');
+    navigate('/VerifyPassword');
     // 추가적인 프로필 수정 로직을 여기서 처리합니다.
   };
 

@@ -95,3 +95,20 @@ export const getUserDataByPhoneNumber = (db, phoneNumber) => {
     };
   });
 };
+export const getUserDataByPassword = (db, password) => {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(['users'], 'readonly');
+    const objectStore = transaction.objectStore('users');
+    const index = objectStore.index('password');
+    const request = index.get(password);
+
+    request.onsuccess = (event) => {
+      resolve(event.target.result);
+    };
+
+    request.onerror = (event) => {
+      console.error('Get error:', event.target.error);
+      reject('Get error');
+    };
+  });
+};

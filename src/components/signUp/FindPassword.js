@@ -15,12 +15,12 @@ const FindPassword = () => {
 
     try {
       const db = await openDatabase();
-      const userData = await getUserData(db, email);
-      const userData1 = await getUserDataByPhoneNumber(db, phoneNumber);
-      if (userData1) {
-	    setPassword(userData.password); 
-		if(userData){
-			setPhoneNumber(userData1.phoneNumber);
+      const userEmail = await getUserData(db, email);
+      const userPhoneNumber = await getUserDataByPhoneNumber(db, phoneNumber);
+      if (userPhoneNumber) {
+	    setPassword(userEmail.password); 
+		if(userEmail){
+			setPhoneNumber(userPhoneNumber.phoneNumber);
 		}
       } else {
         alert('해당 아이디가 없습니다.');
