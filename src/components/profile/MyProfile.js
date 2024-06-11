@@ -3,7 +3,6 @@ import { openDatabase, getUserData } from '../../db'; // 수정된 경로
 import './profile.css';
 import { useNavigate } from 'react-router';
 
-
 const MyProfile = () => {
  const navigate = useNavigate();
   const [heartClicked, setHeartClicked] = useState(false);
@@ -57,14 +56,6 @@ const MyProfile = () => {
     console.log('Heart clicked!');
   };
 
-
-  if (loading) {
-    return <div>Loading...</div>; // 로딩 상태 표시
-  }
-
-  if (!user) {
-    return <div>No user data found.</div>; // 유저 데이터가 없을 때 표시
-  }
 
   return (
     <div className="profile">
