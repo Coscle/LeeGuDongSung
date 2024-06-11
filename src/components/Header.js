@@ -10,7 +10,7 @@ export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
 
-
+  // 현재 경로가 '/Login'인지 확인
   const isLoginPage = location.pathname === '/Login';
 
   return (
@@ -27,7 +27,7 @@ export default function Header() {
         <>
           {isLoggedIn ? (
             <div>
-              <button onClick={()=>{logout(); navigate('/');}} className="LogoutBtn">로그아웃</button>
+              <button onClick={()=>{logout(); navigate('/');} } className="LogoutBtn">로그아웃</button>
               <Link to="/messageboard">
                 <button className="messageBtn">쪽지함</button>
               </Link>
