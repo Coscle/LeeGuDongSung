@@ -14,6 +14,9 @@ function BoardWrite({ onSubmit, onCancel }) {
   //   isRecruitmentDone: false,
   //   photo: null,
   // });
+  
+  // 임시 데이터, member 테이블에 member_no가 1이라는 데이터가 있어야함
+  // 그러면 동작
   const [formData, setFormData] = useState({
     board_title: "",
     board_content: "",

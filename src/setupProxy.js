@@ -38,4 +38,10 @@ module.exports = function (app) {
     })
   );
 
+  app.use('/postBoardRepl', createProxyMiddleware({
+    target: 'http://localhost:8080/board/insertBoardRepl/',
+    changeOrigin: true,
+    })
+  );
+
 };

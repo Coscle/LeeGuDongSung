@@ -67,7 +67,7 @@ const RecruitBoardDetail = () => {
           <div className="board-detail">
             <div className="board-info-container">
               <h2 className="board-title">
-                {boardData?.board_title}
+                {boardData?.board_title} | 작성일: {boardData?.board_writeday}
                 <span className="recruitment-status">{boardData?.recruit_done ? '구인 완료' : '구인중'}</span>
               </h2>
               <div className="board-detail-item tag-list">
