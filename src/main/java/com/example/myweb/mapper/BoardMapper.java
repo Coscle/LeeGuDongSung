@@ -19,8 +19,9 @@ public interface BoardMapper {
 
     void insert(BoardDTO board);
     void recruitInsert(BoardDTO board);
+    void insertRepl(BoardDTO board);
 
-    void update(BoardDTO board);
+    void recruitUpdate(BoardDTO board);
 
     void delete(int board_no);
 }

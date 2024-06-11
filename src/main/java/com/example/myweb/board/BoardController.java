@@ -51,21 +51,25 @@ public class BoardController {
 	public void insertBoard(@RequestBody BoardDTO board) {
 		boardService.recruitInsert(board);
 	}
+	@PostMapping("/insertBoardRepl/")
+	public void insertBoardRepl(@RequestBody BoardDTO board) {
+		boardService.insertRepl(board);
+	}
 	
-	@PutMapping("/boardUpdate/")
+	@PutMapping("/updateBoard/")
 	public String updateBoard(@RequestBody BoardDTO board) {
 		Optional<BoardDTO> existing = boardService.findById(board.getBoard_no());
 		if (existing.isPresent()) {
 			board.setBoard_no(board.getBoard_no());
-			boardService.update(board);
+			boardService.recruitUpdate(board);
 			return "성공";
 		} else {
 			return "실패";
 		}
 	}
 	
-	@GetMapping("/deleteBoard/")
-	public String delete(int board_no) {
+	@GetMapping("/deleteBoard/{board_no}")
+	public String delete(@PathVariable int board_no) {
 		Optional<BoardDTO> existing = boardService.findById(board_no);
 		if (existing.isPresent()) {
 			boardService.delete(board_no);

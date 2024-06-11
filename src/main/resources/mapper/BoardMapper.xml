@@ -69,12 +69,16 @@
 		VALUES (#{cboard_tags}, #{recruit_done}, #{trip_start}, #{trip_end},
 		(select board_no from board order by board_no desc limit 1))
 	</insert>
+	<insert id="insertRepl" useGeneratedKeys="true" keyProperty="board_no">
+		INSERT INTO boardrepls(boardrepl_content, replauthor_no, replauthor_nickname, boardrepl_group, boardrepl_repl_seq, boardrepl_writeday, board_no) 
+		VALUES (#{boardrepl_content}, #{replauthor_no}, #{replauthor_nickname}, #{boardrepl_group}, #{boardrepl_repl_seq}, now(), #{board_no})
+	</insert>
 
 	<update id="update">
 		UPDATE board SET board_title=#{board_title}, board_content=#{board_content} WHERE board_no=#{board_no}
 	</update>
 	
-	<update id="recruit_update">
+	<update id="recruitUpdate">
 		UPDATE recruitboard AS r
 		INNER JOIN board AS b ON r.board_no = b.board_no
 		SET r.recruit_done = #{recruit_done},

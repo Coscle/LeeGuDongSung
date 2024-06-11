@@ -50,12 +50,16 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.insert(board);
 		boardMapper.recruitInsert(board);
 	}
+	@Override
+	public void insertRepl(BoardDTO board) {
+		boardMapper.insertRepl(board);
+	}
 
 	
 	
 	@Override
-	public void update(BoardDTO board) {
-		boardMapper.update(board);
+	public void recruitUpdate(BoardDTO board) {
+		boardMapper.recruitUpdate(board);
 	}
 
 	

@@ -12,6 +12,7 @@ public interface BoardService {
     public Optional<BoardDTO> findById(int board_no);
     public List<BoardDTO> findByIdRepls(int board_no);
     public void recruitInsert(BoardDTO board);
-    public void update(BoardDTO board);
+    public void insertRepl(BoardDTO board);
+    public void recruitUpdate(BoardDTO board);
     public void delete(int board_no);
 }
