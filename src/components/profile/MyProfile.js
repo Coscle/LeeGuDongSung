@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { openDatabase, getUserData } from '../../db'; // 수정된 경로
+import { openDatabase, getUserData } from '../../db'; 
 import './profile.css';
 
 const MyProfile = () => {
@@ -49,7 +49,7 @@ const MyProfile = () => {
 
   const handleEditProfile = () => {
     console.log('Editing profile...');
-    // 추가적인 프로필 수정 로직을 여기서 처리합니다.
+    // 추가적인 프로필 수정 로직을 
   };
 
   if (loading) {
