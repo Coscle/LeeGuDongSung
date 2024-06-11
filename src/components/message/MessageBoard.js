@@ -3,14 +3,38 @@ import MessageList from './MessageList';
 import MessageDetail from './MessageDetail';
 import './messageBoard.css';
 import axios from 'axios';
+import { useLocation } from 'react-router';
+import {openDatabase, getUserData } from '../../db';
 
 function MessageBoard() {
   const [messages, setMessages] = useState([]);
   const [selectedMessage, setSelectedMessage] = useState(null);
-
+  const [nickname, setNickname] = useState('');
+  const location = useLocation();
+  const {email} = location.state || {};
+    //veiryfyPassword의 다음 버튼에서 navigate로 가져온 state(email)
+  	//email데이터를 쓸수있게함
+  	//|| {}를 사용하여 undefined인 경우 빈 객체를 기본값으로 설정
+  
   useEffect(() => {
+	if(email){
+		fetchNickname();
+	}
     fetchMessageList();
-  }, []);
+  }, [email]);
+
+  const fetchNickname = async ()=>{
+	 try{
+	  const db = await openDatabase();
+	  const userData = await getUserData(db,email);
+	  if(userData){
+		  setNickname(userData.nickname);
+	  }
+	 }catch(error){
+		 console.error('Error fetching nickname:', error);
+	 }
+  };
+
 
   const fetchMessageList = async () => {
     try {
@@ -48,11 +72,11 @@ function MessageBoard() {
     }
   };
 
-  return (
+   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-4 border-right">
-          <h2>쪽지함</h2>
+          <h2>'{nickname}'님의 쪽지함</h2> {/* 닉네임 표시 */}
           <div className="msg-container">
             <div className="messaging">
               <div className="inbox_msg">
@@ -81,7 +105,7 @@ function MessageBoard() {
               <MessageDetail message={selectedMessage} />
             </div>
           ) : (
-			<div className="noMessage">함께 하고 싶은 <br/>여행 메이트에게 <br/>메시지를 보내보세요!</div>
+            <div className="noMessage">함께 하고 싶은 <br />여행 메이트에게 <br />메시지를 보내보세요!</div>
           )}
         </div>
       </div>

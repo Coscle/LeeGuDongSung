@@ -78,6 +78,7 @@ export const getUserDataBySnsAddress = (db, snsAddress) => {
     };
   });
 };
+
 export const getUserDataByPhoneNumber = (db, phoneNumber) => {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction(['users'], 'readonly');
@@ -95,6 +96,7 @@ export const getUserDataByPhoneNumber = (db, phoneNumber) => {
     };
   });
 };
+
 export const getUserDataByPassword = (db, password) => {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction(['users'], 'readonly');
