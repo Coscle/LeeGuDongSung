@@ -58,4 +58,6 @@
 	<delete id="delete">
 		DELETE FROM board WHERE board_no = #{board_no}
 	</delete>
+	
+	
 </mapper>

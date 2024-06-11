@@ -25,7 +25,7 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@GetMapping()
+	@GetMapping("")
 	public List<BoardDto> getAllPost() {
 		List<BoardDto> list = boardService.findAll();
 		System.out.println(list);
@@ -39,7 +39,7 @@ public class BoardController {
 	}
 	
 	
-	@PostMapping
+	@PostMapping("")
 	public ResponseEntity<BoardDto> createPost(@RequestBody BoardDto post) {
 		boardService.insert(post);
         return ResponseEntity.status(HttpStatus.CREATED).body(post);
