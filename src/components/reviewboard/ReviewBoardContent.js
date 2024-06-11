@@ -1,22 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './reviewBoardContent.css';
+import axios from 'axios';
 
 const ITEMS_PER_PAGE = 10;
 
-const ReviewBoardContent = ({ data }) => {
+const ReviewBoardContent = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
+//  const [mergedData, setMergedData] = useState([]);
+
+/*
+  useEffect(() => {
+    if (data && data.board && data.reviewboard) {
+      console.log('Received data:', data);
+      const combinedData = data.reviewboard.map(review => {
+        const boardItem = data.board.find(board => board.board_no === review.board_no);
+        return { ...review, ...boardItem };
+      });
+      console.log('Combined data:', combinedData);
+      setMergedData(combinedData);
+    } else {
+      console.error('Data format is incorrect.');
+    }
+  }, [data]);
+*/
 
   const handleEnterDetail = boardNo => {
     navigate(`/reviewboard/${boardNo}`);
   };
-
-  const dataArray = Array.isArray(data) ? data : [];
-
-  const uniqueData = dataArray.filter((value, index, self) => {
-    return self.findIndex(item => item.VBOARD_NO === value.VBOARD_NO) === index;
+/*
+  const uniqueData = mergedData.filter((value, index, self) => {
+    return self.findIndex(item => item.vboard_no === value.vboard_no) === index;
   });
+
+  const totalPages = Math.ceil(uniqueData.length / ITEMS_PER_PAGE);
+
+  const currentData = uniqueData.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+*/
+
+
+ const [uniqueData, setUD] = useState([]);
+   useEffect(()=>{
+    axios.get("/getBoardAll").then((res)=>{
+      setUD(res.data);
+    })
+  },[]);
+  console.log(uniqueData);
 
   const totalPages = Math.ceil(uniqueData.length / ITEMS_PER_PAGE);
 
@@ -34,10 +71,9 @@ const ReviewBoardContent = ({ data }) => {
       <div className="review-board-container">
         <div className="review-board-items">
           {currentData.map(item => (
-            <div key={item.VBOARD_NO} onClick={() => handleEnterDetail(item.VBOARD_NO)} className="review-board-item">
-              <h2>{item.BOARD_TITLE}</h2>
-              <p>게시일: {item.BOARD_WRITEDAY}</p>
-              <img src={item.PHOTO_URL} alt="사진" /> 
+            <div key={item.vboard_no} onClick={() => handleEnterDetail(item.vboard_no)} className="review-board-item">
+              <h2>{item.board_title}</h2>
+              <p>게시일: {item.board_writeday}</p>
             </div>
           ))}
         </div>

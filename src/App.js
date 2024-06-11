@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -28,23 +28,14 @@ import ProfileToMessage from './components/message/ProfileToMessage';
 import './App.css';
 import './fonts/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AuthProvider } from './contexts/AuthContext'; // Import AuthProvider
+import { AuthProvider } from './contexts/AuthContext';
 
 
 const App = () => {
-	
-const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch('/db/dummy.json')
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
 	 
   return (
     <div className="App">
-	  <AuthProvider>
+	<AuthProvider>
 		<BrowserRouter>
 			<Header className="header" />
 			<Routes>
@@ -59,9 +50,9 @@ const [data, setData] = useState(null);
 			<Route path = "/TagSelectionForEdit" element = {<TagSelectionForEdit/>}/>
 			<Route path="/main" element={<Main />} />
 			<Route path="/recruitboard" element={<RecruitBoard />} />
-			<Route path="/reviewboard" element={<ReviewBoard data={data} />} />
+			<Route path="/reviewboard" element={<ReviewBoard />} />
 			<Route path="/reviewboardwrite" element={<ReviewBoardWrite />} />
-			<Route path="/recruitboard/:boardNo" element={<RecruitBoardDetail data={data} />} />
+			<Route path="/recruitboard/:boardNo" element={<RecruitBoardDetail />} />
 			<Route path="/reviewboard/:boardNo" element={<ReviewBoardDetail />} />
 			<Route path="/userprofile/:userId" element={<UserProfile />} />
 			<Route path="/myprofile" element={<MyProfile />} />

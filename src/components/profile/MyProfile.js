@@ -20,6 +20,7 @@ const MyProfile = () => {
     tags: [],
     profilePicture: null, // 프로필 사진 추가
   });
+  const [loading, setLoading] = useState(true); // 로딩 상태 추가
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -46,6 +47,7 @@ const MyProfile = () => {
   }, [email]);
 
  const handleEditProfile = () => {
+	console.log('Editing profile...');
     navigate('/verifyPassword', { state: { email } }); // 비밀번호 확인 페이지로 이동
   };
 
@@ -53,6 +55,15 @@ const MyProfile = () => {
     setHeartClicked(!heartClicked);
     console.log('Heart clicked!');
   };
+
+
+  if (loading) {
+    return <div>Loading...</div>; // 로딩 상태 표시
+  }
+
+  if (!user) {
+    return <div>No user data found.</div>; // 유저 데이터가 없을 때 표시
+  }
 
   return (
     <div className="profile">
