@@ -6,51 +6,84 @@ import axios from 'axios';
 const Comment = ({ comments, setComments }) => {
   const {boardNo} = useParams();
   const [commentList, setComment] = useState([]);
+  const [tempList, setTemp] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [replyText, setReplyText] = useState('');
   const [replyingTo, setReplyingTo] = useState(null);
   useEffect(()=>{
     axios.get("/findRecruitBoardRepls/"+boardNo).then((res)=>{
-      setComment([res.data]);
-      console.log(commentList);
+      setTemp(res.data);
     });
   },[]);
 
+  useEffect(()=>{
+    if (commentList.length < tempList.length){
+      tempList.map((item)=>{
+        setComment(commentList=>[...commentList,{
+          boardrepl_no : item.boardrepl_no,
+          boardrepl_content : item.boardrepl_content,
+          replauthor_no : item.replauthor_no,
+          replauthor_nickname : item.replauthor_nickname,
+          boardrepl_group : item.boardrepl_group,
+          boardrepl_repl_seq : item.boardrepl_repl_seq,
+          boardrepl_writeday : item.boardrepl_writeday
+        }])
+      });
+    }
+  },[tempList]);
+
+  //댓글
   const replList = (comment, idx) => {
+    if (comment.boardrepl_repl_seq === 0){
       return (
       <div key={comment.replauthor_no} className="comment">
         <div className="comment-profile">
           <img src={comment.profilePic} alt="프로필 사진" className="comment-profile-pic" />
-          <span className="comment-author">{comment.replauthor_no}</span>
+          <span className="comment-author">{comment.replauthor_nickname}</span>
           <p className="comment-text">{comment.boardrepl_content}</p>
           <div className="replies">
             {rereplList(commentList[idx].boardrepl_group)}
             {/* 대댓글 달기 버튼 */}
             {commentList.length > 0 && (
-              <button className="toggle-reply" onClick={() => handleToggleReply(comment.id)}>🗨답글</button>
+              <button className="toggle-reply" onClick={() => handleToggleReply(comment.boardrepl_no)}>🗨답글</button>
             )}
+            
+            {/* 대댓글 입력란 */}
+            {
+              replyingTo === comment.boardrepl_no && (
+                <div className="reply-input" style={{ marginLeft: `${comment.boardrepl_repl_seq * 40}px` }}>
+                  <textarea
+                    placeholder="대댓글을 작성해주세요."
+                    value={replyText}
+                    onChange={(e) => setReplyText(e.target.value)}
+                  ></textarea>
+                  <button className="reply-button" onClick={() => handleAddReply(comment.replauthor_no, comment.boardrepl_group)}>🗨답글</button>
+                </div>
+              )
+            }
           </div>
         </div>
       </div>
       );
+    }
   }
 
+  //대댓글
   const rereplList = (replGroup)=>{
     const result = commentList.filter((rerepls)=>(
-      rerepls.boardrepl_group === replGroup && rerepls.boardrepl_repl_seq>0
+      rerepls.boardrepl_group === replGroup && rerepls.boardrepl_repl_seq > 0
     ));
-    console.log(result)
     return (
       <>
       {
         result.map(reply => (
-          <div key={reply.id} className="reply" style={{ marginLeft: `${reply.depth * 40}px` }}>
+          <div key={reply.id} className="reply" style={{ marginLeft: `${reply.boardrepl_repl_seq * 40}px` }}>
             <div className="reply-profile">
               <img src={reply.profilePic} alt="프로필 사진" className="reply-profile-pic" />
-              <span className="reply-author">{reply.author}</span>
+              <span className="reply-author">{reply.replauthor_nickname}|{reply.boardrepl_repl_seq}</span>
             </div>
             <div className="reply-details">
-              <p className="reply-text">{reply.text}</p>
+              <p className="reply-text">{reply.boardrepl_writeday} | {reply.boardrepl_content}</p>
             </div>
           </div>
         ))
@@ -63,10 +96,20 @@ const Comment = ({ comments, setComments }) => {
     setNewComment(e.target.value);
   };
 
-	const handleAddComment = () => {
-	  const newId = commentList.length + 1;
-	  const newCommentObj = { id: newId, text: newComment, author: '사용자', profilePic: '/profile.jpg', replies: [] };
-	  setComments([...commentList, newCommentObj]);
+  const handleAddComment = () => {
+	  const newGroup = commentList.length? commentList[commentList.length-1].boardrepl_group : 0;
+	  const newCommentObj = {
+      replauthor_no: 1,
+      boardrepl_content: newComment,
+      replauthor_nickname: '홍시',
+      profilePic: '/profile.jpg',
+      boardrepl_group: newGroup+1,
+      boardrepl_repl_seq: 0,
+      board_no : boardNo
+    };
+    console.log(newCommentObj)
+    axios.post("/postBoardRepl",newCommentObj);
+    window.location.reload();
 	  setNewComment('');
 	};
 
@@ -75,16 +118,20 @@ const Comment = ({ comments, setComments }) => {
     setReplyText('@'+commentId+' | '); 
   };
 
-  const handleAddReply = (commentId, depth) => {
-    const commentIndex = commentList.findIndex(comment => comment.id === commentId);
-    if (commentIndex !== -1) {
-      const newId = commentList[commentIndex].replies.length + 1;
-      const newReply = { id: newId, text: replyText, author: '사용자', profilePic: '/profile.jpg', depth: depth + 1 };
-      const updatedComments = [...commentList];
-      updatedComments[commentIndex].replies.push(newReply);
-      setComments(updatedComments);
-      setReplyingTo(null); 
-    }
+  const handleAddReply = (commentId, group) => {
+    const seq = commentList.filter((rerepls)=>(rerepls.boardrepl_group===group));
+    const newCommentObj = {
+      replauthor_no: 1,
+      boardrepl_content: replyText,
+      replauthor_nickname: '홍시',
+      profilePic: '/profile.jpg',
+      boardrepl_group: group,
+      boardrepl_repl_seq: seq.length,
+      board_no : boardNo
+    };
+    console.log(newCommentObj);
+    axios.post("/postBoardRepl", newCommentObj);
+    window.location.reload();
   };
 
   return (
@@ -98,31 +145,9 @@ const Comment = ({ comments, setComments }) => {
         <button className="comment-button" onClick={handleAddComment}>댓글</button>
       </div>
       <div className="comments">
-        { commentList.map((comment, idx) => (replList(comment, idx)))}
-          {/* 대댓글 입력란 */}
-          {/* {replyingTo === comment.id && (
-            <div className="reply-input" style={{ marginLeft: `${comment.depth * 40}px` }}>
-              <textarea
-                placeholder="대댓글을 작성해주세요."
-                value={replyText}
-                onChange={(e) => setReplyText(e.target.value)}
-              ></textarea>
-              <button className="reply-button" onClick={() => handleAddReply(comment.id, comment.depth)}>🗨답글</button>
-            </div>
-          )} */}
-          {
-            // <div className="reply-input" style={{ marginLeft: `${comment.depth * 40}px` }}>
-            //   <textarea
-            //     placeholder={"대댓글을 작성해주세요."}
-            //     value={replyText}
-            //     onChange={(e) => setReplyText(e.target.value)}
-            //   ></textarea>
-            //   <button className="reply-button" onClick={() => handleAddReply(comment.id, comment.depth)}>🗨답글</button>
-            // </div>
-          }
-        
-        </div>
+        { commentList.map((comment, index) => (replList(comment, index)))}
       </div>
+    </div>
   );
 };
 

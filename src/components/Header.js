@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import hifive from '../images/hifive.png';
 import './header.css';
 import '../fonts/fonts.css';
-import { AuthContext } from '../contexts/AuthContext';
+import  AuthContext  from '../AuthContext.js';
 
 export default function Header() {
   const { isLoggedIn, logout } = useContext(AuthContext);

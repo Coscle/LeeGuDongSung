@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import SideFilter from '../board/SideFilter';
 import RecruitBoardContent from './RecruitBoardContent';
 import './recruitBoard.css';
 import { Link } from 'react-router-dom';
+import  AuthContext  from '../../AuthContext.js'; // Import AuthContext
 
 function RecruitBoard() {
+
+  
+
   const products = [
     { id: 1, name: 'Product 1', region: ['서유럽'], gender: '남자', type: '즉흥', budget: '더치페이', activities: ['카페'] },
     { id: 2, name: 'Product 2', region: ['북유럽'], gender: '여자', type: '계획', budget: '공금', activities: ['산책'] },

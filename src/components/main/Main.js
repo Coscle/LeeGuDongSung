@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './main.css';
 import '../../fonts/fonts.css';
 import tpic from '../../images/tpic.png';
 import { Link, useNavigate } from 'react-router-dom';
+import  AuthContext  from '../../AuthContext.js'; // Import AuthContext
 
 function Main() {
   const [mateText, setMateText] = useState("Travel\nMate");
@@ -10,6 +11,8 @@ function Main() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
+  const { user } = useContext(AuthContext);
+  console.log(user);
   useEffect(() => {
     // 컴포넌트가 마운트될 때 세션 스토리지에서 로그인 상태를 읽어옴
     const loggedIn = sessionStorage.getItem('isLoggedIn') === 'true';

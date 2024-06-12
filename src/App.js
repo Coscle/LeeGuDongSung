@@ -27,13 +27,15 @@ import ProfileToMessage from './components/message/ProfileToMessage';
 import './App.css';
 import './fonts/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AuthProvider } from './contexts/AuthContext';
+import {AuthProvider} from './AuthContext.js';
 
 const App = () => {
 	 
   return (
-    <div className="App">
+	
+
 	<AuthProvider>
+		<div className="App">
 		<BrowserRouter>
 			<Header className="header" />
 			<Routes>
@@ -63,8 +65,9 @@ const App = () => {
 			</Routes>
 			<Footer className="footer" />
 		</BrowserRouter>
-	  </AuthProvider>
-    </div>
+		</div>
+	</AuthProvider>
+
   );
 };
 

@@ -1,48 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { openDatabase, getUserData } from '../../db'; // 수정된 경로
 import './profile.css';
 import { useNavigate } from 'react-router-dom';
+import  AuthContext  from '../../AuthContext.js'; 
 
 const MyProfile = () => {
+  const { user } = useContext(AuthContext); // Use AuthContext
   const [heartClicked, setHeartClicked] = useState(false);
-  const [user, setUser] = useState({
-    nickname: '',
-    posts: [],
-    savedPosts: [],
-    tags: [],
-  });
-  const [loading, setLoading] = useState(true); // 로딩 상태 추가
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const loadUserData = async () => {
-      try {
-        const db = await openDatabase();
-        const email = sessionStorage.getItem('loggedInUserEmail'); // 세션에서 이메일 가져오기
-        if (email) {
-          const userData = await getUserData(db, email); // 이메일로 사용자 데이터 가져오기
-          if (userData) {
-            setUser({
-              ...userData,
-              posts: userData.posts || [],
-              savedPosts: userData.savedPosts || [],
-              tags: userData.tags || [],
-            });
-          } else {
-            console.error('No user data found for email:', email);
-          }
-        } else {
-          console.error('No email found in session');
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      } finally {
-        setLoading(false); // 데이터 로드 완료 후 로딩 상태 해제
-      }
-    };
+  if (!user) {
+    return <div>No user data found.</div>; // 유저 데이터가 없을 때 표시
+  }
+  // const [loading, setLoading] = useState(true); // 로딩 상태 추가
 
-    loadUserData();
-  }, []);
+  // useEffect(() => {
+  //   const loadUserData = async () => {
+  //     try {
+  //       const db = await openDatabase();
+  //       const email = sessionStorage.getItem('loggedInUserEmail'); // 세션에서 이메일 가져오기
+  //       if (email) {
+  //         const userData = await getUserData(db, email); // 이메일로 사용자 데이터 가져오기
+  //         if (userData) {
+  //           setUser({
+  //             ...userData,
+  //             posts: userData.posts || [],
+  //             savedPosts: userData.savedPosts || [],
+  //             tags: userData.tags || [],
+  //           });
+  //         } else {
+  //           console.error('No user data found for email:', email);
+  //         }
+  //       } else {
+  //         console.error('No email found in session');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching user data:', error);
+  //     } finally {
+  //       setLoading(false); // 데이터 로드 완료 후 로딩 상태 해제
+  //     }
+  //   };
+
+  //   loadUserData();
+  // }, []);
 
   const handleHeartClick = () => {
     setHeartClicked(!heartClicked);
@@ -55,13 +55,19 @@ const MyProfile = () => {
     // 추가적인 프로필 수정 로직을 여기서 처리합니다.
   };
 
-  if (loading) {
-    return <div>Loading...</div>; // 로딩 상태 표시
-  }
+  // 위에꺼 대신 ㅇㅇ
+  // const handleEditProfile = () => {
+  //   console.log('Editing profile...');
+  //     navigate('/verifyPassword', { state: { email } }); // 비밀번호 확인 페이지로 이동
+  //   };
 
-  if (!user) {
-    return <div>No user data found.</div>; // 유저 데이터가 없을 때 표시
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>; // 로딩 상태 표시
+  // }
+
+  // if (!user) {
+  //   return <div>No user data found.</div>; // 유저 데이터가 없을 때 표시
+  // }
 
   return (
     <div className="profile">
@@ -69,7 +75,7 @@ const MyProfile = () => {
         <div>
           <a className="pic" href="/Myprofile"></a>
           <a className="info">
-            <strong></strong> {user.nickname}
+            <strong></strong> {user.member_id}
           </a>
           <a className={`heart-icon ${heartClicked ? 'clicked' : ''}`} onClick={handleHeartClick}>
             <span role="img" aria-label="heart">❤️</span>
