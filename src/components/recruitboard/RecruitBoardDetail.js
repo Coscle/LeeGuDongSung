@@ -3,7 +3,6 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import './recruitBoardDetail.css';
 import Comment from '../board/Comment';
 import axios from 'axios';
-import '../../fonts/fonts.css';
 
 const RecruitBoardDetail = () => {
   const { boardNo } = useParams();
@@ -12,21 +11,21 @@ const RecruitBoardDetail = () => {
   const [isScrapped, setIsScrapped] = useState(false);
   const [tags, setTags] = useState({})
   const [boardData, setBoardData] = useState([]);
-  
+
   useEffect(()=>{
     axios.get("/findRecruitBoard/"+boardNo).then((res)=>{
       console.log(res.data);
       setBoardData(res.data);
     });
   },[]);
-  
+
   useEffect(()=>{
     if (boardData.cboard_tags != null){
       setTags(JSON.parse(boardData.cboard_tags));
       console.log(boardData);
     }
   },[boardData]);
-  
+
   const loggedInUserId = "user123"; // 임시아이디
   const navigate = useNavigate();
 

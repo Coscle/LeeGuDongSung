@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { openDatabase,  getUserDataByPassword} from '../../db'; 
+import { useNavigate, useLocation } from 'react-router-dom'; // useLocation 추가
+import { openDatabase, getUserDataByPassword } from '../../db'; 
 import './SignUp.css';
 
 const VerifyPassword = () => {
   const navigate = useNavigate(); 
-  const [email, setEmail] = useState('');
+  const location = useLocation(); // useLocation 사용
+  const { email } = location.state || {}; // 전달된 state에서 email 추출
   const [password, setPassword] = useState('');
 
   const handleVerifyPassword = async (event) => {
@@ -14,9 +15,9 @@ const VerifyPassword = () => {
     try {
       const db = await openDatabase();
       const userPassword = await getUserDataByPassword(db, password);
-      if (userPassword) {
-        setEmail(userPassword.email);
-		} else {
+      if (userPassword && userPassword.email === email) { // 이메일이 일치하는지 확인
+        navigate('/EditProfile', { state: { email } });
+      } else {
         alert('비밀번호가 틀렸습니다.');
       }
     } catch (error) {
@@ -42,12 +43,6 @@ const VerifyPassword = () => {
         </div>
         <button type="submit" className="signup-button">비밀번호 확인</button>
       </form>
-      {email && (
-        <div className="result">
-          <br/><button onClick={()=>navigate('/EditProfile', {state: {email}})} className='signup-button'>
-          다음 (내 정보 입력)</button>
-        </div>
-      )}
     </div>
   );
 };
