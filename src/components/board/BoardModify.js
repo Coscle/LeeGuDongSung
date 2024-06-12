@@ -5,7 +5,7 @@ import './boardWrite.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-function BoardModify({ onSubmit, onCancel, tags, setTags }) {
+function BoardModify({ onSubmit, onCancel, tags}) {
   const {boardNo} = useParams();
   // const [formData, setFormData] = useState({
   //   title: '',
@@ -24,10 +24,8 @@ function BoardModify({ onSubmit, onCancel, tags, setTags }) {
     });
   },[]);
   useEffect(()=>{
-    if (formData.cboard_tags != null){
-      setTags(JSON.parse(formData.cboard_tags));
-    }
-  },[formData]);
+    console.log(tags);
+  },[tags]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -78,7 +76,7 @@ function BoardModify({ onSubmit, onCancel, tags, setTags }) {
   const handleRecruitmentStatusChange = (status) => {
     setFormData((prevState) => ({
       ...prevState,
-      isRecruitmentDone: status,
+      recruit_done: status,
     }));
   };
 

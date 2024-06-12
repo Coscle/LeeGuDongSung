@@ -17,7 +17,6 @@ const RecruitBoardContent = () => {
   const [uniqueData, setUD] = useState([]);
   useEffect(()=>{
     axios.get("/getCboardAll").then((res)=>{
-      console.log(res.data);
       setUD(res.data);
     })
   },[]);
