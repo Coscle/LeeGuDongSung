@@ -1,6 +1,6 @@
 export const openDatabase = () => {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open('UserDatabase', 1);
+    const request = indexedDB.open('UserDatabase', 2);
 
     request.onerror = (event) => {
       console.error('Database error:', event.target.error);
@@ -14,15 +14,25 @@ export const openDatabase = () => {
 
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
-      const objectStore = db.createObjectStore('users', { keyPath: 'email' });
-      objectStore.createIndex('email', 'email', { unique: true });
-      objectStore.createIndex('phoneNumber', 'phoneNumber', { unique: false });
-      objectStore.createIndex('nickname', 'nickname', { unique: false });
-      objectStore.createIndex('tags', 'tags', { unique: false });
-      objectStore.createIndex('snsType', 'snsType', { unique: false });
-      objectStore.createIndex('snsAddress', 'snsAddress', { unique: false });
-      objectStore.createIndex('profilePicture', 'profilePicture', { unique: false });
-      objectStore.createIndex('password', 'password', { unique: false });
+      if(event.oldVersion <1){
+	      const objectStore = db.createObjectStore('users', { keyPath: 'email' });
+	      objectStore.createIndex('email', 'email', { unique: true });
+	      objectStore.createIndex('phoneNumber', 'phoneNumber', { unique: false });
+	      objectStore.createIndex('nickname', 'nickname', { unique: false });
+	      objectStore.createIndex('tags', 'tags', { unique: false });
+	      objectStore.createIndex('snsType', 'snsType', { unique: false });
+	      objectStore.createIndex('snsAddress', 'snsAddress', { unique: false });
+	      objectStore.createIndex('profilePicture', 'profilePicture', { unique: false });
+	      objectStore.createIndex('password', 'password', { unique: false });
+	      objectStore.createIndex('selfIntroduction', 'selfIntroduction', { unique: false });
+      }
+      if(event.oldVersion <2){
+		  //selfIntroduction 필드 추가
+		  const objectStore = request.transaction.objectStore('users');
+		  if(!objectStore.indexNames.contains('selfIntroduction')){
+		  objectStore.createIndex('selfIntroduction', 'selfIntroduction', {unique:false});
+		  }
+	  }
     };
   });
 };

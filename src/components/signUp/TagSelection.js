@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { openDatabase, saveUserData } from '../../db'; // 수정된 경로
+import Swal from 'sweetalert2'
 import './SignUp.css';
 
 const TagSelection = () => {
@@ -13,7 +14,7 @@ const TagSelection = () => {
   const [snsType, setSnsType] = useState('');
   const [snsAddress, setSnsAddress] = useState('');
   const [profilePicture, setProfilePicture] = useState(null);
-  
+  const [selfIntroduction, setSelfIntroduction] = useState('');
   const tags = [
     { title: '성격', content: ['활발함', '정적임', '중간'] },
     { title: '여행빈도', content: ['자주', '적당히', '조금'] },
@@ -28,6 +29,15 @@ const TagSelection = () => {
     { title: '성별', content: ['남자', '여자'] },
   ];
 
+  const sweetalert = (title, contents, icon, confirmButtonText) => {
+        Swal.fire({
+            title: title,
+            text: contents,
+            icon: icon,
+            confirmButtonText: confirmButtonText
+            })
+    }
+
   const handleTagChange = (content, index) => {
     const updatedSelectedTags = [...selectedTags];
     updatedSelectedTags[index] = content;
@@ -41,7 +51,10 @@ const TagSelection = () => {
   const handleComplete = async (event) => {
     event.preventDefault();
     const isAnyTagUnselected = tags.some((tag, index) => !selectedTags[index]);
-    if (isAnyTagUnselected) return;
+    if (isAnyTagUnselected) {
+		sweetalert('선택되지않은 테그가 있습니다.');
+		return;
+	}
 
     let profilePictureBlob = null;
     if (profilePicture) {
@@ -63,7 +76,8 @@ const TagSelection = () => {
       snsAddress,
       profilePicture: profilePictureBlob,
       password,
-      tags: selectedTags // `tags`로 저장
+      tags: selectedTags, // `tags`로 저장
+      selfIntroduction
     };
 
     try {
@@ -116,6 +130,15 @@ const TagSelection = () => {
               onChange={(e) => setSnsAddress(e.target.value)}
               placeholder="SNS 주소를 입력해주세요."
               required
+            />
+          </div>
+           <div className="form-group">
+            <label htmlFor="selfIntroduction"></label>
+            <textarea
+              id="selfIntroduction"
+              value={selfIntroduction}
+              onChange={(e) => setSelfIntroduction(e.target.value)}
+              placeholder="자기소개를 입력해주세요."
             />
           </div>
           <div className="form-group">

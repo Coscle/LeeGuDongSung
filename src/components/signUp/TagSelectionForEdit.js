@@ -14,6 +14,7 @@ const TagSelectionForEdit = () => {
   const [snsType, setSnsType] = useState('');
   const [snsAddress, setSnsAddress] = useState('');
   const [profilePicture, setProfilePicture] = useState(null);
+  const [selfIntroduction, setSelfIntroduction] = useState('');
 
   const sweetalert = (title, contents, icon, confirmButtonText) => {
         Swal.fire({
@@ -54,6 +55,7 @@ const TagSelectionForEdit = () => {
         setSnsAddress(userData.snsAddress);
         setSelectedTags(userData.tags || []);
         setProfilePicture(userData.profilePicture);
+        setSelfIntroduction(userData.selfIntroduction);
       }
     };
     fetchData();
@@ -62,7 +64,10 @@ const TagSelectionForEdit = () => {
   const handleComplete = async (event) => {
     event.preventDefault();
     const isAnyTagUnselected = tags.some((tag, index) => !selectedTags[index]);
-    if (isAnyTagUnselected) return;
+    if (isAnyTagUnselected) {
+		sweetalert('선택되지않은 테그가 있습니다.');
+		return;
+	}
 
     const userData = {
       email,
@@ -74,7 +79,8 @@ const TagSelectionForEdit = () => {
       snsType,
       snsAddress,
       profilePicture,
-      tags: selectedTags
+      tags: selectedTags,
+      selfIntroduction
     };
 
     try {
@@ -127,6 +133,15 @@ const TagSelectionForEdit = () => {
               onChange={(e) => setSnsAddress(e.target.value)}
               placeholder="SNS 주소를 입력해주세요."
               required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="selfIntroduction"></label>
+            <textarea
+              id="selfIntroduction"
+              value={selfIntroduction}
+              onChange={(e) => setSelfIntroduction(e.target.value)}
+              placeholder="자기소개를 입력해주세요."
             />
           </div>
           <div className="form-group">
