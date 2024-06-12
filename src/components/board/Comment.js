@@ -45,7 +45,7 @@ const Comment = ({ comments, setComments }) => {
             {rereplList(commentList[idx].boardrepl_group)}
             {/* 대댓글 달기 버튼 */}
             {commentList.length > 0 && (
-              <button className="toggle-reply" onClick={() => handleToggleReply(comment.boardrepl_no)}>🗨답글</button>
+              <button className="toggle-reply" onClick={() => handleToggleReply(comment.boardrepl_no)}>🗨</button>
             )}
             
             {/* 대댓글 입력란 */}
@@ -57,7 +57,7 @@ const Comment = ({ comments, setComments }) => {
                     value={replyText}
                     onChange={(e) => setReplyText(e.target.value)}
                   ></textarea>
-                  <button className="reply-button" onClick={() => handleAddReply(comment.replauthor_no, comment.boardrepl_group)}>🗨답글</button>
+                  <button className="reply-button" onClick={() => handleAddReply(comment.replauthor_no, comment.boardrepl_group)}>🗨</button>
                 </div>
               )
             }

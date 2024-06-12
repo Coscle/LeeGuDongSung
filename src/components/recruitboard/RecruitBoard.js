@@ -3,6 +3,7 @@ import SideFilter from '../board/SideFilter';
 import RecruitBoardContent from './RecruitBoardContent';
 import './recruitBoard.css';
 import { Link } from 'react-router-dom';
+import '../../fonts/fonts.css';
 
 function RecruitBoard() {
   const products = [

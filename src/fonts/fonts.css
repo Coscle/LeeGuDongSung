@@ -2,7 +2,13 @@
     font-family: 'YeojuCeramic';
     src: url('./YeojuCeramic.ttf') format('truetype');
 }
+
 @font-face {
-    font-family: 'GwangyangTouching';
-    src: url('./GwangyangTouching.ttf') format('truetype');
+    font-family: '87';
+    src: url('./87MMILSANG-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'kim';
+    src: url('./KimjungchulMyungjo-Bold.ttf') format('truetype');
 }

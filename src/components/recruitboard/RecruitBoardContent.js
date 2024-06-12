@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './recruitBoardContent.css';
-import tempData from './tempData';
 import axios from 'axios';
 
 const ITEMS_PER_PAGE = 10; // 페이지당 아이템 수
@@ -57,10 +56,10 @@ const RecruitBoardContent = (filtering, setFilter) => {
         <div className="recruit-board-items">
           {currentData.map(item => (
             <div key={item.board_no} onClick={() => handleEnterDetail(item.board_no)} className="recruit-board-item">
-              <h2>{item.board_title}</h2>
-              <h2>작성자 : {item.member_nickname}</h2>
-              <p>게시 여부: {item.recruit_done ? '구인완료' : '구인중'}</p>
-              <p>게시일: {item.board_writeday.slice(0,10)}</p>
+              <h2 className="content-title">{item.board_title}</h2>
+              <span className="contentwritenick">{item.member_nickname}님은</span>
+              <span className="isdonecheck">{item.recruit_done ? '구인완료' : '구인중'}</span>
+              <p>{item.board_writeday.slice(0,10)}</p>
             </div>
           ))}
         </div>

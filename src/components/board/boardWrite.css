@@ -7,6 +7,7 @@
   #startDate,
   #endDate {
     width: 100%;
+    font-family: '87';
   }
 }
 
@@ -17,7 +18,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 1000px;
   box-sizing: border-box;
-  margin: 30px 64px;;
+  margin: 30px 64px;
+  font-family: '87';
 }
 
 .d-flex {
@@ -71,7 +73,7 @@
   padding: 10px 20px;
   cursor: pointer;
   float: right;
-  margin: 0 20px;
+  margin: 10px 20px;
   border-radius: 15px;
 }
 
@@ -80,20 +82,27 @@
 }
 
 .writeSubmitBtn {
-  background-color: #007bff;
+   background: linear-gradient(45deg, #746EF4, #FF66C3);
   border: none;
   padding: 10px 20px;
   margin-bottom: 10px;
   border-radius: 15px;
   float: right;
+  border-radius: 20px; 
+  color:white;
+  font-family:"YeojuCeramic";
+  margin-top : 15px;
 }
 
 .writeSubmitBtn:hover {
-  background-color: #0056b3;
+  background: linear-gradient(45deg, #FF66C3, #746EF4);
+  border-radius: 20px; 
+  color:white;
+  font-family:"YeojuCeramic";
 }
 
 .canclewriteBtn {
-  background-color: #007bff;
+   background: linear-gradient(45deg, #746EF4, #FF66C3);
   border: none;
   padding: 10px 20px;
   margin-bottom: 10px;
@@ -101,10 +110,15 @@
   cursor: pointer;
   float: right; 
   margin-right: 30px;
+  border-radius: 20px; 
+  color:white;
+  font-family:"YeojuCeramic";
+  margin-top : 15px;
 }
 
 .canclewriteBtn:hover {
-  background-color: #0056b3;
+  background: linear-gradient(45deg, #FF66C3, #746EF4);
+  color:white;
 }
 
 .write-board-container {
@@ -117,4 +131,54 @@
 
 .form-container .form-control {
   margin-bottom: 8px;
+}
+
+.custom-date-input {
+  width: 150px;
+  height: 40px; 
+  padding: 8px; 
+  font-size: 16px; 
+}
+
+.custom-dropdown-toggle {
+  background: linear-gradient(45deg, #746EF4, #FF66C3);
+  color: white;
+  border: none; 
+  padding: 10px 20px;
+  font-size: 16px; 
+  border-radius: 20px; 
+  transition: background-color 0.1s; 
+  border-radius: 20px; 
+  font-family:"YeojuCeramic";
+}
+
+.custom-dropdown-toggle:hover {
+  background: linear-gradient(45deg, #FF66C3, #746EF4);
+  border-radius: 20px; 
+}
+
+.custom-dropdown-menu {
+  background-color: #f9f9f9; 
+  border: 1px solid #ddd; 
+  border-radius: 4px; 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+  font-family:"YeojuCeramic";
+}
+
+.custom-dropdown-item {
+  color: #333;
+  padding: 10px 20px; 
+  cursor: pointer; 
+}
+
+.custom-dropdown-item:hover {
+  background-color: #f1f1f1; 
+}
+
+.custom-date-input {
+  width: 200px !important; 
+  height: 40px; 
+  padding: 5px; 
+  font-size: 14px; 
+  margin-right : 20px;
 }

@@ -19,6 +19,7 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
     trip_end: "2024-07-04"
   });
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -27,15 +28,11 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
     }));
   };
 
-  const handleFileChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      photo: e.target.files[0],
-    }));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+	}
+    
     if (category === 1) {
       console.log(tags);
       const tmpTag = Object.entries(tags).map(([key, value])=>(
@@ -75,44 +72,50 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
         <div className="form-container">
           <div className="d-flex align-items-center mb-3">
             {(window.location.pathname === '/recruitboardwrite') && (
-              <Dropdown className="recruitDoneButton">
-                <Dropdown.Toggle variant="primary">
-                  {formData.recruit_done ? '구인 완료' : '구인 중'}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => handleRecruitmentStatusChange(false)}>
-                    구인 중
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleRecruitmentStatusChange(true)}>
-                    구인 완료
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+              <Dropdown>
+		      <Dropdown.Toggle className="custom-dropdown-toggle">
+		        {formData.recruit_done ? '구인 완료' : '구인 중'}
+		      </Dropdown.Toggle>
+		      <Dropdown.Menu className="custom-dropdown-menu">
+		        <Dropdown.Item
+		          className="custom-dropdown-item"
+		          onClick={() => handleRecruitmentStatusChange(false)}
+		        >
+		          구인 중
+		        </Dropdown.Item>
+		        <Dropdown.Item
+		          className="custom-dropdown-item"
+		          onClick={() => handleRecruitmentStatusChange(true)}
+		        >
+		          구인 완료
+		        </Dropdown.Item>
+		      </Dropdown.Menu>
+		    </Dropdown>
             )}
             <label htmlFor="trip_start" className="me-2">
-              여행 시작일:
+              여행 시작일
             </label>
-            <input
-              type="date"
-              name="trip_start"
-              id="trip_start"
-              className="form-control me-2"
-              value={formData.trip_start}
-              onChange={handleChange}
-              placeholder="여행 시작일"
-            />
-            <label htmlFor="trip_end" className="me-2">
-              여행 종료일:
-            </label>
-            <input
-              type="date"
-              name="trip_end"
-              id="trip_end"
-              className="form-control"
-              value={formData.trip_end}
-              onChange={handleChange}
-              placeholder="여행 종료일"
-            />
+		    <input
+		        type="date"
+		        name="trip_start"
+		        id="trip_start"
+		        className="form-control me-2 custom-date-input" 
+		        value={formData.trip_start}
+		        onChange={handleChange}
+		        placeholder="여행 시작일"
+		      />
+		      <label htmlFor="trip_end" className="me-2">
+		        여행 종료일
+		      </label>
+		      <input
+		        type="date"
+		        name="trip_end"
+		        id="trip_end"
+		        className="form-control custom-date-input" 
+		        value={formData.trip_end}
+		        onChange={handleChange}
+		        placeholder="여행 종료일"
+		      />
           </div>
           <div className="mb-1">
             <input
@@ -136,14 +139,6 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
               placeholder="내용을 입력하세요"
             />
           </div>
-          <div className="input-group mb-3">
-            <input
-              type="file"
-              className="form-control"
-              id="inputGroupFile02"
-              onChange={handleFileChange}
-            />
-          </div>
           <button type="submit" className="writeSubmitBtn">
             게시물 작성
           </button>
@@ -154,6 +149,5 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
       </form>
     </div>
   );
-}
 
 export default BoardWrite;

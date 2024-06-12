@@ -90,7 +90,7 @@ const RecruitBoardDetail = () => {
               <div className="button-container">
                 <div className="left-buttons">
                   <button className="like-button" onClick={toggleLike}>
-                    {liked ? '❤' : '🤍'} {likedCount}
+                    {liked ? '❤': '🤍'} {likedCount}
                   </button>
                   <button className="scrap-button" onClick={toggleScrap}>
                     {isScrapped ? '스크랩 완료' : '스크랩'}

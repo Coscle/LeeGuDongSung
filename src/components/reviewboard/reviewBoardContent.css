@@ -34,6 +34,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align:center;
 }
 
 .review-board-item p {
@@ -43,6 +44,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align:right;
 }
 
 .pagination {

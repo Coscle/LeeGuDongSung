@@ -2,47 +2,53 @@ import React, { useEffect, useState } from 'react';
 import MessageList from './MessageList';
 import MessageDetail from './MessageDetail';
 import './messageBoard.css';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function MessageBoard() {
-  const [messages, setMessages] = useState([]);
+  const [messageList, setMessageList] = useState([]);
   const [selectedMessage, setSelectedMessage] = useState(null);
+  const [filteredMessages, setFilteredMessages] = useState([]);
+  const [newMessageContent, setNewMessageContent] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchMessageList();
+    axios.get("/getMessageList").then((res) => {
+      const messages = res.data.filter(message => message.receiver_no === 1);
+      setMessageList(messages);
+      setFilteredMessages(messages);
+    }).catch((error) => {
+      console.error('Error fetching message list:', error);
+    });
   }, []);
 
-  const fetchMessageList = async () => {
-    try {
-      const response = await axios.get("/api/messages");
-      setMessages(response.data);
-    } catch (error) {
-      console.error('Error fetching message list:', error);
-    }
-  };
+  useEffect(() => {
+    const filtered = messageList.filter(message => 
+      message.message_content.includes(searchQuery)
+    );
+    setFilteredMessages(filtered);
+  }, [searchQuery, messageList]);
 
   const selectMessage = (message) => {
     setSelectedMessage(message);
   };
 
-  const sendMessage = async (content) => {
+  const handleSendMessage = async () => {
     try {
-      // 새로운 메시지 
       const newMessage = {
-        message_no: messages.length + 1,
-        sender_no: 1, // 임시
-        receiver_no: 2, // 임시
-        message_content: content,
+        message_content: "새로보냄2 (나한테)",
+        sender_no: 1, // 임시로 설정
+        receiver_no: 1, // 임시로 설정
+        member_no: 1, // 임시로 설정
+        send_date: "2024-06-30"
       };
+      const response = await axios.post("/sendMessage", newMessage);
+      setMessageList([...messageList, response.data]);
+      setNewMessageContent('');
 
-      // 새로운 메시지를 임시 데이터에 추가
-      setMessages([...messages, newMessage]);
-
-      // 새로운 메시지를 서버에 전송
-      await axios.post("/api/messages/send", newMessage);
-
-      // 메시지를 선택하지 않은 상태로 초기화
-      setSelectedMessage(null);
+      alert("메세지 전송완료");
     } catch (error) {
       console.error('Error sending message:', error);
     }
@@ -62,14 +68,23 @@ function MessageBoard() {
                     </div>
                     <div className="srch_bar">
                       <div className="input-group stylish-input-group">
-                        <input type="text" className="form-control search-bar" placeholder="Search" />
+                        <input 
+                          type="text" 
+                          className="form-control search-bar" 
+                          placeholder="Search" 
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                        />
                         <span className="input-group-addon">
-                          <button type="button" className="btn btn-primary">검색</button>
+                          <button 
+                            type="button" 
+                            className="btn btn-primary"
+                          >검색</button>
                         </span>
                       </div>
                     </div>
                   </div>
-                  <MessageList messages={messages} onSelectMessage={selectMessage} />
+                  <MessageList messages={filteredMessages} onSelectMessage={selectMessage} />
                 </div>
               </div>
             </div>
@@ -81,8 +96,18 @@ function MessageBoard() {
               <MessageDetail message={selectedMessage} />
             </div>
           ) : (
-			<div className="noMessage">함께 하고 싶은 <br/>여행 메이트에게 <br/>메시지를 보내보세요!</div>
+            <div className="noMessage">
+              함께 하고 싶은 <br/>여행 메이트에게 <br/>메시지를 보내보세요!
+            </div>
           )}
+        </div>
+        <div className="message-input">
+              <textarea 
+                value={newMessageContent}
+                onChange={(e) => setNewMessageContent(e.target.value)}
+                placeholder="메시지를 입력하세요..."
+              />
+              <button onClick={handleSendMessage}>보내기</button>
         </div>
       </div>
     </div>

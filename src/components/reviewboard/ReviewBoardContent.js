@@ -5,6 +5,11 @@ import axios from 'axios';
 
 const ITEMS_PER_PAGE = 10;
 
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString();
+};
+
 const ReviewBoardContent = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,8 +77,9 @@ const ReviewBoardContent = () => {
         <div className="review-board-items">
           {currentData.map(item => (
             <div key={item.board_no} onClick={() => handleEnterDetail(item.board_no)} className="review-board-item">
-              <h2>{item.board_title}</h2>
-              <p>게시일: {item.board_writeday}</p>
+              <h2 className="content-title">{item.board_title}</h2>
+              <span className="contentwritenick">{item.member_nickname}</span>
+              <p>{formatDate(item.board_writeday)}</p>
             </div>
           ))}
         </div>
