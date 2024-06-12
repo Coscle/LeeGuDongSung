@@ -42,11 +42,14 @@
 	<select id="findAllRecruit" resultMap="boardResultMap">
 		select * from board as b
 		join recruitboard as c on b.board_no=c.board_no
+		join member as m on m.member_no=b.author_no
 		order by c.cboard_no desc
 	</select>
 	<select id="findAllReview" resultMap="boardResultMap">
 		select * from board as b
 		join reviewboard as v on b.board_no=v.board_no
+		join member as m on m.member_no=b.author_no
+		order by v.vboard_no desc
 	</select>
 	
 
