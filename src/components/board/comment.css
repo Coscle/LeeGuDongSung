@@ -1,5 +1,5 @@
 .comment-section {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   margin-bottom : 80px;
 }
@@ -8,16 +8,16 @@
   margin-bottom: 16px;
   display: flex;
   align-items: flex-start;
-  position: relative; /* 추가 */
+  position: relative;
 }
 
-.comment-author {
+.comment-profile {
   font-weight: bold;
   margin-right: 8px;
   display: inline-block;
 }
 
-.profile-picture {
+.comment-profile-pic {
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -30,6 +30,10 @@
   margin-left: 32px;
 }
 
+
+.replies {
+  margin-left: 32px;
+}
 .reply {
   margin-left: 32px;
 }
@@ -46,7 +50,6 @@
 
 .comment-input,
 .reply-input {
-  width: calc(100% - 40px); 
   margin-top: 8px;
   margin-bottom: 8px;
   display: flex;
@@ -55,8 +58,8 @@
 .comment-button,
 .reply-button,
 .toggle-reply {
-  background-color: #3897f0;
-  color: white;
+  background-color: transparent;
+  color: black;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
@@ -67,7 +70,8 @@
 .comment-button:hover,
 .reply-button:hover,
 .toggle-reply:hover {
-  background-color: #36a3f7;
+  background-color: transparent;
+  
 }
 
 textarea {

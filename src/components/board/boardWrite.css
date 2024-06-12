@@ -7,6 +7,7 @@
   #startDate,
   #endDate {
     width: 100%;
+    font-family: '87';
   }
 }
 
@@ -18,6 +19,7 @@
   width: 1000px;
   box-sizing: border-box;
   margin: 30px 64px;;
+  font-family: '87';
 }
 
 .d-flex {
