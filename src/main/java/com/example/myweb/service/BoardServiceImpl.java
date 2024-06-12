@@ -39,6 +39,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.findById(board_no);
 	}
 	@Override
+	public Optional<BoardDTO> findByIdReview(int board_no) {
+		return boardMapper.findByIdReview(board_no);
+	}
+	@Override
 	public List<BoardDTO> findByIdRepls(int board_no) {
 		return boardMapper.findByIdRepls(board_no);
 	}
@@ -51,6 +55,11 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.recruitInsert(board);
 	}
 	@Override
+	public void reviewInsert(BoardDTO board) {
+		boardMapper.insert(board);
+		boardMapper.reviewInsert(board);
+	}
+	@Override
 	public void insertRepl(BoardDTO board) {
 		boardMapper.insertRepl(board);
 	}
@@ -59,7 +68,13 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void recruitUpdate(BoardDTO board) {
+		boardMapper.update(board);
 		boardMapper.recruitUpdate(board);
+	}
+	@Override
+	public void reviewUpdate(BoardDTO board) {
+		System.out.println("service>>>" + board);
+		boardMapper.update(board);
 	}
 
 	

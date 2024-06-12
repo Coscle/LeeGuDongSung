@@ -42,6 +42,10 @@ public class BoardController {
 	public Optional<BoardDTO> getBoardfind(@PathVariable int board_no){
 		return boardService.findById(board_no);
 	}
+	@GetMapping("/review/{board_no}")
+	public Optional<BoardDTO> getVBoardfind(@PathVariable int board_no){
+		return boardService.findByIdReview(board_no);
+	}
 	@GetMapping("/repls/{board_no}")
 	public List<BoardDTO> getBoardfindRepls(@PathVariable int board_no){
 		return boardService.findByIdRepls(board_no);
@@ -50,6 +54,11 @@ public class BoardController {
 	@PostMapping("/insertCboard/")
 	public void insertBoard(@RequestBody BoardDTO board) {
 		boardService.recruitInsert(board);
+	}
+	@PostMapping("/insertVboard/")
+	public void insertBoardReview(@RequestBody BoardDTO board) {
+		System.out.println(board);
+		boardService.reviewInsert(board);
 	}
 	@PostMapping("/insertBoardRepl/")
 	public void insertBoardRepl(@RequestBody BoardDTO board) {
@@ -62,6 +71,18 @@ public class BoardController {
 		if (existing.isPresent()) {
 			board.setBoard_no(board.getBoard_no());
 			boardService.recruitUpdate(board);
+			return "성공";
+		} else {
+			return "실패";
+		}
+	}
+	@PutMapping("/updateVboard/")
+	public String updateVboard(@RequestBody BoardDTO board) {
+		System.out.println(board);
+		Optional<BoardDTO> existing = boardService.findByIdReview(board.getBoard_no());
+		if (existing.isPresent()) {
+			board.setBoard_no(board.getBoard_no());
+			boardService.reviewUpdate(board);
 			return "성공";
 		} else {
 			return "실패";

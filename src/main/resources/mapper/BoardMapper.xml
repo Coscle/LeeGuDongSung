@@ -48,10 +48,16 @@
 		select * from board as b
 		join reviewboard as v on b.board_no=v.board_no
 	</select>
+	
 
 	<select id="findById" resultMap="boardResultMap">
 		select * from board as b
 		join recruitboard as c on c.board_no=#{board_no} and b.board_no=#{board_no}
+		join member as m on b.author_no=m.member_no
+	</select>
+	<select id="findByIdReview" resultMap="boardResultMap">
+		select * from board as b
+		join reviewboard as v on v.board_no=#{board_no} and b.board_no=#{board_no}
 		join member as m on b.author_no=m.member_no
 	</select>
 	<select id="findByIdRepls" resultMap="boardResultMap">
@@ -59,6 +65,7 @@
 		join board as b on br.board_no=#{board_no} and b.board_no=#{board_no}
 		order by boardrepl_group asc
 	</select>
+	
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="board_no">
 		INSERT INTO board(board_title, board_content, board_category, board_writeday, author_no) 
@@ -69,26 +76,28 @@
 		VALUES (#{cboard_tags}, #{recruit_done}, #{trip_start}, #{trip_end},
 		(select board_no from board order by board_no desc limit 1))
 	</insert>
+	<insert id="reviewInsert" useGeneratedKeys="true" keyProperty="board_no">
+		INSERT INTO reviewboard(board_no) 
+		VALUES ((select board_no from board order by board_no desc limit 1))
+	</insert>
 	<insert id="insertRepl" useGeneratedKeys="true" keyProperty="board_no">
 		INSERT INTO boardrepls(boardrepl_content, replauthor_no, replauthor_nickname, boardrepl_group, boardrepl_repl_seq, boardrepl_writeday, board_no) 
 		VALUES (#{boardrepl_content}, #{replauthor_no}, #{replauthor_nickname}, #{boardrepl_group}, #{boardrepl_repl_seq}, now(), #{board_no})
 	</insert>
+	
 
 	<update id="update">
 		UPDATE board SET board_title=#{board_title}, board_content=#{board_content} WHERE board_no=#{board_no}
 	</update>
-	
 	<update id="recruitUpdate">
-		UPDATE recruitboard AS r
-		INNER JOIN board AS b ON r.board_no = b.board_no
-		SET r.recruit_done = #{recruit_done},
-    	r.trip_start = #{trip_start},
-    	r.trip_end = #{trip_end},
-    	r.cboard_tags = #{cboard_tags},
-    	b.board_title = #{board_title},
-    	b.board_content = #{board_content},
-		WHERE b.board_no = #{board_no}
+		UPDATE recruitboard SET 
+		recruit_done = #{recruit_done},
+    	trip_start = #{trip_start},
+    	trip_end = #{trip_end},
+    	cboard_tags = #{cboard_tags}
+		WHERE cboard_no=#{cboard_no}
 	</update>
+	
 
 	<delete id="delete">
 		DELETE FROM board WHERE board_no=#{board_no}
