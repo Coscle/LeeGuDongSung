@@ -17,11 +17,9 @@ function RecruitBoardWrite() {
   };
   useEffect(()=>{
     try{
-      console.log(tags.gender);
       const tmpTag = Object.entries(tags).map(([key, value])=>(
         Object.entries(value).filter(([k,v])=>v===true)
       ));
-      console.log(tmpTag);
     } catch {}
   },[tags]);
 

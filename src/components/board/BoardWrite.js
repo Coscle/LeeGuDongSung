@@ -68,8 +68,7 @@ function BoardWrite({ onSubmit, onCancel, tags }) {
         stringJson += '"'+tmp[j][0][0]+'",';
       }
     }
-    formData.tags = stringJson;
-    console.log(formData);
+    formData.cboard_tags = stringJson;
     axios.post("/postRecruitBoard", formData);
     onSubmit(formData);
   };

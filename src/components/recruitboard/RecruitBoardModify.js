@@ -7,6 +7,7 @@ import './recruitBoardModify.css';
 const RecruitBoardModify = () => {
   const [initialValues, setInitialValues] = useState({}); // 초기 값으로 빈 객체를 설정
   const navigate = useNavigate();
+  const [tags, setTags] = useState({})
 
   useEffect(() => {
     const fetchBoardData = async () => {
@@ -43,7 +44,7 @@ const RecruitBoardModify = () => {
       </div>
       <div className="board-write-container">
      	 <h1>여행 메이트 찾기</h1>
-        <BoardModify initialValues={initialValues} onSubmit={handleSubmit} isModify={true} />
+        <BoardModify initialValues={initialValues} tags={tags} setTags={setTags} onSubmit={handleSubmit} isModify={true} />
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import './boardWrite.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-function BoardModify({ onSubmit, onCancel }) {
+function BoardModify({ onSubmit, onCancel, tags, setTags }) {
   const {boardNo} = useParams();
   // const [formData, setFormData] = useState({
   //   title: '',
@@ -17,7 +17,6 @@ function BoardModify({ onSubmit, onCancel }) {
   //   photo: null,
   // });
   const [formData, setFormData] = useState([]);
-  const [tags, setTags] = useState({})
   useEffect(()=>{
     axios.get("/findRecruitBoard/"+boardNo).then((res)=>{
       console.log(res.data);
@@ -26,9 +25,7 @@ function BoardModify({ onSubmit, onCancel }) {
   },[]);
   useEffect(()=>{
     if (formData.cboard_tags != null){
-      console.log(formData.cboard_tags);
       setTags(JSON.parse(formData.cboard_tags));
-      console.log(formData);
     }
   },[formData]);
 
@@ -49,6 +46,30 @@ function BoardModify({ onSubmit, onCancel }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const tmpTag = Object.entries(tags).map(([key, value])=>(
+      Object.entries(value).filter(([k,v])=>v===true)
+    ));
+    var stringJson = '[';
+    var tmp;
+    for (let i=0; i<tmpTag.length ; i++){
+      if (tmpTag[i].length == 0){
+        alert("태그 모두 선택하세요");
+        break;
+      }
+      tmp = Object.entries(tags).map(([key, value])=>(
+        Object.entries(value).filter(([k,v])=>v===true)
+      ));
+    }
+    console.log(tmp.length)
+    for (let j=0 ; j<tmp.length ; j++){
+      console.log(tmp[j][0]);
+      if(j == tmp.length-1){
+        stringJson += '"'+tmp[j][0][0]+'"]';
+      } else{
+        stringJson += '"'+tmp[j][0][0]+'",';
+      }
+    }
+    formData.cboard_tags = stringJson;
     console.log(formData);
     axios.put("/putUpdateBoard", formData);
     onSubmit(formData);

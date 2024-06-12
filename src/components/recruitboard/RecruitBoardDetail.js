@@ -36,6 +36,8 @@ const RecruitBoardDetail = () => {
 
   const handleDelete = () => {
     console.log('Delete button clicked');
+    axios.get("/deleteBoard/"+boardNo);
+    navigate("/recruitBoard", ()=>{window.location.reload()});
   };
 
   const toggleLike = () => {
@@ -67,9 +69,7 @@ const RecruitBoardDetail = () => {
                 <div className="board-detail-item tag-list">
                   {Array.isArray(tags) && tags.map((tag, index) => (
                     <React.Fragment key={index}>
-                      {tag.지역 && <span className="tag">{tag.지역}</span>}
-                      {tag.성별 && <span className="tag">{tag.성별}</span>}
-                      {tag.타입 && <span className="tag">{tag.타입}</span>}
+                      {tag && <span className="tag">{tag}</span>}
                       {tag.같이즐겨요 && tag.같이즐겨요.length > 0 && (
                         <span className="tag">
                           {tag.같이즐겨요.map((toget, idx) => (
@@ -105,7 +105,7 @@ const RecruitBoardDetail = () => {
                     {isScrapped ? '스크랩 완료' : '스크랩'}
                   </button>
                 </div>
-                {isOwner && (
+                {(
                   <div className="right-buttons">
                     <button onClick={handleEdit} className="edit-button">수정</button>
                     <button onClick={handleDelete} className="delete-button">삭제</button>
