@@ -36,7 +36,6 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(category);
     if (category === 1) {
       console.log(tags);
       const tmpTag = Object.entries(tags).map(([key, value])=>(
@@ -50,16 +49,11 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
         }
       }
       for (let i=0 ; i<tmpTag.length ; i++){
-        if(i == tmpTag.length-1){
-          for (let j=0 ; j<tmpTag[i].length ; j++){
-            stringJson += ''+tmpTag[i][j][0]+'';
-          }
-        } else{
-          for (let j=0 ; j<tmpTag[i].length ; j++){
-            stringJson += ''+tmpTag[i][j][0]+'/';
-          }
+        for (let j=0 ; j<tmpTag[i].length ; j++){
+          stringJson += ''+tmpTag[i][j][0]+'/';
         }
       formData.cboard_tags = stringJson;
+      console.log(stringJson);
       }
       axios.post("/postRecruitBoard", formData);
     } else {
