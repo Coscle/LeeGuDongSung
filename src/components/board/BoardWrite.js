@@ -45,9 +45,32 @@ function BoardWrite({ onSubmit, onCancel, tags }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    formData.tags = 
-    console.log(formData)
-    //axios.post("/postRecruitBoard", formData);
+    const tmpTag = Object.entries(tags).map(([key, value])=>(
+      Object.entries(value).filter(([k,v])=>v===true)
+    ));
+    var stringJson = '[';
+    var tmp;
+    for (let i=0; i<tmpTag.length ; i++){
+      if (tmpTag[i].length == 0){
+        alert("태그 모두 선택하세요");
+        break;
+      }
+      tmp = Object.entries(tags).map(([key, value])=>(
+        Object.entries(value).filter(([k,v])=>v===true)
+      ));
+    }
+    console.log(tmp.length)
+    for (let j=0 ; j<tmp.length ; j++){
+      console.log(tmp[j][0]);
+      if(j == tmp.length-1){
+        stringJson += '"'+tmp[j][0][0]+'"]';
+      } else{
+        stringJson += '"'+tmp[j][0][0]+'",';
+      }
+    }
+    formData.tags = stringJson;
+    console.log(formData);
+    axios.post("/postRecruitBoard", formData);
     onSubmit(formData);
   };
 

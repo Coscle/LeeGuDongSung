@@ -72,15 +72,15 @@ function SideFilter({ products, showTopSearch, setTags, tags }) {
   };
   const [searchTerm, setSearchTerm] = useState("");
   const [passingTags, setPassingTags] = useState(initTag);
-  const [tag, setTag] = useState();
-  const [filterProp, setFP] = useState();
+  // const [filterProp, setFP] = useState('');
+  // const [tag, setTag] = useState('');
+  // const [onePick, setOnepick] = useState();
 
   const handleSearchInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
   const handleTagItemClick = (tag, filterProp) => {
-    console.log(filterProp, tag);
     if (filterProp == 'tour' || filterProp == 'timeOfDay' || 
       filterProp == 'selfPR' || filterProp == 'activities'){
       setPassingTags(prevState => ({
@@ -96,7 +96,7 @@ function SideFilter({ products, showTopSearch, setTags, tags }) {
         ...prevState,
         [filterProp]: {onePick}
       }));
-      
+
       setPassingTags(prevState => ({
         ...prevState,
         [filterProp]: {
@@ -108,9 +108,12 @@ function SideFilter({ products, showTopSearch, setTags, tags }) {
   };
 
   useEffect(()=>{
-    setTags(passingTags);
+    try{
+      setTags(passingTags);
+    } catch {
+
+    }
   },[passingTags]);
-  console.log(tags);
 
   const filteredCollected = () => {
     const collectedTrueKeys = {

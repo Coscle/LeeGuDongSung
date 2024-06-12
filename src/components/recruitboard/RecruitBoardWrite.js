@@ -6,7 +6,7 @@ import './recruitBoardWrite.css';
 
 function RecruitBoardWrite() {
   const navigate = useNavigate();
-  const [tags, setTags] = useState('{}');
+  const [tags, setTags] = useState();
 
   const handleSubmit = (formData) => {
     // 폼 데이터 처리 (예: 서버로 전송)
@@ -16,7 +16,13 @@ function RecruitBoardWrite() {
     navigate('/recruitboard', ()=>{window.location.reload()});
   };
   useEffect(()=>{
-    console.log(Object.entries(tags.region)[0]);
+    try{
+      console.log(tags.gender);
+      const tmpTag = Object.entries(tags).map(([key, value])=>(
+        Object.entries(value).filter(([k,v])=>v===true)
+      ));
+      console.log(tmpTag);
+    } catch {}
   },[tags]);
 
   return (
