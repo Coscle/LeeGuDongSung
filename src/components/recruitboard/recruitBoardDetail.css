@@ -1,210 +1,138 @@
-.detail-container {
-  width: 100%;
-  margin: 0 auto;
+.detail-page-container {
+  display: flex;
+  justify-content: space-between;
   padding: 20px;
+  margin:70px 30px 80px 50px;
+}
+
+.detail-container {
+  flex: 1;
+  max-width: 60%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .back-link-header {
-  padding: 10px 0;
-  border-bottom: 1px solid #ccc;
-  text-align: right;
-  background-color: yellow;
+  background: transparent;
+  position: absolute;
+  margin-top:40px;
+  right: 60px;
 }
 
 .back-link {
-  color: #007bff;
   text-decoration: none;
-  margin-right: 40px;
+  text-align: center;
+  color: rgb(64, 27, 87);
+  font-size: 1em;
+  transition: font-size 0.3s, background-color 0.3s;
+  font-family: 'YeojuCeramic';
 }
 
-.back-link:hover {
-  text-decoration: underline;
-}
-
-.detail-main {
-  margin-top: 20px;
-}
-
-.content {
-  display: flex;
-  justify-content: center;
-}
-
-.board-detail {
-  width: 80%;
-  margin: 0 auto;
+.comment-wrapper {
+  flex: 0 0 35%;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-left:30px;
 }
 
 .board-title {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-family: 'YeojuCeramic';
+  margin-bottom: 30px;
+  font-size:40px;
 }
 
-.board-info-container {
+.recruitment-status {
+  font-size: 16px;
+  margin-left: 10px;
+  color: #666;
+}
+
+.tag-list {
   margin-bottom: 20px;
 }
+
+.tag {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin:10px;
+}
+
+.date-info {
+  margin-bottom: 10px;
+  text-align: right;
+  margin-right:20px;
+}
+
 
 .author-profile-link {
   display: flex;
   align-items: center;
   text-decoration: none;
+  color: #333;
+
+  margin-bottom: 5px;
 }
 
 .profile-picture {
-  width: 32px;
-  height: 32px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  margin-right: 8px;
+  margin-right: 10px;
 }
 
-.board-detail-item {
-  margin-bottom: 8px;
-}
-
-.tag {
-  margin-right: 4px;
-  background-color: #f0f0f0;
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.recruitment-status {
-  font-weight: bold;
-  font-size: 14px;
-  color: #777;
-  margin-right: 15px;
+.board-content {
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #e4f3fd;
+  width : 90%;
+  justify-content: center;
+  align-items: center;
+  margin : auto;
+  padding:20px;
+  min-height: 300px;
 }
 
 .board-photo {
   max-width: 100%;
+  border-radius: 5px;
   margin-bottom: 20px;
-}
-
-.board-content {
-  white-space: pre-line;
-  margin-bottom: 20px;
-}
-
-.comment-wrapper {
-  width: 50%;
-  margin: 0 auto;
-  overflow-y: auto;
-  height: 100vh;
-  background-color: #f0f0f0;
-}
-
-.comment-section {
-  width: 95%;
-  margin: 0 auto;
-}
-
-.comment {
-  margin-bottom: 16px;
-}
-
-.comment-author {
-  font-weight: bold;
-  margin-right: 8px;
-  display: inline-block;
-}
-
-.comment .profile-picture {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  margin-right: 8px;
-  display: inline-block;
-}
-
-.comment-text,
-.reply-text {
-  margin-left: 32px;
-}
-
-.reply {
-  margin-left: 32px;
-}
-
-.reply-input {
-  margin-left: 64px;
-}
-
-.comment-input,
-.reply-input {
-  width: calc(100% - 64px);
-  margin-top: 8px;
-  margin-bottom: 8px;
-}
-
-.comment-button,
-.reply-button,
-.toggle-reply {
-  background-color: #3897f0;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.comment-button:hover,
-.reply-button:hover,
-.toggle-reply:hover {
-  background-color: #36a3f7;
 }
 
 .button-container {
   display: flex;
-  justify-content: space-between; /* 양쪽 정렬 */
+  justify-content: space-between;
   align-items: center;
-}
-
-.left-buttons {
-  display: flex;
-  gap: 10px; /* 버튼 사이의 간격 */
-}
-
-.right-buttons {
-  display: flex;
-  gap: 10px; /* 버튼 사이의 간격 */
 }
 
 .like-button,
 .scrap-button,
 .edit-button,
 .delete-button {
-  background-color: #007bff;
-  color: white;
-  padding: 8px 16px;
+  background-color: transparent;
+  color: black;
   border: none;
-  border-radius: 4px;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .like-button:hover,
 .scrap-button:hover,
 .edit-button:hover,
 .delete-button:hover {
-  background-color: #0056b3;
-}
 
-.comment-button,
-.reply-button {
-  margin-left: 8px;
-}
-
-.date-info {
-  display: flex;
-  margin-bottom: 8px;
-}
-
-.date-info-label {
-  margin-right: 4px;
-  color: #777;
-}
-
-.date-info-value {
-  font-weight: bold;
+  background-color:transparent;
+  font-size: 110%;
+  transition: font-size 0.3s;
 }

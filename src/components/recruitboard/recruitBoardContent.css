@@ -17,7 +17,9 @@
   padding: 20px;
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
-  max-width: 100%; 
+    min-width: 200px; 
+  min-width: 200px; 
+  width: 250px;
 }
 
 .recruit-board-item:hover {
@@ -31,6 +33,22 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align:center;
+  font-family : 'YeojuCeramic';
+}
+
+.isdonecheck {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 5px 15px;
+    border-radius: 5px;
+    width:150px;
+    text-align:right;
+}
+
+.contentwritenick {
+   text-align:left;
+   padding-right : 10px;
 }
 
 .recruit-board-item p {
@@ -40,6 +58,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align:right;
 }
 
 .pagination {
@@ -49,7 +68,7 @@
 }
 
 .page-button {
-  background-color: #007bff;
+  background-color: #ccc;
   border: none;
   color: white;
   cursor: pointer;
@@ -60,11 +79,11 @@
 }
 
 .page-button.active {
-  background-color: #0056b3;
+  background-color: #ccc;
 }
 
 .page-button:hover:not(.active) {
-  background-color: #0056b3;
+  background-color: #ccc;
 }
 
 .page-button:disabled {

@@ -3,30 +3,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown } from 'react-bootstrap';
 import './boardWrite.css';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-function BoardWrite({ onSubmit, onCancel, tags }) {
-  // const [formData, setFormData] = useState({
-  //   board_title: '',
-  //   tags: '',
-  //   board_content: '',
-  //   startDate: '',
-  //   endDate: '',
-  //   isRecruitmentDone: false,
-  //   photo: null,
-  // });
-
+function BoardWrite({ onSubmit, onCancel, tags, category }) {
   // 임시 데이터, member 테이블에 member_no가 1이라는 데이터가 있어야함
   // 그러면 동작
   const [formData, setFormData] = useState({
     board_title: "",
     board_content: "",
-    board_category: 1,
+    board_category: category,
     author_no: 1,
     cboard_tags: "[]",
     recruit_done: false,
     trip_start: "2024-07-01",
     trip_end: "2024-07-04"
   });
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,18 +28,42 @@ function BoardWrite({ onSubmit, onCancel, tags }) {
     }));
   };
 
-  const handleFileChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      photo: e.target.files[0],
-    }));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    formData.tags = 
-    console.log(formData)
-    //axios.post("/postRecruitBoard", formData);
+    if (new Date(formData.trip_start) > new Date(formData.trip_end)) {
+     alert("올바른 날짜를 입력하세요");
+     return;
+   }
+    
+    if (category === 1) {
+      console.log(tags);
+      const tmpTag = Object.entries(tags).map(([key, value])=>(
+        Object.entries(value).filter(([k,v])=>v===true)
+      ));
+      var stringJson = '';
+      for (let i=0; i<tmpTag.length ; i++){
+        if (tmpTag[i].length == 0){
+          alert("태그 모두 선택하세요");
+          return;
+        }
+      }
+      for (let i=0 ; i<tmpTag.length ; i++){
+        if(i == tmpTag.length-1){
+          for (let j=0 ; j<tmpTag[i].length ; j++){
+            stringJson += ''+tmpTag[i][j][0]+'';
+          }
+        } else{
+          for (let j=0 ; j<tmpTag[i].length ; j++){
+            stringJson += ''+tmpTag[i][j][0]+'/';
+          }
+        }
+      formData.cboard_tags = stringJson;
+      }
+      axios.post("/postRecruitBoard", formData);
+    } else {
+      axios.post("/postReviewBoard", formData);
+    }
     onSubmit(formData);
   };
 
@@ -64,40 +80,46 @@ function BoardWrite({ onSubmit, onCancel, tags }) {
         <div className="form-container">
           <div className="d-flex align-items-center mb-3">
             {(window.location.pathname === '/recruitboardwrite') && (
-              <Dropdown className="recruitDoneButton">
-                <Dropdown.Toggle variant="primary">
-                  {formData.recruit_done ? '구인 완료' : '구인 중'}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => handleRecruitmentStatusChange(false)}>
-                    구인 중
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleRecruitmentStatusChange(true)}>
-                    구인 완료
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+              <Dropdown>
+            <Dropdown.Toggle className="custom-dropdown-toggle">
+              {formData.recruit_done ? '구인 완료' : '구인 중'}
+            </Dropdown.Toggle>
+            <Dropdown.Menu className="custom-dropdown-menu">
+              <Dropdown.Item
+                className="custom-dropdown-item"
+                onClick={() => handleRecruitmentStatusChange(false)}
+              >
+                구인 중
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="custom-dropdown-item"
+                onClick={() => handleRecruitmentStatusChange(true)}
+              >
+                구인 완료
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
             )}
             <label htmlFor="trip_start" className="me-2">
-              여행 시작일:
+              여행 시작일
             </label>
-            <input
+          <input
               type="date"
               name="trip_start"
               id="trip_start"
-              className="form-control me-2"
+              className="form-control me-2 custom-date-input" 
               value={formData.trip_start}
               onChange={handleChange}
               placeholder="여행 시작일"
             />
             <label htmlFor="trip_end" className="me-2">
-              여행 종료일:
+              여행 종료일
             </label>
             <input
               type="date"
               name="trip_end"
               id="trip_end"
-              className="form-control"
+              className="form-control custom-date-input" 
               value={formData.trip_end}
               onChange={handleChange}
               placeholder="여행 종료일"
@@ -123,14 +145,6 @@ function BoardWrite({ onSubmit, onCancel, tags }) {
               onChange={handleChange}
               rows="3"
               placeholder="내용을 입력하세요"
-            />
-          </div>
-          <div className="input-group mb-3">
-            <input
-              type="file"
-              className="form-control"
-              id="inputGroupFile02"
-              onChange={handleFileChange}
             />
           </div>
           <button type="submit" className="writeSubmitBtn">

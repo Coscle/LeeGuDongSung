@@ -14,6 +14,7 @@ module.exports = function (app) {
     })
   );
 
+
   app.use('/getVboardAll', createProxyMiddleware({
     target: 'http://localhost:8080/board/getVboard/',
     changeOrigin: true,
@@ -32,6 +33,18 @@ module.exports = function (app) {
     })
   );
 
+  app.use('/findReviewBoard', createProxyMiddleware({
+    target: 'http://localhost:8080/board/review/',
+    changeOrigin: true,
+    })
+  );
+
+  app.use('/findBoardRepls', createProxyMiddleware({
+    target: 'http://localhost:8080/board/repls/',
+    changeOrigin: true,
+    })
+  );
+
   app.use('/findRecruitBoardRepls', createProxyMiddleware({
     target: 'http://localhost:8080/board/repls/',
     changeOrigin: true,
@@ -40,6 +53,12 @@ module.exports = function (app) {
 
   app.use('/postBoardRepl', createProxyMiddleware({
     target: 'http://localhost:8080/board/insertBoardRepl/',
+    changeOrigin: true,
+    })
+  );
+
+  app.use('/postReviewBoard', createProxyMiddleware({
+    target: 'http://localhost:8080/board/insertVboard/',
     changeOrigin: true,
     })
   );
@@ -81,7 +100,7 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
-  
+
   app.use(
     '/member',
     createProxyMiddleware({

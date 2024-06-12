@@ -5,7 +5,7 @@ import './boardWrite.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-function BoardModify({ onSubmit, onCancel }) {
+function BoardModify({ onSubmit, onCancel, tags, category}) {
   const {boardNo} = useParams();
   // const [formData, setFormData] = useState({
   //   title: '',
@@ -17,20 +17,23 @@ function BoardModify({ onSubmit, onCancel }) {
   //   photo: null,
   // });
   const [formData, setFormData] = useState([]);
-  const [tags, setTags] = useState({})
   useEffect(()=>{
-    axios.get("/findRecruitBoard/"+boardNo).then((res)=>{
-      console.log(res.data);
-      setFormData(res.data);
-    });
-  },[]);
-  useEffect(()=>{
-    if (formData.cboard_tags != null){
-      console.log(formData.cboard_tags);
-      setTags(JSON.parse(formData.cboard_tags));
-      console.log(formData);
+    if (category === 1){
+      axios.get("/findRecruitBoard/"+boardNo).then((res)=>{
+        console.log(res.data);
+        setFormData(res.data);
+      });
+    } else {
+      axios.get("/findReviewBoard/"+boardNo).then((res)=>{
+        console.log(res.data);
+        setFormData(res.data);
+      });
     }
-  },[formData]);
+  },[]);
+  
+  useEffect(()=>{
+    console.log(tags);
+  },[tags]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,26 +43,53 @@ function BoardModify({ onSubmit, onCancel }) {
     }));
   };
 
-  const handleFileChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      photo: e.target.files[0],
-    }));
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    axios.put("/putUpdateBoard", formData);
+    if (new Date(formData.trip_start) > new Date(formData.trip_end)) {
+	  alert("올바른 날짜를 입력하세요");
+	  return;
+	}
+    
+    
+    if (category === 1) {
+      const tmpTag = Object.entries(tags).map(([key, value])=>(
+        Object.entries(value).filter(([k,v])=>v===true)
+      ));
+      var stringJson = '';
+      var tmp;
+      for (let i=0; i<tmpTag.length ; i++){
+        if (tmpTag[i].length == 0){
+          alert("태그를 모두 선택하세요");
+          return;
+        }
+      }
+      for (let i=0 ; i<tmpTag.length ; i++){
+        if(i == tmpTag.length-1){
+          for (let j=0 ; j<tmpTag[i].length ; j++){
+            stringJson += ''+tmpTag[i][j][0]+'';
+          }
+        } else{
+          for (let j=0 ; j<tmpTag[i].length ; j++){
+            stringJson += ''+tmpTag[i][j][0]+'/';
+          }
+        }
+      }
+      formData.cboard_tags = stringJson;
+      console.log(formData);
+      axios.put("/putUpdateBoard", formData);
+    } else {
+      axios.put("/putUpdateBoard", formData);
+    }
     onSubmit(formData);
   };
 
   const handleRecruitmentStatusChange = (status) => {
     setFormData((prevState) => ({
       ...prevState,
-      isRecruitmentDone: status,
+      recruit_done: status,
     }));
   };
+
 
   return (
     <div className="write-board-container">
@@ -67,14 +97,14 @@ function BoardModify({ onSubmit, onCancel }) {
         <div className="form-container">
           <div className="d-flex align-items-center mb-3">
             <Dropdown className="recruitDoneButton">
-              <Dropdown.Toggle variant="primary">
+               <Dropdown.Toggle className="custom-dropdown-toggle">
                 {formData.recruit_done ? '구인 완료' : '구인 중'}
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item onClick={() => handleRecruitmentStatusChange(false)}>
+                <Dropdown.Item className="custom-dropdown-item" onClick={() => handleRecruitmentStatusChange(false)}>
                   구인 중
                 </Dropdown.Item>
-                <Dropdown.Item onClick={() => handleRecruitmentStatusChange(true)}>
+                <Dropdown.Item className="custom-dropdown-item" onClick={() => handleRecruitmentStatusChange(true)}>
                   구인 완료
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -86,7 +116,7 @@ function BoardModify({ onSubmit, onCancel }) {
               type="date"
               name="trip_start"
               id="startDate"
-              className="form-control me-2"
+              className="form-control me-2 custom-date-input"
               value={formData.trip_start}
               onChange={handleChange}
               placeholder="여행 시작일"
@@ -98,7 +128,7 @@ function BoardModify({ onSubmit, onCancel }) {
               type="date"
               name="trip_end"
               id="endDate"
-              className="form-control"
+              className="form-control custom-date-input"
               value={formData.trip_end}
               onChange={handleChange}
               placeholder="여행 종료일"
@@ -126,16 +156,8 @@ function BoardModify({ onSubmit, onCancel }) {
               placeholder="내용을 입력하세요"
             />
           </div>
-          <div className="input-group mb-3">
-            <input
-              type="file"
-              className="form-control"
-              id="inputGroupFile02"
-              onChange={handleFileChange}
-            />
-          </div>
           <button type="submit" className="writeSubmitBtn">
-            게시물 작성
+            게시물 수정
           </button>
           <button type="button" className="canclewriteBtn" onClick={onCancel}>
             취소하기

@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import BoardWrite from '../board/BoardWrite';
 import SideFilter from '../board/SideFilter';
 import './reviewBoardModify.css'; 
+import BoardModify from '../board/BoardModify';
+import { useNavigate } from 'react-router-dom';
 
 const ReviewBoardModify = () => {
   const [initialValues, setInitialValues] = useState({}); 
+  const navigate = useNavigate();
 
+  /*
   useEffect(() => {
     const fetchBoardData = async () => {
       try {
@@ -26,21 +30,19 @@ const ReviewBoardModify = () => {
     fetchBoardData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []);*/
 
   const handleSubmit = (formData) => {
     console.log('Modified form data:', formData);
     // 여기에서 수정된 내용을 서버로 전송하거나 다른 작업을 수행
+    navigate('/reviewboard', ()=>{window.location.reload()});
   };
 
   return (
     <div className="modify-board-container">
-      <div className="side-filter">
-        <SideFilter showTopSearch={false} />
-      </div>
       <div className="board-write-container">
       	<h1>여행 후기 작성</h1>
-        <BoardWrite initialValues={initialValues} onSubmit={handleSubmit} />
+        <BoardModify initialValues={initialValues} onSubmit={handleSubmit} category={2} />
       </div>
     </div>
   );

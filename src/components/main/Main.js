@@ -3,21 +3,14 @@ import './main.css';
 import '../../fonts/fonts.css';
 import tpic from '../../images/tpic.png';
 import { Link, useNavigate } from 'react-router-dom';
-import  AuthContext  from '../../AuthContext.js'; // Import AuthContext
+import  { useAuth }  from '../../AuthContext.js'; // Import AuthContext
 
 function Main() {
   const [mateText, setMateText] = useState("Travel\nMate");
   const [reviewText, setReviewText] = useState("Travel\nReview");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-
-  const { user } = useContext(AuthContext);
-  console.log(user);
-  useEffect(() => {
-    // 컴포넌트가 마운트될 때 세션 스토리지에서 로그인 상태를 읽어옴
-    const loggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
-    setIsLoggedIn(loggedIn);
-  }, []);
+  const user = useAuth();
+  
 
   const handleMouseEnterMate = () => {
     setMateText("여행\n메이트");
@@ -36,8 +29,7 @@ function Main() {
   };
 
   const handleMateClick = () => {
-	  const loggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
-	  if(loggedIn) {
+	  if(user) {
 		  navigate('/RecruitBoard');
 	  }else{
 		 navigate('/login'); 
@@ -45,8 +37,7 @@ function Main() {
   };
 
   const handleReviewClick = () => {
-	  const loggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
-	  if(loggedIn){
+	  if(user){
 		  navigate('/ReviewBoard');
 	  }else{
 	    navigate('/login');
@@ -58,7 +49,7 @@ function Main() {
       <div className="mainTop">
         <div className="mainLeft">
           <div className="mainText">마음이 <br /> <span className="highlight">Dong</span>하는 사람과 <br /> 함께 완<span className="highlight">Sung</span> 하는<br /> 취향 존중 여행</div>
-          {isLoggedIn ? (
+          {user ? (
             <Link to="/myprofile" className="joinButton">My Profile</Link>
           ) : (
             <Link to="/login" className="joinButton">Join-us</Link>

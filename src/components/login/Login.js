@@ -21,16 +21,16 @@ const Login = () => {
       });
 
       if (response.status === 200) {
-        
-        // 로그인 성공 시
+        // 로그인 성공시
         const userData = response.data; // 서버로부터 받은 사용자 데이터
-        // sessionStorage.setItem('loggedInUser', JSON.stringify(userData)); // 로그인한 사용자의 데이터를 세션에 저장 
-        login(userData);  // Context의 login 함수 호출
-        const memberId = userData.username;
-        console.log('로그인에 성공했습니다.');
         
-        alert('로그인에 성공했습니다.');
-        navigate('/recruitboard'); 
+        
+       // sessionStorage.setItem('loggedInUser', JSON.stringify(userData)); // 로그인한 사용자의 데이터를 세션에 저장 
+        //const loggedInUserData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+        login(userData);  // Context의 login 함수 호출
+        console.log('로그인에 성공했습니다.');
+        navigate('/'); 
+
       } else {
         // 로그인 실패 시
         console.log('로그인에 실패했습니다.');

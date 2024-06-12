@@ -3,7 +3,7 @@ import TopSearch from './TopSearch';
 import TagFilter from './TagFilter';
 import './sideFilter.css';
 
-function SideFilter({ products, showTopSearch, setTags, tags }) {
+function SideFilter({ products, showTopSearch, setTags, filtering, setFilter}) {
   const initTag = {
     region: {
       서유럽: false,
@@ -72,17 +72,12 @@ function SideFilter({ products, showTopSearch, setTags, tags }) {
   };
   const [searchTerm, setSearchTerm] = useState("");
   const [passingTags, setPassingTags] = useState(initTag);
-  const [tag, setTag] = useState();
-  const [filterProp, setFP] = useState();
 
   const handleSearchInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
   const handleTagItemClick = (tag, filterProp) => {
-    console.log(filterProp, tag);
-    if (filterProp == 'tour' || filterProp == 'timeOfDay' || 
-      filterProp == 'selfPR' || filterProp == 'activities'){
       setPassingTags(prevState => ({
         ...prevState,
         [filterProp]: {
@@ -90,30 +85,57 @@ function SideFilter({ products, showTopSearch, setTags, tags }) {
           [tag]: !prevState[filterProp][tag]
         }
       }));
-    } else {
-      const onePick = initTag.filterProp;
-      setPassingTags(prevState => ({
-        ...prevState,
-        [filterProp]: {onePick}
-      }));
+      console.log(filtering);
+      if (filtering && filtering.indexOf(tag) !== -1) {
+          const updatedFilter = filtering.filter(item => item !== tag);
+          setFilter(updatedFilter);
+      } else {
+          setFilter(prev => [...prev, tag]);
+      }
+      /* else {
+      if (filtering.indexOf(tag) !== -1) {
+          const updatedFilter = filtering.filter(item => item !== tag);
+          setFilter(updatedFilter);
+      } else {
+          setFilter(prev => [...prev, tag]);
+      }
       
-      setPassingTags(prevState => ({
-        ...prevState,
-        [filterProp]: {
-          ...prevState[filterProp],
-          [tag]: !prevState[filterProp][tag]
-        }
-      }));
-    }
+      // passingTags 업데이트
+      setPassingTags(prevState => {
+          const updatedFilterProp = { ...prevState[filterProp] };
+          // 현재 태그가 이미 선택되어 있는지 확인
+          const isTagSelected = updatedFilterProp[tag];
+          
+          // 현재 태그가 선택되어 있지 않은 경우 해당 태그를 선택하고
+          // 다른 모든 태그를 false로 설정
+          if (!isTagSelected) {
+              for (const key in updatedFilterProp) {
+                  updatedFilterProp[key] = false;
+              }
+              updatedFilterProp[tag] = true;
+          } else {
+              // 현재 태그가 이미 선택되어 있는 경우 해당 태그의 상태를 반전
+              updatedFilterProp[tag] = !updatedFilterProp[tag];
+          }
+          return {
+              ...prevState,
+              [filterProp]: updatedFilterProp
+          };
+      });
+
+      // 필터에 새로 선택한 태그 추가
+      setFilter(prevFilter => [...prevFilter, tag]);
+      }*/
   };
 
   useEffect(()=>{
     try{
       setTags(passingTags);
-    }catch{
+      
+    } catch {
+
     }
   },[passingTags]);
-  console.log(tags);
 
   const filteredCollected = () => {
     const collectedTrueKeys = {
