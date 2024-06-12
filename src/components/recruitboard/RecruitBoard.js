@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import SideFilter from '../board/si';
+import SideFilter from '../board/SideFilter';
 import RecruitBoardContent from './RecruitBoardContent';
 import './recruitBoard.css';
 import { Link } from 'react-router-dom';
