@@ -22,9 +22,10 @@ label {
   font-weight: bold;
 }
 
-input[type='text'],
+input[type='email'],
 input[type='password'] {
   width: calc(100% - 20px); 
+  margin-left: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -33,13 +34,26 @@ input[type='password'] {
 .btn-primary,
 .btn-second,
 .btn-third{
-  background-color: #e67e22;
+  background: linear-gradient(45deg, #746EF4, #FF66C3);
   color: white;
-  border: 0.5px solid #ccc;
-  padding: 10px;
+  border: solid white 0.1px;
+  padding: 0.5em 1em;
+  border-radius: 25px;
+  margin-top: 0.2em;
+  margin-bottom: 0.5em; 
+  font-size: 1.2em;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: transform 0.3s;
+  width: 150px;
+  font-family: "YeojuCeramic";
+  text-decoration: none; /* 링크에 밑줄 없애기 */
 }
-
+.btn-primary:hover,
+.btn-second:hover,
+.btn-third:hover{
+   transform: scale(1.1);
+}
 .btn-primary {
   width: calc(100% - 40px); 
   display: inline-block;
@@ -47,26 +61,22 @@ input[type='password'] {
    margin-left: 50px;
 }
 .btn-second {
-  width: calc(35% - 20px);
+  width: calc(35% - 15px);
   margin-top: 15px;
   border-radius: 20px;
 }
 .btn-space{
 	margin-right: 6px;
 }
+.btn-space2{
+	margin-left: 10px;
+}
 .btn-third{
-  margin-top: 15px;
-  width: calc(80% - 20px);
+  width: calc(100% - 40px);
   border-radius: 20px;
   margin-left: 20px;
 }
 
-.btn-third:hover {
-  background-color: #d35400;
-}
-.btn-second:hover {
-  background-color: #d35400;
-}
 .link {
   color: white; 
   text-decoration: none; 

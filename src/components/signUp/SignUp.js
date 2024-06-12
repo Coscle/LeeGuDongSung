@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
 import './SignUp.css';
 
 const SignUp = () => {
@@ -12,12 +13,21 @@ const SignUp = () => {
   const [phonePart3, setPhonePart3] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [gender, setGender] = useState('');
+  const sweetalert = (title, contents, icon, confirmButtonText) => {
+        Swal.fire({
+            title: title,
+            text: contents,
+            icon: icon,
+            confirmButtonText: confirmButtonText
+            })
+    }
+
 
   const handleSignUp = (event) => {
     event.preventDefault();	//기본 제출 동작을 막음
     // 비밀번호 확인
     if (password !== confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
+      sweetalert("비밀번호가 일치하지 않습니다.");
       return;
     }
     // 회원가입 로직

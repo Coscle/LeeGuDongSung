@@ -127,6 +127,20 @@
   font-family: YeojuCeramic;
   white-space: nowrap;
 }
+.logo-link {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+.logo-container {
+  display: flex;
+  gap: 10px; /* 로고 사이의 간격 조절 */
+  margin-top: 20px;
+}
 
 @media (max-width: 768px) {
   .mainText {

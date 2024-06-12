@@ -1,0 +1,106 @@
+.full-height {
+  height: calc(100vh - 100px); /* Adjusting to leave some space from the bottom */
+}
+
+.full-card {
+  height: 100%;
+}
+
+.card-left {
+  height: 100%;
+}
+
+.card-right {
+  height: 100%;
+}
+
+.gradient-custom {
+  background: #f6d365;
+  background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+  background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+}
+
+.profile .profile-details {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile .profile-details .pic-placeholder {
+  width: 160px; /* 크기 조정 */
+  height: 160px; /* 크기 조정 */
+  background-color: #ccc;
+  border-radius: 50%;
+  display: inline-block;
+  line-height: 160px; /* 크기 조정 */
+  font-size: 48px; /* 크기 조정 */
+  color: #fff;
+  margin: 40px 0; /* 크기 조정 */
+}
+
+.profile .profile-details .info {
+  display: block;
+  margin-top: 20px; /* 크기 조정 */
+}
+
+.profile .profile-details .heart-icon {
+  cursor: pointer;
+}
+
+.profile .profile-details .heart-icon.clicked {
+  color: red;
+}
+
+.profile .posts-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile .posts-container .my-posts,
+.profile .posts-container .saved-posts {
+  width: 48%;
+}
+
+.profile .posts-container .post-content .post-item {
+  border: 1px solid #ccc;
+  padding: 20px; /* 크기 조정 */
+  margin-bottom: 20px; /* 크기 조정 */
+  border-radius: 10px; /* 크기 조정 */
+}
+
+.profile .btn-right1, .profile .btn-right2 {
+  margin-right: 20px; /* 크기 조정 */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 20px 40px; /* 크기 조정 */
+  border-radius: 10px; /* 크기 조정 */
+  cursor: pointer;
+  margin-top: 40px; /* 크기 조정 */
+}
+
+.profile .btn-right1:hover, .profile .btn-right2:hover {
+  background-color: #0056b3;
+}
+
+.profile .tags {
+  margin-top: 40px; /* 크기 조정 */
+}
+
+.profile .tags h2 {
+  margin-bottom: 20px; /* 크기 조정 */
+}
+
+.profile .tags ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.profile .tags ul li {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px; /* 크기 조정 */
+  border-radius: 10px; /* 크기 조정 */
+  margin-right: 10px; /* 크기 조정 */
+  margin-bottom: 10px; /* 크기 조정 */
+}

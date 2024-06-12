@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getUserData, openDatabase, saveUserData } from '../../db'; 
+import Swal from 'sweetalert2'
 import './SignUp.css';
 
 const TagSelectionForEdit = () => {
@@ -13,6 +14,15 @@ const TagSelectionForEdit = () => {
   const [snsType, setSnsType] = useState('');
   const [snsAddress, setSnsAddress] = useState('');
   const [profilePicture, setProfilePicture] = useState(null);
+
+  const sweetalert = (title, contents, icon, confirmButtonText) => {
+        Swal.fire({
+            title: title,
+            text: contents,
+            icon: icon,
+            confirmButtonText: confirmButtonText
+            })
+    }
 
   const tags = [
     { title: '성격', content: ['활발함', '정적임', '중간'] },
@@ -128,7 +138,7 @@ const TagSelectionForEdit = () => {
               onChange={(e) => setProfilePicture(e.target.files[0])}
             />
           </div>
-          <button type="submit" className="signup-button" onClick={()=>alert('수정이 완료되었습니다.')}>수정 완료</button>
+          <button type="submit" className="signup-button" onClick={()=>sweetalert('수정이 완료되었습니다.')}>수정 완료</button>
         </form>
       </div>
       <div className="tag-container">

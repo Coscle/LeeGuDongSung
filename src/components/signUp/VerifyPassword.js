@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom'; // useLocation 추가
 import { openDatabase, getUserDataByPassword } from '../../db'; 
+import Swal from 'sweetalert2'
 import './SignUp.css';
 
 const VerifyPassword = () => {
@@ -8,7 +9,14 @@ const VerifyPassword = () => {
   const location = useLocation(); // useLocation 사용
   const { email } = location.state || {}; // 전달된 state에서 email 추출
   const [password, setPassword] = useState('');
-
+  const sweetalert = (title, contents, icon, confirmButtonText) => {
+        Swal.fire({
+            title: title,
+            text: contents,
+            icon: icon,
+            confirmButtonText: confirmButtonText
+            })
+    }
   const handleVerifyPassword = async (event) => {
     event.preventDefault(); 
 
@@ -18,11 +26,11 @@ const VerifyPassword = () => {
       if (userPassword && userPassword.email === email) { // 이메일이 일치하는지 확인
         navigate('/EditProfile', { state: { email } });
       } else {
-        alert('비밀번호가 틀렸습니다.');
+        sweetalert('비밀번호가 틀렸습니다.');
       }
     } catch (error) {
       console.error('비밀번호 확인 중 오류 발생:', error);
-      alert('비밀번호 확인 중 오류가 발생했습니다.');
+      sweetalert('비밀번호 확인 중 오류가 발생했습니다.');
     }
   };
 

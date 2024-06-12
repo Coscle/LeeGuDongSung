@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { openDatabase, getUserData, getUserDataByPhoneNumber} from '../../db'; 
+import Swal from 'sweetalert2'
 import './SignUp.css';
 
 const FindPassword = () => {
@@ -13,6 +14,15 @@ const FindPassword = () => {
   const handleFindPassword = async (event) => {
     event.preventDefault(); 
 
+  const sweetalert = (title, contents, icon, confirmButtonText) => {
+        Swal.fire({
+            title: title,
+            text: contents,
+            icon: icon,
+            confirmButtonText: confirmButtonText
+            })
+    }
+
     try {
       const db = await openDatabase();
       const userEmail = await getUserData(db, email);
@@ -23,11 +33,11 @@ const FindPassword = () => {
 			setPhoneNumber(userPhoneNumber.phoneNumber);
 		}
       } else {
-        alert('해당 아이디가 없습니다.');
+        sweetalert('해당 아이디가 없습니다.');
       }
     } catch (error) {
       console.error('비밀번호 찾기 중 오류 발생:', error);
-      alert('비밀번호 찾기 중 오류가 발생했습니다.');
+      sweetalert('비밀번호 찾기 중 오류가 발생했습니다.');
     }
   };
 

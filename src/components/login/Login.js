@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { openDatabase, getUserData } from '../../db';
 import './login.css';
 import { AuthContext } from '../../contexts/AuthContext'; // Import AuthContext
+import Swal from 'sweetalert2'
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,6 +14,16 @@ const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
 
+  const sweetalert = (title, contents, icon, confirmButtonText) => {
+        Swal.fire({
+            title: title,
+            text: contents,
+            icon: icon,
+            confirmButtonText: confirmButtonText
+            })
+    }
+	
+
     try {
       const db = await openDatabase();
       const userData = await getUserData(db, email);
@@ -22,20 +33,16 @@ const Login = () => {
         if (email === savedEmail && password === savedPassword) {
           sessionStorage.setItem('loggedInUserEmail', email); // 로그인한 사용자의 이메일을 세션에 저장
           login(); // Context의 login 함수 호출
-          console.log('로그인에 성공했습니다.');
-          alert('로그인에 성공했습니다.');
+          sweetalert('로그인에 성공했습니다.');
           navigate('/'); 
         } else {
-          console.log('로그인에 실패했습니다.');
-          alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+          sweetalert('아이디 또는 비밀번호가 올바르지 않습니다.');
         }
       } else {
-        console.log('IndexedDB에 사용자 데이터가 없습니다.');
-        alert('회원가입을 먼저 진행해주세요.');
+        sweetalert('회원가입을 먼저 진행해주세요.');
       }
     } catch (error) {
-      console.error('로그인 중 오류 발생:', error);
-      alert('로그인 중 오류가 발생했습니다.');
+      sweetalert('로그인 중 오류가 발생했습니다.');
     }
   };
 
@@ -68,9 +75,9 @@ const Login = () => {
         <button type="submit" className="btn-primary">
           로그인하기
         </button>
-        <button type="button" className="btn-second">SNS연동</button>
+        <button type="button" className="btn-second btn-space2" onClick = {()=>window.open("https://instagram.com")}>SNS연동</button>
         <button type="button" className="btn-second" onClick = {()=>{navigate('/FindId');}}>ID찾기</button>
-        <button type="button" className="btn-second">비밀번호 찾기</button>
+        <button type="button" className="btn-second" onClick = {()=>{navigate('/FindPassword')}}>비밀번호 찾기</button>
         <button type = "button" className = "btn-third" onClick={()=>{ navigate('/SignUp');} }>회원가입하기</button>
       </form>
     </div>

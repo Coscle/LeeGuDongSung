@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { openDatabase, getUserData } from '../../db'; // 수정된 경로
-import './profile.css';
 import { useNavigate } from 'react-router';
+import './profile.css';
 
 const MyProfile = () => {
  const navigate = useNavigate();
@@ -57,14 +57,6 @@ const MyProfile = () => {
   };
 
 
-  if (loading) {
-    return <div>Loading...</div>; // 로딩 상태 표시
-  }
-
-  if (!user) {
-    return <div>No user data found.</div>; // 유저 데이터가 없을 때 표시
-  }
-
   return (
     <div className="profile">
       <div className="profile-details">
@@ -101,7 +93,7 @@ const MyProfile = () => {
           <div className="post-content">
             {user.savedPosts.map((post) => (
               <div key={post.id} className="post-item">
-                <a href={`/post/${post.id}`}>
+                <a className = "adco" href={`/post/${post.id}`}>
                   <h3>{post.title}</h3>
                   <p>{post.content}</p>
                 </a>

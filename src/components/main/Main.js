@@ -3,6 +3,8 @@ import './main.css';
 import '../../fonts/fonts.css';
 import tpic from '../../images/tpic.png';
 import { Link, useNavigate } from 'react-router-dom';
+import instagramLogo from '../../images/instagram.png';
+import facebookLogo from '../../images/facebook.png';
 
 function Main() {
   const [mateText, setMateText] = useState("Travel\nMate");
@@ -55,11 +57,13 @@ function Main() {
       <div className="mainTop">
         <div className="mainLeft">
           <div className="mainText">마음이 <br /> <span className="highlight">Dong</span>하는 사람과 <br /> 함께 완<span className="highlight">Sung</span> 하는<br /> 취향 존중 여행</div>
-          {isLoggedIn ? (
-            <Link to="/myprofile" className="joinButton">My Profile</Link>
-          ) : (
-            <Link to="/login" className="joinButton">Join-us</Link>
-          )}
+          <div className='logo-container'>
+	          <a href="https://www.instagram.com/29dongsung?igsh=bnpyZGQ0Ym8zc2I1" target="_blank" className="logo-link">
+	            <img src={instagramLogo} className="logo" />
+	          </a><a href="https://www.facebook.com/profile.php?id=61560562423396" target="_blank" className="logo-link">
+	            <img src={facebookLogo} className="logo" />
+	          </a>
+	       </div>
         </div>
         
         <div className="buttonsContainer">
