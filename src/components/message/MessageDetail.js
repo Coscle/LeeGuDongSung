@@ -5,7 +5,7 @@ function MessageDetail({ message }) {
     <div className="message-detail">
       <h3>Message from: {message.sender_no}</h3>
       <p>{message.message_content}</p>
-      <p>Date: {message.board_writeday}</p>
+      <p>Date: {message.send_date}</p>
     </div>
   );
 }

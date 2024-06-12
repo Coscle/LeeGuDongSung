@@ -50,4 +50,11 @@ module.exports = function (app) {
     })
   );
 
+  app.use('/sendMessage', createProxyMiddleware({
+    target: 'http://localhost:8080/message/',
+    changeOrigin: true,
+    })
+  );
+  
+
 };
