@@ -77,7 +77,8 @@ const ReviewBoardContent = () => {
         <div className="review-board-items">
           {currentData.map(item => (
             <div key={item.board_no} onClick={() => handleEnterDetail(item.board_no)} className="review-board-item">
-              <h2>{item.board_title}</h2>
+              <h2 className="content-title">{item.board_title}</h2>
+              <span className="contentwritenick">{item.member_nickname}</span>
               <p>{formatDate(item.board_writeday)}</p>
             </div>
           ))}

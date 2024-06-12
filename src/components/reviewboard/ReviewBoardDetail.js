@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import './reviewBoardDetail.css';
-import reviewData from './tempData2.json';
 import Comment from '../board/Comment';
 import axios from 'axios';
 
 const ReviewBoardDetail = () => {
   const { boardNo } = useParams();
   const [liked, setLiked] = useState(false); 
-  const [likedCount, setLikedCount] = useState(0); 
-  //const boardData = reviewData.find(data => data.board_no === boardNo);
+  const [likedCount, setLikedCount] = useState(8);
+  const [isScrapped, setIsScrapped] = useState(false); 
   const [boardData, setBoardData] = useState([]);
   const loggedInUserId = "user123"; // 임시아이디
   const navigate = useNavigate();
@@ -26,7 +25,9 @@ const ReviewBoardDetail = () => {
   };
 
   const handleDelete = () => {
-    console.log('Delete button clicked');
+	console.log('Delete button clicked');
+    axios.get("/deleteBoard/"+boardNo);
+    navigate("/recruitBoard", ()=>{window.location.reload()});
   };
 
   const toggleLike = () => {
@@ -34,8 +35,11 @@ const ReviewBoardDetail = () => {
     setLikedCount(prevCount => liked ? prevCount - 1 : prevCount + 1);
   };
 
+  const toggleScrap = () => {
+    setIsScrapped(prevScrapped => !prevScrapped);
+  };
 
-  const isOwner = loggedInUserId === boardData?.member_nickname;
+  const isOwner = loggedInUserId === boardData?.member_id;
 
   return (
 	<>

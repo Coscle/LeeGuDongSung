@@ -1,13 +1,6 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function (app) {
-  app.use(
-	'/users',
-    createProxyMiddleware({
-      target: 'https://jsonplaceholder.typicode.com',
-      changeOrigin: true,
-    }),
-  );
 
   app.use('/getBoardAll', createProxyMiddleware({
     target: 'http://localhost:8080/board/',
@@ -80,12 +73,5 @@ module.exports = function (app) {
     changeOrigin: true,
     })
   );
-  app.use(
-    '/member',
-    createProxyMiddleware({
-      target: 'http://localhost:8080/member/',
-      changeOrigin: true,
-    })
-  );
-  
+
 };

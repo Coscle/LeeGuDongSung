@@ -8,11 +8,11 @@ import '../../fonts/fonts.css';
 const RecruitBoardDetail = () => {
   const { boardNo } = useParams();
   const [liked, setLiked] = useState(false); 
-  const [likedCount, setLikedCount] = useState(11); 
+  const [likedCount, setLikedCount] = useState(0); 
   const [isScrapped, setIsScrapped] = useState(false);
   const [tags, setTags] = useState({})
   const [boardData, setBoardData] = useState([]);
-
+  
   useEffect(()=>{
     axios.get("/findRecruitBoard/"+boardNo).then((res)=>{
       setBoardData(res.data);
@@ -48,7 +48,6 @@ const RecruitBoardDetail = () => {
   };
 
   const isOwner = loggedInUserId === boardData?.member_id;
-
 
   return (
     <>
