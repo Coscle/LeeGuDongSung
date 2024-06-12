@@ -5,7 +5,7 @@ import './boardWrite.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-function BoardModify({ onSubmit, onCancel, tags}) {
+function BoardModify({ onSubmit, onCancel, tags, category}) {
   const {boardNo} = useParams();
   // const [formData, setFormData] = useState({
   //   title: '',
@@ -18,10 +18,17 @@ function BoardModify({ onSubmit, onCancel, tags}) {
   // });
   const [formData, setFormData] = useState([]);
   useEffect(()=>{
-    axios.get("/findRecruitBoard/"+boardNo).then((res)=>{
-      console.log(res.data);
-      setFormData(res.data);
-    });
+    if (category === 1){
+      axios.get("/findRecruitBoard/"+boardNo).then((res)=>{
+        console.log(res.data);
+        setFormData(res.data);
+      });
+    } else {
+      axios.get("/findReviewBoard/"+boardNo).then((res)=>{
+        console.log(res.data);
+        setFormData(res.data);
+      });
+    }
   },[]);
   useEffect(()=>{
     console.log(tags);
@@ -44,32 +51,34 @@ function BoardModify({ onSubmit, onCancel, tags}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const tmpTag = Object.entries(tags).map(([key, value])=>(
-      Object.entries(value).filter(([k,v])=>v===true)
-    ));
-    var stringJson = '[';
-    var tmp;
-    for (let i=0; i<tmpTag.length ; i++){
-      if (tmpTag[i].length == 0){
-        alert("태그 모두 선택하세요");
-        break;
-      }
-      tmp = Object.entries(tags).map(([key, value])=>(
+    if (category === 1) {
+      const tmpTag = Object.entries(tags).map(([key, value])=>(
         Object.entries(value).filter(([k,v])=>v===true)
       ));
-    }
-    console.log(tmp.length)
-    for (let j=0 ; j<tmp.length ; j++){
-      console.log(tmp[j][0]);
-      if(j == tmp.length-1){
-        stringJson += '"'+tmp[j][0][0]+'"]';
-      } else{
-        stringJson += '"'+tmp[j][0][0]+'",';
+      var stringJson = '[';
+      var tmp;
+      for (let i=0; i<tmpTag.length ; i++){
+        if (tmpTag[i].length == 0){
+          alert("태그 모두 선택하세요");
+          return;
+        }
+        tmp = Object.entries(tags).map(([key, value])=>(
+          Object.entries(value).filter(([k,v])=>v===true)
+        ));
       }
+      for (let j=0 ; j<tmp.length ; j++){
+        console.log(tmp[j][0]);
+        if(j == tmp.length-1){
+          stringJson += '"'+tmp[j][0][0]+'"]';
+        } else{
+          stringJson += '"'+tmp[j][0][0]+'",';
+        }
+      }
+      formData.cboard_tags = stringJson;
+      axios.put("/putUpdateBoard", formData);
+    } else {
+      axios.put("/putUpdateVboard", formData);
     }
-    formData.cboard_tags = stringJson;
-    console.log(formData);
-    axios.put("/putUpdateBoard", formData);
     onSubmit(formData);
   };
 

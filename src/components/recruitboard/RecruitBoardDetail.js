@@ -15,15 +15,13 @@ const RecruitBoardDetail = () => {
   
   useEffect(()=>{
     axios.get("/findRecruitBoard/"+boardNo).then((res)=>{
-      console.log(res.data);
       setBoardData(res.data);
     });
   },[]);
   
   useEffect(()=>{
     if (boardData.cboard_tags != null){
-      setTags(JSON.parse(boardData.cboard_tags));
-      console.log(boardData);
+      setTags(boardData.cboard_tags.split('/'));
     }
   },[boardData]);
   
@@ -70,13 +68,6 @@ const RecruitBoardDetail = () => {
                   {Array.isArray(tags) && tags.map((tag, index) => (
                     <React.Fragment key={index}>
                       {tag && <span className="tag">{tag}</span>}
-                      {tag.같이즐겨요 && tag.같이즐겨요.length > 0 && (
-                        <span className="tag">
-                          {tag.같이즐겨요.map((toget, idx) => (
-                            <span key={idx} className="tag">{toget}</span>
-                          ))}
-                        </span>
-                      )}
                     </React.Fragment>
                   ))}
                 </div>

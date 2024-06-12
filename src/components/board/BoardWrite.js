@@ -3,24 +3,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown } from 'react-bootstrap';
 import './boardWrite.css';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-function BoardWrite({ onSubmit, onCancel, tags }) {
-  // const [formData, setFormData] = useState({
-  //   board_title: '',
-  //   tags: '',
-  //   board_content: '',
-  //   startDate: '',
-  //   endDate: '',
-  //   isRecruitmentDone: false,
-  //   photo: null,
-  // });
-
+function BoardWrite({ onSubmit, onCancel, tags, category }) {
   // 임시 데이터, member 테이블에 member_no가 1이라는 데이터가 있어야함
   // 그러면 동작
   const [formData, setFormData] = useState({
     board_title: "",
     board_content: "",
-    board_category: 1,
+    board_category: category,
     author_no: 1,
     cboard_tags: "[]",
     recruit_done: false,
@@ -45,31 +36,35 @@ function BoardWrite({ onSubmit, onCancel, tags }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const tmpTag = Object.entries(tags).map(([key, value])=>(
-      Object.entries(value).filter(([k,v])=>v===true)
-    ));
-    var stringJson = '[';
-    var tmp;
-    for (let i=0; i<tmpTag.length ; i++){
-      if (tmpTag[i].length == 0){
-        alert("태그 모두 선택하세요");
-        break;
-      }
-      tmp = Object.entries(tags).map(([key, value])=>(
+    alert(category);
+    if (category === 1) {
+      console.log(tags);
+      const tmpTag = Object.entries(tags).map(([key, value])=>(
         Object.entries(value).filter(([k,v])=>v===true)
       ));
-    }
-    console.log(tmp.length)
-    for (let j=0 ; j<tmp.length ; j++){
-      console.log(tmp[j][0]);
-      if(j == tmp.length-1){
-        stringJson += '"'+tmp[j][0][0]+'"]';
-      } else{
-        stringJson += '"'+tmp[j][0][0]+'",';
+      var stringJson = '';
+      for (let i=0; i<tmpTag.length ; i++){
+        if (tmpTag[i].length == 0){
+          alert("태그 모두 선택하세요");
+          return;
+        }
       }
+      for (let i=0 ; i<tmpTag.length ; i++){
+        if(i == tmpTag.length-1){
+          for (let j=0 ; j<tmpTag[i].length ; j++){
+            stringJson += ''+tmpTag[i][j][0]+'';
+          }
+        } else{
+          for (let j=0 ; j<tmpTag[i].length ; j++){
+            stringJson += ''+tmpTag[i][j][0]+'/';
+          }
+        }
+      formData.cboard_tags = stringJson;
+      }
+      axios.post("/postRecruitBoard", formData);
+    } else {
+      axios.post("/postReviewBoard", formData);
     }
-    formData.cboard_tags = stringJson;
-    axios.post("/postRecruitBoard", formData);
     onSubmit(formData);
   };
 

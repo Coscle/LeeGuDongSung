@@ -1,5 +1,9 @@
 .App {
-  text-align: center;
   overflow-x: hidden;
   min-height: auto;
+  font-family: '87';
+}
+
+#h1 #h2{
+  font-family: "YeojuCeramic";
 }

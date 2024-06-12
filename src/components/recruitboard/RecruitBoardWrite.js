@@ -26,11 +26,11 @@ function RecruitBoardWrite() {
   return (
     <div className="write-board-container">
       <div className="side-filter">
-        <SideFilter showTopSearch={false} setTags={setTags} tags={tags} />
+        <SideFilter showTopSearch={false} setTags={setTags} tags={tags} category={1} />
       </div>
       <div className="board-write-container">
       	<h1>여행 메이트 찾기</h1>
-        <BoardWrite tags={tags} onSubmit={handleSubmit} onCancel={() => navigate('/recruitboard')} />
+        <BoardWrite tags={tags} onSubmit={handleSubmit} onCancel={() => navigate('/recruitboard')} category={1} />
       </div>
     </div>
   );

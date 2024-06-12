@@ -44,7 +44,7 @@ const RecruitBoardModify = () => {
       </div>
       <div className="board-write-container">
      	 <h1>여행 메이트 찾기</h1>
-        <BoardModify initialValues={initialValues} tags={tags} setTags={setTags} onSubmit={handleSubmit} isModify={true} />
+        <BoardModify initialValues={initialValues} tags={tags} setTags={setTags} onSubmit={handleSubmit} isModify={true} category={1} />
       </div>
     </div>
   );

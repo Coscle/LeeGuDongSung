@@ -17,7 +17,7 @@ function ReviewBoardWrite() {
     <div className="write-board-container">
       <div className="board-write-container">
       	<h1>여행 후기 작성</h1>
-        <BoardWrite onSubmit={handleSubmit} onCancel={() => navigate('/reviewboard')} />
+        <BoardWrite onSubmit={handleSubmit} onCancel={() => navigate('/reviewboard')} category={2} />
       </div>
     </div>
   );
