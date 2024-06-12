@@ -84,8 +84,9 @@
 		SET r.recruit_done = #{recruit_done},
     	r.trip_start = #{trip_start},
     	r.trip_end = #{trip_end},
+    	r.cboard_tags = #{cboard_tags},
     	b.board_title = #{board_title},
-    	b.board_content = #{board_content}
+    	b.board_content = #{board_content},
 		WHERE b.board_no = #{board_no}
 	</update>
 
