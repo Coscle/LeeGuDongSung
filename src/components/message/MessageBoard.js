@@ -16,12 +16,13 @@ function MessageBoard() {
 
   useEffect(() => {
     axios.get("/getMessageList").then((res) => {
-      const messages = res.data.filter(message => message.receiver_no === 1);
+      const messages = res.data.filter(message => message.receiver_no === 3);
       setMessageList(messages);
       setFilteredMessages(messages);
-    }).catch((error) => {
-      console.error('Error fetching message list:', error);
-    });
+    })
+    // }).catch((error) => {
+    //   console.error('Error fetching message list:', error);
+    // });
   }, []);
 
   useEffect(() => {
@@ -59,6 +60,7 @@ function MessageBoard() {
       <div className="row">
         <div className="col-md-4 border-right">
           <h2>쪽지함</h2>
+          {messageList[0]?.message_content}
           <div className="msg-container">
             <div className="messaging">
               <div className="inbox_msg">

@@ -8,28 +8,7 @@ const RecruitBoardModify = () => {
   const [initialValues, setInitialValues] = useState({}); // 초기 값으로 빈 객체를 설정
   const navigate = useNavigate();
   const [tags, setTags] = useState();
-
-  useEffect(() => {
-    // const fetchBoardData = async () => {
-    //   try {
-    //     const boardNo = 123; 
-    //     const response = await fetch(`API_ENDPOINT/${boardNo}`); 
-    //     if (response.ok) {
-    //       const data = await response.json();
-    //       setInitialValues(data); 
-    //     } else {
-    //       throw new Error('Failed to fetch board data');
-    //     }
-    //   } catch (error) {
-    //     console.error('Error fetching board data:', error);
-    //     // 오류 처리를 여기에 추가할 수 있습니다.
-    //   }
-    // };
-
-    // fetchBoardData();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const [filtering, setFilter] = useState([]);
 
   const handleSubmit = (formData) => {
     console.log('Modified form data:', formData);
@@ -40,7 +19,7 @@ const RecruitBoardModify = () => {
   return (
     <div className="modify-board-container">
       <div className="side-filter">
-        <SideFilter showTopSearch={false} tags={tags} setTags={setTags} />
+        <SideFilter showTopSearch={false} tags={tags} setTags={setTags} filtering={filtering} setFilter={setFilter} />
       </div>
       <div className="board-write-container">
      	 <h1 className="board-write-title">여행 메이트 찾기</h1>

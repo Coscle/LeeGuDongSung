@@ -5,7 +5,7 @@ import './boardWrite.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-function BoardWrite({ onSubmit, onCancel, tags, category }) {
+function BoardWrite({ onSubmit, onCancel, tags, category}) {
   // 임시 데이터, member 테이블에 member_no가 1이라는 데이터가 있어야함
   // 그러면 동작
   const [formData, setFormData] = useState({
@@ -31,7 +31,10 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-	}
+    if (new Date(formData.trip_start) > new Date(formData.trip_end)) {
+     alert("올바른 날짜를 입력하세요");
+     return;
+   }
     
     if (category === 1) {
       console.log(tags);
@@ -46,11 +49,16 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
         }
       }
       for (let i=0 ; i<tmpTag.length ; i++){
-        for (let j=0 ; j<tmpTag[i].length ; j++){
-          stringJson += ''+tmpTag[i][j][0]+'/';
+        if(i == tmpTag.length-1){
+          for (let j=0 ; j<tmpTag[i].length ; j++){
+            stringJson += ''+tmpTag[i][j][0]+'';
+          }
+        } else{
+          for (let j=0 ; j<tmpTag[i].length ; j++){
+            stringJson += ''+tmpTag[i][j][0]+'/';
+          }
         }
       formData.cboard_tags = stringJson;
-      console.log(stringJson);
       }
       axios.post("/postRecruitBoard", formData);
     } else {
@@ -73,49 +81,49 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
           <div className="d-flex align-items-center mb-3">
             {(window.location.pathname === '/recruitboardwrite') && (
               <Dropdown>
-		      <Dropdown.Toggle className="custom-dropdown-toggle">
-		        {formData.recruit_done ? '구인 완료' : '구인 중'}
-		      </Dropdown.Toggle>
-		      <Dropdown.Menu className="custom-dropdown-menu">
-		        <Dropdown.Item
-		          className="custom-dropdown-item"
-		          onClick={() => handleRecruitmentStatusChange(false)}
-		        >
-		          구인 중
-		        </Dropdown.Item>
-		        <Dropdown.Item
-		          className="custom-dropdown-item"
-		          onClick={() => handleRecruitmentStatusChange(true)}
-		        >
-		          구인 완료
-		        </Dropdown.Item>
-		      </Dropdown.Menu>
-		    </Dropdown>
+            <Dropdown.Toggle className="custom-dropdown-toggle">
+              {formData.recruit_done ? '구인 완료' : '구인 중'}
+            </Dropdown.Toggle>
+            <Dropdown.Menu className="custom-dropdown-menu">
+              <Dropdown.Item
+                className="custom-dropdown-item"
+                onClick={() => handleRecruitmentStatusChange(false)}
+              >
+                구인 중
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="custom-dropdown-item"
+                onClick={() => handleRecruitmentStatusChange(true)}
+              >
+                구인 완료
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
             )}
             <label htmlFor="trip_start" className="me-2">
               여행 시작일
             </label>
-		    <input
-		        type="date"
-		        name="trip_start"
-		        id="trip_start"
-		        className="form-control me-2 custom-date-input" 
-		        value={formData.trip_start}
-		        onChange={handleChange}
-		        placeholder="여행 시작일"
-		      />
-		      <label htmlFor="trip_end" className="me-2">
-		        여행 종료일
-		      </label>
-		      <input
-		        type="date"
-		        name="trip_end"
-		        id="trip_end"
-		        className="form-control custom-date-input" 
-		        value={formData.trip_end}
-		        onChange={handleChange}
-		        placeholder="여행 종료일"
-		      />
+          <input
+              type="date"
+              name="trip_start"
+              id="trip_start"
+              className="form-control me-2 custom-date-input" 
+              value={formData.trip_start}
+              onChange={handleChange}
+              placeholder="여행 시작일"
+            />
+            <label htmlFor="trip_end" className="me-2">
+              여행 종료일
+            </label>
+            <input
+              type="date"
+              name="trip_end"
+              id="trip_end"
+              className="form-control custom-date-input" 
+              value={formData.trip_end}
+              onChange={handleChange}
+              placeholder="여행 종료일"
+            />
           </div>
           <div className="mb-1">
             <input
@@ -149,5 +157,6 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
       </form>
     </div>
   );
+}
 
 export default BoardWrite;

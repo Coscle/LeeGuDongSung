@@ -25,9 +25,9 @@ const ReviewBoardDetail = () => {
   };
 
   const handleDelete = () => {
-	console.log('Delete button clicked');
+	  console.log('Delete button clicked');
     axios.get("/deleteBoard/"+boardNo);
-    navigate("/recruitBoard", ()=>{window.location.reload()});
+    navigate("/reviewBoard", ()=>{window.location.reload()});
   };
 
   const toggleLike = () => {

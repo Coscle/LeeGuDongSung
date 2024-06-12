@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { openDatabase, getUserData } from '../../db'; // 수정된 경로
 import './profile.css';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 
 const MyProfile = () => {
  const navigate = useNavigate();
@@ -23,6 +24,9 @@ const MyProfile = () => {
   const [loading, setLoading] = useState(true); // 로딩 상태 추가
 
   useEffect(() => {
+    axios.get('/member').then((res)=>{
+      console.log(res.data);
+    });
     const loadUserData = async () => {
       try {
         const db = await openDatabase(); 	

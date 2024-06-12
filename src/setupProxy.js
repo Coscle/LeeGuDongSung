@@ -74,4 +74,24 @@ module.exports = function (app) {
     })
   );
 
+  app.use('/getMessageList', createProxyMiddleware({
+    target: 'http://localhost:8080/message/',
+    changeOrigin: true,
+    })
+  );
+
+  app.use('/sendMessage', createProxyMiddleware({
+    target: 'http://localhost:8080/message/',
+    changeOrigin: true,
+    })
+  );
+
+  app.use(
+    '/member',
+    createProxyMiddleware({
+      target: 'http://localhost:8080/member/',
+      changeOrigin: true,
+    })
+  );
+
 };

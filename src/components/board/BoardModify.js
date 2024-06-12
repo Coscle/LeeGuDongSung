@@ -55,7 +55,7 @@ function BoardModify({ onSubmit, onCancel, tags, category}) {
       const tmpTag = Object.entries(tags).map(([key, value])=>(
         Object.entries(value).filter(([k,v])=>v===true)
       ));
-      var stringJson = '[';
+      var stringJson = '';
       var tmp;
       for (let i=0; i<tmpTag.length ; i++){
         if (tmpTag[i].length == 0){
@@ -66,12 +66,15 @@ function BoardModify({ onSubmit, onCancel, tags, category}) {
           Object.entries(value).filter(([k,v])=>v===true)
         ));
       }
-      for (let j=0 ; j<tmp.length ; j++){
-        console.log(tmp[j][0]);
-        if(j == tmp.length-1){
-          stringJson += '"'+tmp[j][0][0]+'"]';
+      for (let i=0 ; i<tmpTag.length ; i++){
+        if(i == tmpTag.length-1){
+          for (let j=0 ; j<tmpTag[i].length ; j++){
+            stringJson += ''+tmpTag[i][j][0]+'';
+          }
         } else{
-          stringJson += '"'+tmp[j][0][0]+'",';
+          for (let j=0 ; j<tmpTag[i].length ; j++){
+            stringJson += ''+tmpTag[i][j][0]+'/';
+          }
         }
       }
       formData.cboard_tags = stringJson;
