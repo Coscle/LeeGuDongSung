@@ -1,10 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './reviewBoard.css';
 import ReviewBoardContent from './ReviewBoardContent'; 
 import tempData from './tempData2'; 
 
+
 const ReviewBoard = () => {
+  const navigate = useNavigate();
+
+  const handleEnterWrite = boardCategory => {
+    navigate(`/reviewboardwrite/${boardCategory}`);
+  };
   return (
     <div className="review-board-container">
       <div className="review-link-content-container">

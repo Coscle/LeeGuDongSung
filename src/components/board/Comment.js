@@ -11,7 +11,7 @@ const Comment = ({ comments, setComments }) => {
   const [replyText, setReplyText] = useState('');
   const [replyingTo, setReplyingTo] = useState(null);
   useEffect(()=>{
-    axios.get("/findRecruitBoardRepls/"+boardNo).then((res)=>{
+    axios.get("/findBoardRepls/"+boardNo).then((res)=>{
       setTemp(res.data);
     });
   },[]);

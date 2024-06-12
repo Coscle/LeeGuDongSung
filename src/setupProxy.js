@@ -33,13 +33,25 @@ module.exports = function (app) {
     })
   );
 
+  app.use('/postReviewBoard', createProxyMiddleware({
+    target: 'http://localhost:8080/board/insertVboard/',
+    changeOrigin: true,
+    })
+  );
+
   app.use('/findRecruitBoard', createProxyMiddleware({
     target: 'http://localhost:8080/board/',
     changeOrigin: true,
     })
   );
 
-  app.use('/findRecruitBoardRepls', createProxyMiddleware({
+  app.use('/findReviewBoard', createProxyMiddleware({
+    target: 'http://localhost:8080/board/review/',
+    changeOrigin: true,
+    })
+  );
+
+  app.use('/findBoardRepls', createProxyMiddleware({
     target: 'http://localhost:8080/board/repls/',
     changeOrigin: true,
     })
@@ -53,6 +65,12 @@ module.exports = function (app) {
 
   app.use('/putUpdateBoard', createProxyMiddleware({
     target: 'http://localhost:8080/board/updateBoard/',
+    changeOrigin: true,
+    })
+  );
+
+  app.use('/putUpdateVboard', createProxyMiddleware({
+    target: 'http://localhost:8080/board/updateVboard/',
     changeOrigin: true,
     })
   );

@@ -72,9 +72,6 @@ function SideFilter({ products, showTopSearch, setTags, tags }) {
   };
   const [searchTerm, setSearchTerm] = useState("");
   const [passingTags, setPassingTags] = useState(initTag);
-  // const [filterProp, setFP] = useState('');
-  // const [tag, setTag] = useState('');
-  // const [onePick, setOnepick] = useState();
 
   const handleSearchInputChange = (e) => {
     setSearchTerm(e.target.value);

@@ -17,22 +17,20 @@ function RecruitBoardWrite() {
   };
   useEffect(()=>{
     try{
-      console.log(tags.gender);
       const tmpTag = Object.entries(tags).map(([key, value])=>(
         Object.entries(value).filter(([k,v])=>v===true)
       ));
-      console.log(tmpTag);
     } catch {}
   },[tags]);
 
   return (
     <div className="write-board-container">
       <div className="side-filter">
-        <SideFilter showTopSearch={false} setTags={setTags} tags={tags} />
+        <SideFilter showTopSearch={false} setTags={setTags} tags={tags} category={1} />
       </div>
       <div className="board-write-container">
       	<div className="board-write-title"><h1>여행 메이트 찾기</h1></div>
-        <BoardWrite tags={tags} onSubmit={handleSubmit} onCancel={() => navigate('/recruitboard')} />
+        <BoardWrite tags={tags} onSubmit={handleSubmit} onCancel={() => navigate('/recruitboard')} category={1} />
       </div>
     </div>
   );

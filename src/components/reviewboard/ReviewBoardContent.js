@@ -54,7 +54,7 @@ const ReviewBoardContent = () => {
 
  const [uniqueData, setUD] = useState([]);
    useEffect(()=>{
-    axios.get("/getBoardAll").then((res)=>{
+    axios.get("/getVboardAll").then((res)=>{
       setUD(res.data);
     })
   },[]);
@@ -76,7 +76,7 @@ const ReviewBoardContent = () => {
       <div className="review-board-container">
         <div className="review-board-items">
           {currentData.map(item => (
-            <div key={item.vboard_no} onClick={() => handleEnterDetail(item.vboard_no)} className="review-board-item">
+            <div key={item.board_no} onClick={() => handleEnterDetail(item.board_no)} className="review-board-item">
               <h2>{item.board_title}</h2>
               <p>{formatDate(item.board_writeday)}</p>
             </div>
