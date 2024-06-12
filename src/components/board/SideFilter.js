@@ -85,7 +85,8 @@ function SideFilter({ products, showTopSearch, setTags, filtering, setFilter}) {
           [tag]: !prevState[filterProp][tag]
         }
       }));
-      if (filtering.indexOf(tag) !== -1) {
+      console.log(filtering);
+      if (filtering && filtering.indexOf(tag) !== -1) {
           const updatedFilter = filtering.filter(item => item !== tag);
           setFilter(updatedFilter);
       } else {

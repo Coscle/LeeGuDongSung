@@ -22,34 +22,23 @@ const RecruitBoardContent = (filtering, setFilter) => {
     })
     console.log(filtering);
   },[]);
-
-  // useEffect(()=>{
-  //   for (let i=0 ; i<filtering.filtering.length ; i++){
-  //     const searchFilter = filtering.filtering[i];
-  //     console.log(searchFilter);
-  //     for (let j=0 ; j < uniqueData.length ; j++){
-  //       if (uniqueData[j].cboard_tags.indexOf(searchFilter)){
-  //         console.log(j);
-  //       }
-  //     }
-  //   }
-  // },[filtering]);
+  
   useEffect(() => {
     axios.get("/getCboardAll").then((res)=>{
       setUD(res.data);
       setSear(!search);
     })
-}, [filtering.filtering]);
+  }, [filtering.filtering]);
 
-useEffect(() => {
-  if (filtering.filtering.length > 0) {
-      const filteredData = [...uniqueData.filter((item) => {
-          // 필터링된 태그들 중 하나라도 해당 게시글의 태그에 포함되어 있으면 true 반환
-          return filtering.filtering.every((filterTag) => item.cboard_tags.includes(filterTag));
-      })];
-      setUD(filteredData);
-  }
-}, [search]);
+  useEffect(() => {
+    if (filtering.filtering.length > 0) {
+        const filteredData = [...uniqueData.filter((item) => {
+            // 필터링된 태그들 중 하나라도 해당 게시글의 태그에 포함되어 있으면 true 반환
+            return filtering.filtering.every((filterTag) => item.cboard_tags.includes(filterTag));
+        })];
+        setUD(filteredData);
+    }
+  }, [search]);
 
   const totalPages = Math.ceil(uniqueData.length / ITEMS_PER_PAGE);
 

@@ -7,6 +7,10 @@ import './recruitBoardWrite.css';
 function RecruitBoardWrite() {
   const navigate = useNavigate();
   const [tags, setTags] = useState();
+  const [filtering, setFilter] = useState([]);
+  useEffect(()=>{
+    console.log(filtering);
+  },[filtering]);
 
   const handleSubmit = (formData) => {
     // 폼 데이터 처리 (예: 서버로 전송)
@@ -26,7 +30,7 @@ function RecruitBoardWrite() {
   return (
     <div className="write-board-container">
       <div className="side-filter">
-        <SideFilter showTopSearch={false} setTags={setTags} tags={tags} category={1} />
+        <SideFilter showTopSearch={false} setTags={setTags} tags={tags} category={1} filtering={filtering} setFilter={setFilter} />
       </div>
       <div className="board-write-container">
       	<h1>여행 메이트 찾기</h1>
