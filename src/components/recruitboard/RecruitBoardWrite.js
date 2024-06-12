@@ -31,7 +31,7 @@ function RecruitBoardWrite() {
         <SideFilter showTopSearch={false} setTags={setTags} tags={tags} />
       </div>
       <div className="board-write-container">
-      	<h1>여행 메이트 찾기</h1>
+      	<div className="board-write-title"><h1>여행 메이트 찾기</h1></div>
         <BoardWrite tags={tags} onSubmit={handleSubmit} onCancel={() => navigate('/recruitboard')} />
       </div>
     </div>

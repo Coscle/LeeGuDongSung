@@ -62,5 +62,12 @@ module.exports = function (app) {
     changeOrigin: true,
     })
   );
-
+  app.use(
+    '/member',
+    createProxyMiddleware({
+      target: 'http://localhost:8080/member/',
+      changeOrigin: true,
+    })
+  );
+  
 };

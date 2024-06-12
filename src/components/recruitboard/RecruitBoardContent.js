@@ -5,6 +5,11 @@ import axios from 'axios';
 
 const ITEMS_PER_PAGE = 10; // 페이지당 아이템 수
 
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString();
+};
+
 const RecruitBoardContent = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,7 +37,6 @@ const RecruitBoardContent = () => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
   return (
     <>
       <div className="recruit-board-container">
@@ -40,8 +44,8 @@ const RecruitBoardContent = () => {
           {currentData.map(item => (
             <div key={item.board_no} onClick={() => handleEnterDetail(item.board_no)} className="recruit-board-item">
               <h2>{item.board_title}</h2>
-              <p>게시 여부: {item.recruit_done ? '구인완료' : '구인중'}</p>
-              <p>게시일: {item.board_writeday}</p>
+              <span className="isdonecheck">{item.recruit_done ? '구인완료' : '구인중'}</span>
+              <p>{formatDate(item.board_writeday)}</p>
             </div>
           ))}
         </div>

@@ -120,3 +120,41 @@
 .form-container .form-control {
   margin-bottom: 8px;
 }
+
+.custom-date-input {
+  width: 150px;
+  height: 40px; 
+  padding: 8px; 
+  font-size: 16px; 
+}
+
+.custom-dropdown-toggle {
+  background: linear-gradient(45deg, #746EF4, #FF66C3);
+  color: white;
+  border: none; 
+  padding: 10px 20px;
+  font-size: 16px; 
+  border-radius: 20px; 
+  transition: background-color 0.1s; 
+}
+
+.custom-dropdown-toggle:hover {
+  background: linear-gradient(45deg, #FF66C3, #746EF4);
+}
+
+.custom-dropdown-menu {
+  background-color: #f9f9f9; 
+  border: 1px solid #ddd; 
+  border-radius: 4px; 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+}
+
+.custom-dropdown-item {
+  color: #333;
+  padding: 10px 20px; 
+  cursor: pointer; 
+}
+
+.custom-dropdown-item:hover {
+  background-color: #f1f1f1; 
+}

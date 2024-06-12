@@ -87,44 +87,50 @@ function BoardWrite({ onSubmit, onCancel, tags }) {
         <div className="form-container">
           <div className="d-flex align-items-center mb-3">
             {(window.location.pathname === '/recruitboardwrite') && (
-              <Dropdown className="recruitDoneButton">
-                <Dropdown.Toggle variant="primary">
-                  {formData.recruit_done ? '구인 완료' : '구인 중'}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => handleRecruitmentStatusChange(false)}>
-                    구인 중
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleRecruitmentStatusChange(true)}>
-                    구인 완료
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+              <Dropdown>
+		      <Dropdown.Toggle className="custom-dropdown-toggle">
+		        {formData.recruit_done ? '구인 완료' : '구인 중'}
+		      </Dropdown.Toggle>
+		      <Dropdown.Menu className="custom-dropdown-menu">
+		        <Dropdown.Item
+		          className="custom-dropdown-item"
+		          onClick={() => handleRecruitmentStatusChange(false)}
+		        >
+		          구인 중
+		        </Dropdown.Item>
+		        <Dropdown.Item
+		          className="custom-dropdown-item"
+		          onClick={() => handleRecruitmentStatusChange(true)}
+		        >
+		          구인 완료
+		        </Dropdown.Item>
+		      </Dropdown.Menu>
+		    </Dropdown>
             )}
             <label htmlFor="trip_start" className="me-2">
               여행 시작일:
             </label>
             <input
-              type="date"
-              name="trip_start"
-              id="trip_start"
-              className="form-control me-2"
-              value={formData.trip_start}
-              onChange={handleChange}
-              placeholder="여행 시작일"
-            />
+		        type="date"
+		        name="trip_start"
+		        id="trip_start"
+		        className="form-control me-2 custom-date-input" // 사용자 정의 클래스 추가
+		        value={formData.trip_start}
+		        onChange={handleChange}
+		        placeholder="여행 시작일"
+		      />
             <label htmlFor="trip_end" className="me-2">
               여행 종료일:
             </label>
-            <input
-              type="date"
-              name="trip_end"
-              id="trip_end"
-              className="form-control"
-              value={formData.trip_end}
-              onChange={handleChange}
-              placeholder="여행 종료일"
-            />
+		      <input
+		        type="date"
+		        name="trip_end"
+		        id="trip_end"
+		        className="form-control custom-date-input" // 사용자 정의 클래스 추가
+		        value={formData.trip_end}
+		        onChange={handleChange}
+		        placeholder="여행 종료일"
+		      />
           </div>
           <div className="mb-1">
             <input

@@ -8,7 +8,7 @@ import '../../fonts/fonts.css';
 const RecruitBoardDetail = () => {
   const { boardNo } = useParams();
   const [liked, setLiked] = useState(false); 
-  const [likedCount, setLikedCount] = useState(0); 
+  const [likedCount, setLikedCount] = useState(11); 
   const [isScrapped, setIsScrapped] = useState(false);
   const [tags, setTags] = useState({})
   const [boardData, setBoardData] = useState([]);
@@ -19,14 +19,14 @@ const RecruitBoardDetail = () => {
       setBoardData(res.data);
     });
   },[]);
-
+  
   useEffect(()=>{
     if (boardData.cboard_tags != null){
       setTags(JSON.parse(boardData.cboard_tags));
       console.log(boardData);
     }
   },[boardData]);
-
+  
   const loggedInUserId = "user123"; // 임시아이디
   const navigate = useNavigate();
 
@@ -36,6 +36,8 @@ const RecruitBoardDetail = () => {
 
   const handleDelete = () => {
     console.log('Delete button clicked');
+    axios.get("/deleteBoard/"+boardNo);
+    navigate("/recruitBoard", ()=>{window.location.reload()});
   };
 
   const toggleLike = () => {
@@ -48,6 +50,7 @@ const RecruitBoardDetail = () => {
   };
 
   const isOwner = loggedInUserId === boardData?.member_id;
+
 
   return (
     <>
@@ -99,7 +102,7 @@ const RecruitBoardDetail = () => {
               <div className="button-container">
                 <div className="left-buttons">
                   <button className="like-button" onClick={toggleLike}>
-                    {liked ? '❤' : '🤍'} {likedCount}
+                    {liked ? '❤': '🤍'} {likedCount}
                   </button>
                   <button className="scrap-button" onClick={toggleScrap}>
                     {isScrapped ? '스크랩 완료' : '스크랩'}

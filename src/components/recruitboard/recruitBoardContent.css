@@ -31,6 +31,16 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align:center;
+}
+
+.isdonecheck {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 5px 15px;
+    border-radius: 5px;
+    width:150px;
+    text-align:right;
 }
 
 .recruit-board-item p {
@@ -40,6 +50,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align:right;
 }
 
 .pagination {
@@ -49,7 +60,7 @@
 }
 
 .page-button {
-  background-color: #007bff;
+  background-color: #ccc;
   border: none;
   color: white;
   cursor: pointer;
@@ -60,11 +71,11 @@
 }
 
 .page-button.active {
-  background-color: #0056b3;
+  background-color: #ccc;
 }
 
 .page-button:hover:not(.active) {
-  background-color: #0056b3;
+  background-color: #ccc;
 }
 
 .page-button:disabled {
