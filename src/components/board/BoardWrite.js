@@ -4,7 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 import './boardWrite.css';
 import axios from 'axios';
 
-function BoardWrite({ onSubmit, onCancel }) {
+function BoardWrite({ onSubmit, onCancel, tags }) {
   // const [formData, setFormData] = useState({
   //   board_title: '',
   //   tags: '',
@@ -14,6 +14,9 @@ function BoardWrite({ onSubmit, onCancel }) {
   //   isRecruitmentDone: false,
   //   photo: null,
   // });
+
+  // 임시 데이터, member 테이블에 member_no가 1이라는 데이터가 있어야함
+  // 그러면 동작
   const [formData, setFormData] = useState({
     board_title: "",
     board_content: "",
@@ -42,6 +45,31 @@ function BoardWrite({ onSubmit, onCancel }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const tmpTag = Object.entries(tags).map(([key, value])=>(
+      Object.entries(value).filter(([k,v])=>v===true)
+    ));
+    var stringJson = '[';
+    var tmp;
+    for (let i=0; i<tmpTag.length ; i++){
+      if (tmpTag[i].length == 0){
+        alert("태그 모두 선택하세요");
+        break;
+      }
+      tmp = Object.entries(tags).map(([key, value])=>(
+        Object.entries(value).filter(([k,v])=>v===true)
+      ));
+    }
+    console.log(tmp.length)
+    for (let j=0 ; j<tmp.length ; j++){
+      console.log(tmp[j][0]);
+      if(j == tmp.length-1){
+        stringJson += '"'+tmp[j][0][0]+'"]';
+      } else{
+        stringJson += '"'+tmp[j][0][0]+'",';
+      }
+    }
+    formData.tags = stringJson;
+    console.log(formData);
     axios.post("/postRecruitBoard", formData);
     onSubmit(formData);
   };

@@ -44,10 +44,23 @@ module.exports = function (app) {
     changeOrigin: true,
     })
   );
-  
+
   app.use('/postBoardRepl', createProxyMiddleware({
     target: 'http://localhost:8080/board/insertBoardRepl/',
     changeOrigin: true,
     })
   );
+
+  app.use('/putUpdateBoard', createProxyMiddleware({
+    target: 'http://localhost:8080/board/updateBoard/',
+    changeOrigin: true,
+    })
+  );
+
+  app.use('/deleteBoard', createProxyMiddleware({
+    target: 'http://localhost:8080/board/deleteBoard/',
+    changeOrigin: true,
+    })
+  );
+
 };

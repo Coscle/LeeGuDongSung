@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './comment.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -97,8 +97,8 @@ const Comment = ({ comments, setComments }) => {
   };
 
   const handleAddComment = () => {
-     const newGroup = commentList.length? commentList[commentList.length-1].boardrepl_group : 0;
-     const newCommentObj = {
+	  const newGroup = commentList.length? commentList[commentList.length-1].boardrepl_group : 0;
+	  const newCommentObj = {
       replauthor_no: 1,
       boardrepl_content: newComment,
       replauthor_nickname: '홍시',
@@ -110,8 +110,8 @@ const Comment = ({ comments, setComments }) => {
     console.log(newCommentObj)
     axios.post("/postBoardRepl",newCommentObj);
     window.location.reload();
-     setNewComment('');
-   };
+	  setNewComment('');
+	};
 
   const handleToggleReply = (commentId) => {
     setReplyingTo(commentId === replyingTo ? null : commentId);

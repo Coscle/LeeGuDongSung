@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import './recruitBoardDetail.css';
 import Comment from '../board/Comment';
 import axios from 'axios';
+import '../../fonts/fonts.css';
 
 const RecruitBoardDetail = () => {
   const { boardNo } = useParams();
