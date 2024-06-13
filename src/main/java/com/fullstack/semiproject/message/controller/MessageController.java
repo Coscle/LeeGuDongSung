@@ -24,7 +24,7 @@ public class MessageController {
 	@Autowired
 	private MessageService messageService;
 	
-	@GetMapping
+	@GetMapping("/")
 	public List<MessageDto> getAllMessage() {
 		return messageService.findAll();
 	}
@@ -35,7 +35,7 @@ public class MessageController {
 		return message.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 	}
 	
-	@PostMapping("")
+	@PostMapping("/")
 	public ResponseEntity<MessageDto> createMessage(@RequestBody MessageDto message) {
 		messageService.insert(message);
 		return ResponseEntity.status(HttpStatus.CREATED).body(message);

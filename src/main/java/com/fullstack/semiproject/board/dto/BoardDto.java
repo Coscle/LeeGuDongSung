@@ -46,5 +46,18 @@ public class BoardDto {
 	private String trip_start;
 	private String trip_end;
 	
+	// 작성자 속성들
+	private int member_no;
+	private String member_id;
+	private String member_nickname;
+		
+	// 댓글 속성들
+	private int boardrepl_no;
+	private int replauthor_no;
+	private String replauthor_nickname;
+	private int boardrepl_group;
+	private int boardrepl_repl_seq;
+	private String boardrepl_content;
+	private String boardrepl_writeday;
 	
 }
