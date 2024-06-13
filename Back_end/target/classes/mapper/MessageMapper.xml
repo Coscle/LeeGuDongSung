@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.fullstack.semiproject.message.mapper.MessageMapper">
+	
+	<resultMap id="messageResultMap" type="com.fullstack.semiproject.message.dto.MessageDto">
+		<id property="message_no" column="message_no" />
+		<result property="message_content" column="message_content" />
+		<result property="send_date" column="send_date" />
+		<result property="sender_no" column="sender_no" />
+		<result property="receiver_no" column="receiver_no" />
+		<result property="member_no" column="member_no" />
+	</resultMap>
+	
+	<select id="findAll" resultMap="messageResultMap">
+		select * from message
+	</select>
+
+	<select id="findById" resultMap="messageResultMap">
+		select * from message where message_no = #{message_no}
+	</select>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="message_no">
+		insert into message 
+		(message_content, send_date, sender_no,
+		receiver_no, member_no) values
+		(#{message_content}, #{send_date}, #{sender_no}, #{receiver_no}, #{member_no});
+	</insert>
+
+	<update id="update">
+		UPDATE recruitboard AS r
+		INNER JOIN board AS b ON r.board_no = b.board_no
+		SET r.recruit_done = #{recruit_done},
+    	r.trip_start = #{trip_start},
+    	r.trip_end = #{trip_end},
+    	b.board_title = #{board_title},
+    	b.board_content = #{board_content}
+		WHERE b.board_no = #{board_no}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM message WHERE message_no = #{message_no}
+	</delete>
+	
+	
+</mapper>

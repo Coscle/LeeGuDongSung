@@ -1,0 +1,138 @@
+.detail-page-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin:70px 30px 80px 50px;
+}
+
+.detail-container {
+  flex: 1;
+  max-width: 60%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.back-link-header {
+  background: transparent;
+  position: absolute;
+  margin-top:40px;
+  right: 60px;
+}
+
+.back-link {
+  text-decoration: none;
+  text-align: center;
+  color: rgb(64, 27, 87);
+  font-size: 1em;
+  transition: font-size 0.3s, background-color 0.3s;
+  font-family: 'YeojuCeramic';
+}
+
+.comment-wrapper {
+  flex: 0 0 35%;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-left:30px;
+}
+
+.board-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-family: 'YeojuCeramic';
+  margin-bottom: 30px;
+  font-size:40px;
+}
+
+.recruitment-status {
+  font-size: 16px;
+  margin-left: 10px;
+  color: #666;
+}
+
+.tag-list {
+  margin-bottom: 20px;
+}
+
+.tag {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin:10px;
+}
+
+.date-info {
+  margin-bottom: 10px;
+  text-align: right;
+  margin-right:20px;
+}
+
+
+.author-profile-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+
+  margin-bottom: 5px;
+}
+
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.board-content {
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #e4f3fd;
+  width : 90%;
+  justify-content: center;
+  align-items: center;
+  margin : auto;
+  padding:20px;
+  min-height: 300px;
+}
+
+.board-photo {
+  max-width: 100%;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.like-button,
+.scrap-button,
+.edit-button,
+.delete-button {
+  background-color: transparent;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.like-button:hover,
+.scrap-button:hover,
+.edit-button:hover,
+.delete-button:hover {
+
+  background-color:transparent;
+  font-size: 110%;
+  transition: font-size 0.3s;
+}

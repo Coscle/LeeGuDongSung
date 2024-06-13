@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fullstack.semiproject.user.mapper.UserMapper">
+	<resultMap id="userResultMap" type="com.fullstack.semiproject.user.dto.UserDto">
+		<id property="member_no" column="member_no" />
+		<result property="member_name" column="member_name" />
+		<result property="member_id" column="member_id" />
+		<result property="member_pw" column="member_pw" />
+		<result property="member_birth" column="member_birth" />
+		<result property="member_gender" column="member_gender" />
+		<result property="member_tel" column="member_tel" />
+		<result property="member_nickname" column="member_nickname" />
+		<result property="member_rgday" column="member_rgday" />
+		<result property="member_snsurl" column="member_snsurl" />
+		<result property="member_like" column="member_like" />
+		<result property="member_dcrt" column="member_dcrt" />
+		<result property="member_no" column="member_no" />
+		<result property="my_tags" column="my_tags" />
+		<result property="my_like" column="my_like" />
+	</resultMap>
+		
+	<select id="findAll" resultMap="userResultMap" resultType="com.fullstack.semiproject.user.dto.UserDto">
+		SELECT * FROM member
+	</select>
+
+	<select id="findByMemberNo" resultMap="userResultMap">
+		SELECT * FROM member WHERE member_no = #{member_no}
+	</select>
+
+	<select id="findByMemberId" resultMap="userResultMap" resultType="com.fullstack.semiproject.user.dto.UserDto">
+		select * from member where member_id = #{member_id}
+	</select>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="member_no">
+		INSERT INTO member(member_name, member_id, member_pw, member_birth, member_gender, member_tel, member_nickname, member_rgday, member_snsurl, member_like, member_dcrt) VALUES(#{member_name}, #{member_id}, #{member_pw}, #{member_birth}, #{member_gender}, #{member_tel}, #{member_nickname}, #{member_rgday}, #{member_snsurl}, #{member_like}, #{member_dcrt})
+	</insert>
+
+	<update id="updateSignUp">
+		UPDATE member SET member_nickname=#{member_nickname}, member_snsurl=#{member_snsurl} WHERE member_id=#{member_id}
+	</update>
+	
+	<update id="update">
+		UPDATE member SET member_pw=#{member_pw}, member_birth=#{member_birth}, member_tel=#{member_tel}, member_nickname=#{member_nickname}, member_snsurl=#{member_snsurl}, member_gender=#{member_gender} WHERE member_no=#{member_id}
+	</update>
+	
+	<update id="updateProfile">
+    UPDATE member SET 
+        member_pw=#{member_pw}, 
+        member_birth=#{member_birth}, 
+        member_gender=#{member_gender}, 
+        member_tel=#{member_tel},
+        member_snsurl=#{member_snsurl}
+    WHERE member_id=#{member_id}
+	</update>
+		
+	<delete id="delete">
+		DELETE FROM member WHERE member_no = #{member_no}
+	</delete>
+	
+	<select id="selectMyinfo" resultMap="userResultMap">
+	 SELECT m.*, y.*
+	 FROM myinfo y
+	 INNER JOIN member m ON m.member_no = y.member_no
+	 WHERE m.member_id = #{member_id};
+	</select>
+
+
+	<select id="selectMember" resultMap="userResultMap" resultType="com.fullstack.semiproject.user.dto.UserDto">
+	 SELECT * FROM member WHERE member_id = #{member_id} and member_pw = #{member_pw}
+	</select>
+	
+</mapper>

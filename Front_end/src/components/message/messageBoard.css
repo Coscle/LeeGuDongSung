@@ -1,0 +1,10 @@
+.container-fluid{
+	margin-top : 60px;
+  margin-bottom : 80px;
+}
+.noMessage {
+  font-size: 70px;
+  text-align: center;
+  line-height: 1.5; 
+  margin-top : 80px;
+}

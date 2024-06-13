@@ -1,0 +1,103 @@
+
+
+.side-filter {
+  width: 60%; 
+  padding: 10px;
+  box-sizing: border-box;
+  max-height: 100vh; 
+  overflow-y : auto;
+}
+.searchContainer {
+  margin-bottom: 0; 
+  padding: 0 20px;
+}
+
+
+.topSearch {
+  margin-bottom: 0; 
+  text-align: center;
+  padding: 10px 0;
+}
+
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  width:250px;
+}
+
+
+.topSearchBar {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+
+.searchBtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+
+.searchBtnIcon {
+  width: 24px;
+  height: 24px;
+}
+
+
+.filterContainer {
+  margin-top: 0; 
+  padding: 10px;
+  font-size : 13px;
+}
+
+
+.filterGroup {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc; 
+}
+
+
+.filterGroup:last-child {
+  border-bottom: none; 
+}
+
+
+.filterGroup h3 {
+  margin-bottom: 10px;
+  font-size:15px;
+   text-align: left;
+   font-weight: bold;
+}
+
+
+.boardTag {
+  margin: 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s;
+}
+
+
+.boardTag.active {
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #007bff;
+}
+
+
+.boardTag:hover {
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #007bff;
+}

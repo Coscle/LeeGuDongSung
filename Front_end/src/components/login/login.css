@@ -1,0 +1,85 @@
+.login-container {
+  width: 490px; 
+  height: 400px;
+  margin: 0 auto;
+  margin-top : 150px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px; 
+  background-color: #f9f9f9;
+}
+
+.login-container h2 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type='email'],
+input[type='password'] {
+  width: calc(100% - 20px); 
+  margin-left: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-primary,
+.btn-second,
+.btn-third{
+  background: linear-gradient(45deg, #746EF4, #FF66C3);
+  color: white;
+  border: solid white 0.1px;
+  padding: 0.5em 1em;
+  border-radius: 25px;
+  margin-top: 0.2em;
+  margin-bottom: 0.5em; 
+  font-size: 1.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.3s;
+  width: 150px;
+  font-family: "YeojuCeramic";
+  text-decoration: none; /* 링크에 밑줄 없애기 */
+}
+.btn-primary:hover,
+.btn-second:hover,
+.btn-third:hover{
+   transform: scale(1.1);
+}
+.btn-primary {
+  width: calc(100% - 40px); 
+  display: inline-block;
+   border-radius: 5px;
+   margin-left: 50px;
+}
+.btn-second {
+  width: calc(35% - 15px);
+  margin-top: 5px;
+  border-radius: 20px;
+}
+.btn-space{
+	margin-right: 6px;
+}
+.btn-space2{
+	margin-left: 10px;
+}
+.btn-third{
+  width: calc(100% - 40px);
+  border-radius: 20px;
+}
+
+.link {
+  color: white; 
+  text-decoration: none; 
+}
+.link:hover {
+  font-weight: bold;
+}
