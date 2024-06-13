@@ -90,7 +90,7 @@ const MyProfile = () => {
             <img src={insta} className="logo" />
           </a>
           <a className="info">
-            <strong>@news_rain</strong> 
+            <strong>@Lee_Gu_Dong_Sung</strong> 
           </a>
         </div>
       </div>

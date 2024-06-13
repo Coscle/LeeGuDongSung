@@ -10,7 +10,7 @@ const TagSelectionForEdit = () => {
   // 기본값을 빈 문자열로 설정
   // const { email, password, phoneNumber, birthDate, gender } = location.state || {};
 
-  const [selectedTags, setSelect ,editTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
   const [nickname, setNickname] = useState('');
   const [snsType, setSnsType] = useState('');
   const [snsAddress, setSnsAddress] = useState('');
