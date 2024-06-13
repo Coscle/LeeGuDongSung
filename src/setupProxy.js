@@ -93,13 +93,6 @@ module.exports = function (app) {
     })
   );
   
-  app.use(
-    '/login',
-    createProxyMiddleware({
-      target: 'http://localhost:8080/member/login/',
-      changeOrigin: true,
-    })
-  );
 
   app.use(
     '/member',
@@ -108,6 +101,50 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+
+    // 회원가입
+  app.use(
+    '/member',
+    createProxyMiddleware({
+      target: 'http://localhost:8080/member/',
+      changeOrigin: true
+    })
+  );
+
+  // 회원가입 - TagSelectionPage
+  app.use(
+    '/signUp',
+    createProxyMiddleware({
+      target: 'http://localhost:8080/member/id/',
+      changeOrigin: true
+    })
+  );
+
+  // 로그인
+  app.use(
+    '/login',
+    createProxyMiddleware({
+      target: 'http://localhost:8080/member/login/',
+      changeOrigin: true,
+    })
+  );
+
+  // 회원정보(내 정보) 받아오기
+  app.use(
+    '/selectMyinfo',
+    createProxyMiddleware({
+      target: 'http://localhost:8080/member/id/',
+      changeOrigin: true,
+    })
+  );
+
+  // 회원정보수정
+  app.use('/editProfile', createProxyMiddleware({
+      target: 'http://localhost:8080/member/editprofile/',
+      changeOrigin: true
+    })
+  );
+
 
 
 };

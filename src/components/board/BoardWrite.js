@@ -67,12 +67,12 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
     onSubmit(formData);
   };
 
-  const handleRecruitmentStatusChange = (status) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      isRecruitmentDone: status,
-    }));
-  };
+const handleRecruitmentStatusChange = (status) => {
+  setFormData((prevState) => ({
+    ...prevState,
+    recruit_done: status,
+  }));
+};
 
   return (
     <div className="write-board-container">
@@ -80,26 +80,21 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
         <div className="form-container">
           <div className="d-flex align-items-center mb-3">
             {(window.location.pathname === '/recruitboardwrite') && (
-              <Dropdown>
-            <Dropdown.Toggle className="custom-dropdown-toggle">
-              {formData.recruit_done ? '구인 완료' : '구인 중'}
-            </Dropdown.Toggle>
-            <Dropdown.Menu className="custom-dropdown-menu">
-              <Dropdown.Item
-                className="custom-dropdown-item"
-                onClick={() => handleRecruitmentStatusChange(false)}
-              >
-                구인 중
-              </Dropdown.Item>
-              <Dropdown.Item
-                className="custom-dropdown-item"
-                onClick={() => handleRecruitmentStatusChange(true)}
-              >
-                구인 완료
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-            )}
+            <>
+              <Dropdown className="recruitDoneButton">
+              <Dropdown.Toggle className="custom-dropdown-toggle">
+                {formData.recruit_done ? '구인 완료' : '구인 중'}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item className="custom-dropdown-item" onClick={() => handleRecruitmentStatusChange(false)}>
+                  구인 중
+                </Dropdown.Item>
+                <Dropdown.Item className="custom-dropdown-item" onClick={() => handleRecruitmentStatusChange(true)}>
+                  구인 완료
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            
             <label htmlFor="trip_start" className="me-2">
               여행 시작일
             </label>
@@ -124,6 +119,8 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
               onChange={handleChange}
               placeholder="여행 종료일"
             />
+            </>
+            )}
           </div>
           <div className="mb-1">
             <input

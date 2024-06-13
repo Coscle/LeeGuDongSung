@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { openDatabase, saveUserData } from '../../db'; // 수정된 경로
+import axios from 'axios';
 import './SignUp.css';
+import Swal from 'sweetalert2'
 
 const TagSelection = () => {
   const navigate = useNavigate(); 
@@ -13,7 +14,14 @@ const TagSelection = () => {
   const [snsType, setSnsType] = useState('');
   const [snsAddress, setSnsAddress] = useState('');
   const [profilePicture, setProfilePicture] = useState(null);
-  
+  const sweetalert = (title, contents, icon, confirmButtonText) => {
+    Swal.fire({
+        title: title,
+        text: contents,
+        icon: icon,
+        confirmButtonText: confirmButtonText
+        })
+  }
   const tags = [
     { title: '성격', content: ['활발함', '정적임', '중간'] },
     { title: '여행빈도', content: ['자주', '적당히', '조금'] },
@@ -41,29 +49,32 @@ const TagSelection = () => {
   const handleComplete = async (event) => {
     event.preventDefault();
     const isAnyTagUnselected = tags.some((tag, index) => !selectedTags[index]);
-    if (isAnyTagUnselected) return;
-
+    if (isAnyTagUnselected) 
+      sweetalert('선택되지않은 테그가 있습니다.','','','확인');
+    /*
     const userData = {
-      email,
-      phoneNumber,
-      birthDate,
-      gender,
-      nickname,
-      snsType,
-      snsAddress,
-      profilePicture,
-      password,
-      tags: selectedTags // `tags`로 저장
+      member_nickname: nickname,
+      member_snsurl: snsAddress,
+      // my_tags: selectedTags
     };
+    */
 
     try {
-      const db = await openDatabase();
-      await saveUserData(db, userData);
-      console.log('User data saved:', userData);
-      navigate('/');
+      const response = await axios.put('/signUp/'+email, {
+        member_nickname: nickname,
+        member_snsurl: snsAddress,
+        // my_tags: selectedTags
+      });
+      if (response.status === 201) {
+        console.log('User data saved:', response.data);
+        navigate('/');
+      } else {
+        console.error('Saving user data failed:', response.data);
+      }
     } catch (error) {
       console.error('Error saving user data:', error);
     }
+
   };
 
   return (

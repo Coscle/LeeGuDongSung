@@ -3,14 +3,16 @@ import './main.css';
 import '../../fonts/fonts.css';
 import tpic from '../../images/tpic.png';
 import { Link, useNavigate } from 'react-router-dom';
-import  { useAuth }  from '../../AuthContext.js'; // Import AuthContext
+import instagramLogo from '../../images/instagram.png';
+import facebookLogo from '../../images/facebook.png';
+import  AuthContext  from '../../AuthContext.js'; // Import AuthContext
 
 function Main() {
   const [mateText, setMateText] = useState("Travel\nMate");
   const [reviewText, setReviewText] = useState("Travel\nReview");
   const navigate = useNavigate();
-  const user = useAuth();
-  
+  const { login } = useContext(AuthContext); // Use AuthContext
+
 
   const handleMouseEnterMate = () => {
     setMateText("여행\n메이트");
@@ -29,7 +31,7 @@ function Main() {
   };
 
   const handleMateClick = () => {
-	  if(user) {
+	  if(login) {
 		  navigate('/RecruitBoard');
 	  }else{
 		 navigate('/login'); 
@@ -37,7 +39,8 @@ function Main() {
   };
 
   const handleReviewClick = () => {
-	  if(user){
+	  const loggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+	  if(login){
 		  navigate('/ReviewBoard');
 	  }else{
 	    navigate('/login');
@@ -49,11 +52,13 @@ function Main() {
       <div className="mainTop">
         <div className="mainLeft">
           <div className="mainText">마음이 <br /> <span className="highlight">Dong</span>하는 사람과 <br /> 함께 완<span className="highlight">Sung</span> 하는<br /> 취향 존중 여행</div>
-          {user ? (
-            <Link to="/myprofile" className="joinButton">My Profile</Link>
-          ) : (
-            <Link to="/login" className="joinButton">Join-us</Link>
-          )}
+          <div className='logo-container'>
+	          <a href="https://www.instagram.com/29dongsung?igsh=bnpyZGQ0Ym8zc2I1" target="_blank" className="logo-link">
+	            <img src={instagramLogo} className="logo" />
+	          </a><a href="https://www.facebook.com/profile.php?id=61560562423396&mibextid=ZbWKwL" target="_blank" className="logo-link">
+	            <img src={facebookLogo} className="logo" />
+	          </a>
+	       </div>
         </div>
         
         <div className="buttonsContainer">

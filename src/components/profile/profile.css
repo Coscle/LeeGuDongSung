@@ -4,15 +4,20 @@
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: white;
   display: inline-block;
   position: relative; 
+  margin-top: 30px;
+  margin-left: 200px;
+  margin-bottom:80px;
 }
 .profile-details {
-  width: 555px;
+  width: 49.5%;
   height: 60px;
-  background-color: #d1c4e9; 
-  border: 1px solid gray;
+  background-color: #f9f9f9;
+  flex: 1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 2px soild gray;
   border-radius: 5px;
   font-size: 18px;
   text-align: center;
@@ -30,10 +35,20 @@
   margin-top: 4px;
   text-decoration: none !important;
 }
+
+.info-post {
+  font-size:30px;
+ font-family:'YeojuCeramic';
+}
+
+.post-title{
+   text-align:center;
+   font-size:20px;
+   font-family:'YeojuCeramic';
+}
 .pic {
-  background-image: url('제리프로필.png');
   background-color: white;
-  border: 1px solid gray;
+  border: 1px solid white;
   border-radius: 50%;
   height: 50px;
   padding: 0;
@@ -42,9 +57,10 @@
   float: left;
   margin-left: 20px;
 }
+
 .info {
-  background-color: #b39ddb;
-  border: 1px solid gray;
+  background-color: #F0F0F0;
+  border: 1px solid white;
   height: 50px;
   padding: 0;
   border-radius: 1.0rem;
@@ -53,12 +69,14 @@
   line-height: 50px;
   float: left;
   margin-left: 10px;
+  color: white;
+  font-family:'YeojuCeramic';
 }
 .heart-icon {
+  background-color: #F0F0F0;
   width: 50px; 
   height: 50px;
-  background-color: #ffffff;
-  border: 1px solid gray;
+  border: 1px solid white;
   border-radius: 50%;
   text-align: center;
   line-height: 50px; /* 수직 중앙 정렬 */
@@ -76,43 +94,61 @@
   top:1px;
 }
 .heart-icon.clicked {
-  color: red; /* 클릭된 상태일 때 색상 변경 */
+  color: pink; 
 }
 .saved-posts,
 .my-posts,
 .tags {
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 10px;
-  border: 1px solid gray;
+  border: 2px solid white;
   border-radius: 5px;
 }
 .my-posts, .saved-posts {
-  width: 48%; /* 내 게시물과 찜한 게시물이 동일한 너비를 가지도록 설정 */
-  height: 400px;
-}
+  width: 100px;
+  height: 410px; 
+} 
+
 .saved-posts {
-  background-color: #d1c4e9;
-  float: right;
+ background-color: #f9f9f9;
+ flex: 1;
+ float: right;
+ border: 2px soild gray;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ color: gray;
+ overflow-y: auto;
 }
 .my-posts {
-  background-color: #b39ddb; 
-  float: left;
+ background-color: #f9f9f9;
+ flex: 1;
+ float: left;
+ border: 2px soild gray;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ color: gray;
+ overflow-y:auto;
 }
 .btn-right1,
 .btn-right2{
-  background-color: #e67e22;
+  background: linear-gradient(45deg, #746EF4, #FF66C3);
   color: white;
-  border: 1px solid #ccc;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
+  border: solid white 0.1px;
+  padding: 0.2em 0;
+  border-radius: 40px;
+  margin-top: 0.2em;
+  margin-bottom: 1em; 
+  margin-right:3px;
+  font-size: 1.2em;
+  text-transform: uppercase;
   cursor: pointer;
-  position: absolute; /* 절대 위치 설정 */
-  width: 12.1% ;
+  transition: transform 0.3s;
+  font-family: "YeojuCeramic";
+  text-decoration: none; 
+  position: absolute; 
+  width: 120px ;
 }
 .btn-right1 {
-  right: 20px; /* 부모 요소의 오른쪽 끝에서 20px만큼 왼쪽으로 이동 */
-  top: 20px; /* 부모 요소의 위쪽에서 20px만큼 아래쪽으로 이동 */
+  right: 20px; 
+  top: 20px; 
 }
 .btn-right2 {
   right: 165px; 
@@ -123,30 +159,44 @@
   justify-content: space-between;
 }
 .post-list {
-  border: 1px solid #ccc;
+  border: 2px solid gray;
   border-radius: 5px;
   padding: 10px;
 }
 .post-content {
-  border: 1px solid #ccc;
+  border: 2px solid gray;
   border-radius: 5px;
   margin-top: 10px;
 }
 .post-item {
   padding: 10px;
-  border-bottom: 1px solid #ccc;
+  height:100px;
+  border-bottom: 2px solid gray;
 }
 .post-item:last-child {
   border-bottom: none;
 }
 .tags {
-  background-color: #e57373;
+  color: #5E5E5E;
+  background-color:  #F0F0F0;
+  height: 100px;
+  flex: 1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .tags li {
   list-style-type: none;
   display: inline-block; 
-  border: 1px solid black;
-  border-radius: 5px;
+  border: 2px solid white;
+  border-radius: 20px;
   padding: 5px 10px;
   margin: 5px;
+  background-color: #f9f9f9;
+  color: gray
+ }
+ .tags li:hover{
+  transform: scale(1.1);
+ }
+a{
+   text-decoration: none !important;
+   color: gray !important;
 }

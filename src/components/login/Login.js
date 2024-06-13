@@ -4,15 +4,25 @@ import { openDatabase, getUserData } from '../../db';
 import axios from 'axios';
 import './login.css';
 import  AuthContext  from '../../AuthContext.js'; // Import AuthContext
+import Swal from 'sweetalert2'
 
 const Login = () => {
   const [member_id, setMemberId] = useState('');
   const [member_pw, setMemberPw] = useState('');
   const navigate = useNavigate();
   const { login } = useContext(AuthContext); // Use AuthContext
+  
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    const sweetalert = (title, contents, icon, confirmButtonText) => {
+      Swal.fire({
+          title: title,
+          text: contents,
+          icon: icon,
+          confirmButtonText: confirmButtonText
+          })
+    }
 
     try {
       const response = await axios.post('/login', {
@@ -20,7 +30,7 @@ const Login = () => {
         member_pw
       });
 
-      if (response.status === 200) {
+      if (response.status === 200 && response.data != "") {
         // 로그인 성공시
         const userData = response.data; // 서버로부터 받은 사용자 데이터
         
@@ -28,17 +38,18 @@ const Login = () => {
        // sessionStorage.setItem('loggedInUser', JSON.stringify(userData)); // 로그인한 사용자의 데이터를 세션에 저장 
         //const loggedInUserData = JSON.parse(sessionStorage.getItem('loggedInUser'));
         login(userData);  // Context의 login 함수 호출
-        console.log('로그인에 성공했습니다.');
+       
+        sweetalert('로그인에 성공했습니다.', '', '', '확인');       
         navigate('/'); 
 
       } else {
         // 로그인 실패 시
         console.log('로그인에 실패했습니다.');
-        alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+        sweetalert('아이디 또는 비밀번호가 올바르지 않습니다.', '', '', '확인');
       }
     } catch (error) {
       console.error('로그인 중 오류 발생:', error);
-      alert('로그인 중 오류가 발생했습니다.');
+      sweetalert('로그인 중 오류가 발생했습니다.');
     }
   };
 

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getUserData, openDatabase, saveUserData } from '../../db'; 
+import axios from 'axios';
 import './SignUp.css';
 
 const TagSelectionForEdit = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { email, password, phoneNumber, birthDate, gender } = location.state || {};
+  const { email = '', password = '', phoneNumber = '', birthDate = '', gender = '' } = location.state || {};
+  // 기본값을 빈 문자열로 설정
+  // const { email, password, phoneNumber, birthDate, gender } = location.state || {};
 
-  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedTags, setSelect ,editTags] = useState([]);
   const [nickname, setNickname] = useState('');
   const [snsType, setSnsType] = useState('');
   const [snsAddress, setSnsAddress] = useState('');
@@ -35,46 +37,42 @@ const TagSelectionForEdit = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const db = await openDatabase();
-      const userData = await getUserData(db, email);
-      if (userData) {
+    axios.get('/editProfile/'+email)
+      .then(response => {
+        const userData = response.data;
         setNickname(userData.nickname);
         setSnsType(userData.snsType);
         setSnsAddress(userData.snsAddress);
         setSelectedTags(userData.tags || []);
         setProfilePicture(userData.profilePicture);
-      }
-    };
-    fetchData();
+      })
+      .catch(error => {
+        console.error('There was an error fetching the user data!', error);
+      });
   }, [email]);
 
-  const handleComplete = async (event) => {
+   const handleComplete = (event) => {
     event.preventDefault();
     const isAnyTagUnselected = tags.some((tag, index) => !selectedTags[index]);
     if (isAnyTagUnselected) return;
 
     const userData = {
-      email,
-      password,
-      phoneNumber,
-      birthDate,
-      gender,
-      nickname,
-      snsType,
-      snsAddress,
-      profilePicture,
-      tags: selectedTags
+      member_pw: password,
+      member_birth: birthDate,
+      member_gender: gender,
+      member_nickname: nickname,
+      member_snsurl: snsAddress
     };
 
-    try {
-      const db = await openDatabase();
-      await saveUserData(db, userData);
-      console.log('User data saved:', userData);
-      navigate('/');
-    } catch (error) {
-      console.error('Error saving user data:', error);
-    }
+    
+    axios.put('/editProfile/'+email, userData)
+      .then(() => {
+        console.log('User data saved:', userData);
+        navigate('/');
+      })
+      .catch(error => {
+        console.error('Error saving user data:', error);
+      });
   };
 
   return (
