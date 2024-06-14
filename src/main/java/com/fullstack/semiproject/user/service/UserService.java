@@ -7,20 +7,23 @@ import com.fullstack.semiproject.user.dto.UserDto;
 
 public interface UserService {
 
-	List<UserDto> findAll();
+    List<UserDto> findAll();
 
-	Optional<UserDto> findByMemberNo(int member_no);
-	
-	void insert(UserDto user);
-	
-	void update(UserDto user);
+    Optional<UserDto> findByMemberNo(int member_no);
 
-	void deleteByMemberNo(int member_no);
-	
-	List<UserDto> selectMyinfo(int member_no);
-	
-	UserDto selectMember(String member_id, String member_pw);
-	
-	void updateProfile(UserDto user);
-	
+    UserDto findByMemberId(String member_id);
+
+    void insert(UserDto user);
+
+    void updateSignUp(UserDto user);
+
+    void deleteByMemberNo(int member_no);
+
+    List<UserDto> selectMyinfo(String member_id);
+
+    void updateProfile(UserDto user);
+
+    UserDto selectMember(String member_id, String member_pw);
+
+
 }

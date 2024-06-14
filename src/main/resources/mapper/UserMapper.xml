@@ -21,10 +21,6 @@
 		<result property="my_like" column="my_like" />
 	</resultMap>
 		
-	<select id="selectByMemberNo" resultType="com.fullstack.semiproject.user.dto.UserDto">
-		select * from member where member_no = #{member_no}
-	</select>
-
 	<select id="findAll" resultMap="userResultMap" resultType="com.fullstack.semiproject.user.dto.UserDto">
 		SELECT * FROM member
 	</select>
@@ -33,14 +29,33 @@
 		SELECT * FROM member WHERE member_no = #{member_no}
 	</select>
 
+	<select id="findByMemberId" resultMap="userResultMap" resultType="com.fullstack.semiproject.user.dto.UserDto">
+		select * from member where member_id = #{member_id}
+	</select>
+
 	<insert id="insert" useGeneratedKeys="true" keyProperty="member_no">
 		INSERT INTO member(member_name, member_id, member_pw, member_birth, member_gender, member_tel, member_nickname, member_rgday, member_snsurl, member_like, member_dcrt) VALUES(#{member_name}, #{member_id}, #{member_pw}, #{member_birth}, #{member_gender}, #{member_tel}, #{member_nickname}, #{member_rgday}, #{member_snsurl}, #{member_like}, #{member_dcrt})
 	</insert>
 
-	<update id="update">
-		UPDATE member SET member_pw=#{member_pw}, member_tel=#{member_tel}, member_nickname=#{member_nickname}, member_snsurl=#{member_snsurl} WHERE member_no=#{member_no}
+	<update id="updateSignUp">
+		UPDATE member SET member_nickname=#{member_nickname}, member_snsurl=#{member_snsurl} WHERE member_id=#{member_id}
 	</update>
-
+	
+	<update id="update">
+		UPDATE member SET member_pw=#{member_pw}, member_birth=#{member_birth}, member_tel=#{member_tel}, member_nickname=#{member_nickname}, member_snsurl=#{member_snsurl}, member_gender=#{member_gender} WHERE member_no=#{member_id}
+	</update>
+	
+	<update id="updateProfile">
+	    UPDATE member SET 
+	        member_pw=#{member_pw}, 
+	        member_birth=#{member_birth}, 
+	        member_gender=#{member_gender}, 
+	        member_tel=#{member_tel},
+	        member_nickname=#{member_nickname},
+	        member_snsurl=#{member_snsurl}
+	    WHERE member_id=#{member_id}
+    </update>
+		
 	<delete id="delete">
 		DELETE FROM member WHERE member_no = #{member_no}
 	</delete>
@@ -49,16 +64,12 @@
 	 SELECT m.*, y.*
 	 FROM myinfo y
 	 INNER JOIN member m ON m.member_no = y.member_no
-	 WHERE y.member_no = #{member_no};
+	 WHERE m.member_id = #{member_id};
 	</select>
-	
+
+
 	<select id="selectMember" resultMap="userResultMap" resultType="com.fullstack.semiproject.user.dto.UserDto">
 	 SELECT * FROM member WHERE member_id = #{member_id} and member_pw = #{member_pw}
 	</select>
-	
-	<update id="updateProfile">
-		UPDATE member SET member_pw=#{member_pw}, member_tel=#{member_tel}, member_nickname=#{member_nickname} WHERE member_id=#{member_id};
-	</update>
-
 	
 </mapper>

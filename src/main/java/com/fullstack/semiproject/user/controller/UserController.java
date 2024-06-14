@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,56 +29,79 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
+    
+    // 목록 다 받기
     @GetMapping("/")
-    public List<UserDto> getMember() {
+    public List<UserDto> getAllUsers() {
         return userService.findAll();
     }
 
-    @GetMapping("/{member_no}")
-    public ResponseEntity<UserDto> getUserByMemberNo(@PathVariable int member_no) {
-        Optional<UserDto> user = userService.findByMemberNo(member_no);
-        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
+    // 사용자 생성(가입)
     @PostMapping("/")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto user) {
         userService.insert(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
-
-    @PutMapping("/{member_no}")
+    
+    // 사용자 생성(가입)+
+    @PutMapping("/id/{member_id}")
+    public ResponseEntity<UserDto> update(@PathVariable String member_id, @RequestBody UserDto user) {
+        userService.updateSignUp(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+    
+    // member_no로 조회
+    @GetMapping("/no/{member_no}")
+    public ResponseEntity<UserDto> getUserByMemberNo(@PathVariable int member_no) {
+        Optional<UserDto> user = userService.findByMemberNo(member_no);
+        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    
+    // member_no로 수정
+    @PutMapping("/no/{member_no}")
     public ResponseEntity<UserDto> updateUser(@PathVariable int member_no, @RequestBody UserDto user) {
         Optional<UserDto> existingUser = userService.findByMemberNo(member_no);
         if (existingUser.isPresent()) {
             user.setMember_no(member_no);
-            userService.update(user);
+            userService.updateSignUp(user);
             return ResponseEntity.ok(user);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @DeleteMapping("/{member_no}")
+    
+    // member_id로 myinfo까지 합쳐서 조회 후 정보 업데이트
+    @GetMapping("/id/{member_id}")
+    public ResponseEntity<UserDto> getUserByMemberId(@PathVariable String member_id) {
+        UserDto user = userService.findByMemberId(member_id);
+        return ResponseEntity.ok(user);
+    }
+        
+    // member_no로 회원삭제
+    @DeleteMapping("/no/{member_no}")
     public ResponseEntity<Void> deleteUser(@PathVariable int member_no) {
         userService.deleteByMemberNo(member_no);
         return ResponseEntity.noContent().build();
     }
-
-    @GetMapping("/profile/{member_no}")
-    public List<UserDto> selectMyinfo(@PathVariable int member_no) {
-        return userService.selectMyinfo(member_no);
+    
+    // member_id로 회원정보 받아오기
+    @GetMapping("/profile/id/{member_id}")
+    public ResponseEntity<UserDto> getUserProfile(@PathVariable String member_id) {
+        UserDto user = userService.findByMemberId(member_id);
+        return ResponseEntity.ok(user);
     }
     
-    @PutMapping("/profile/{member_no}")
-    public ResponseEntity<UserDto> updateUserProfile(@PathVariable int member_no, @RequestBody UserDto user) {
-        Optional<UserDto> existingUser = userService.findByMemberNo(member_no);
-        if (existingUser.isPresent()) {
-            user.setMember_no(member_no);
+    // member_id로 회원정보 수정
+    @PutMapping("/editprofile/")
+    public void updateUserProfile( @RequestBody UserDto user) {
+       System.out.println(user);
+        UserDto existingUser = userService.findByMemberId(user.getMember_id());
+        System.out.println("existinguser>>>>" + existingUser);
+        if (existingUser != null) {
             userService.updateProfile(user);
-            return ResponseEntity.ok(user);
         } else {
-            return ResponseEntity.notFound().build();
+        	System.out.println("실패");
+            //return ResponseEntity.notFound().build();
         }
     }
     

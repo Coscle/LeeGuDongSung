@@ -10,7 +10,7 @@ import com.fullstack.semiproject.user.mapper.UserMapper;
 
 @Service
 public class UserServiceImpl implements UserService {
-	private final UserMapper userMapper;
+    private final UserMapper userMapper;
 
     @Autowired
     public UserServiceImpl(UserMapper userMapper) {
@@ -19,38 +19,46 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> findAll() {
-    	//System.out.println(userMapper.findAll());
+        //System.out.println(userMapper.findAll());
         return userMapper.findAll();
     }
 
     @Override
     public Optional<UserDto> findByMemberNo(int member_no) {
-        return Optional.ofNullable(userMapper.findByMemberNo(member_no));
-    }
-    
-    @Override
-    public void insert(UserDto user) {
-    	userMapper.insert(user);
-    }
-    
-    @Override
-    public void update(UserDto user) {
-    	userMapper.update(user);
+        return userMapper.findByMemberNo(member_no);
     }
 
-    
     @Override
-    public List<UserDto> selectMyinfo(int member_no){
-    	return userMapper.selectMyinfo(member_no);
+    public UserDto findByMemberId(String member_id) {
+        return userMapper.findByMemberId(member_id);
     }
-    
-    
-    
+
+    @Override
+    public void insert(UserDto user) {
+        userMapper.insert(user);
+    }
+
+    @Override
+    public void updateSignUp(UserDto user) {
+        userMapper.updateSignUp(user);
+    }
+
+    @Override
+    public void deleteByMemberNo(int member_no) {
+        userMapper.deleteByMemberNo(member_no);
+    }
+
+    @Override
+    public List<UserDto> selectMyinfo(String member_id){
+        return userMapper.selectMyinfo(member_id);
+    }
+
     @Override
     public void updateProfile(UserDto user) {
-    	userMapper.update(user);
+        System.out.println("updateProfile"+user);
+        userMapper.updateProfile(user);
     }
-    
+
     @Override
     public UserDto selectMember(String member_id, String member_pw) {
         UserDto user = userMapper.selectMember(member_id, member_pw);
@@ -61,10 +69,5 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-	@Override
-	public void deleteByMemberNo(int member_no) {
-		userMapper.deleteByMemberNo(member_no);
-	}
 
-	
 }
