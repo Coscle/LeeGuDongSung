@@ -8,13 +8,13 @@ function MessageList({ messages, onSelectMessage }) {
   console.log(user);
   const tmpMassages = [{
     message_no : 1,
-    sender : '라이언',
+    sender : '씨범',
     receiver : '이구동성',
     send_date : '2024-06-10',
     message_content : '글보고 쪽지 드렸어요~ㅎㅎ'
   },{
     message_no : 2,
-    sender : '이구동성',
+    sender : '클럽죽돌이',
     receiver : '라이언',
     send_date : '2024-06-10',
     message_content : '아 네~ 같이가실래요?'
@@ -26,13 +26,13 @@ function MessageList({ messages, onSelectMessage }) {
     message_content : '좋아요, 언제 만나실래요?'
   },{
     message_no : 4,
-    sender : '프로도',
+    sender : '말왕',
     receiver : '이구동성',
     send_date : '2024-06-10',
     message_content : '안녕하세요! 내일 같이 가실래요?'
   },{
     message_no : 5,
-    sender : '이구동성 ',
+    sender : '짱구 ',
     receiver : '프로도',
     send_date : '2024-06-10',
     message_content : '넵 잠시만여~!'

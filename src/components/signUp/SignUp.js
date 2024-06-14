@@ -40,7 +40,7 @@ const SignUp = () => {
         return;
    }
     if (password !== confirmPassword) {
-      sweetalert("비밀번호가 일치하지 않습니다.");
+      sweetalert("비밀번호가 일치하지 않습니다.", "", "", "확인");
       return;
     }
     // 회원가입 로직

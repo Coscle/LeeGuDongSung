@@ -4,7 +4,7 @@ import './recruitBoardDetail.css';
 import Comment from '../board/Comment';
 import axios from 'axios';
 import gganggan from '../../images/gganggan.jpeg'
-
+import leegudongsung from '../../images/leegudongsung.png'
 
 const RecruitBoardDetail = () => {
   const { boardNo } = useParams();
@@ -87,7 +87,7 @@ const RecruitBoardDetail = () => {
             </div>
                 <div className="author-profile">
                 <Link to={`/userProfile/${boardData?.author_no}`} className="author-profile-link">
-                  <img src={gganggan} alt="Profile" className="profile-picture" />
+                  <img src={leegudongsung} alt="Profile" className="profile-picture" />
                   {boardData?.member_nickname}
                 </Link>
               </div>

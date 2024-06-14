@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getUserData, openDatabase, saveUserData } from '../../db'; 
 import Swal from 'sweetalert2'
+import axios from 'axios';
+
 import './SignUp.css';
 
 const TagSelectionForEdit = () => {
@@ -39,6 +41,7 @@ const TagSelectionForEdit = () => {
     { title: '성별', content: ['남자', '여자'] },
   ];
 
+  
   const handleTagChange = (content, index) => {
     const updatedSelectedTags = [...selectedTags];
     updatedSelectedTags[index] = content;
@@ -55,7 +58,7 @@ const TagSelectionForEdit = () => {
         setSnsAddress(userData.snsAddress);
         setSelectedTags(userData.tags || []);
         setProfilePicture(userData.profilePicture);
-        setSelfIntroduction(userData.selfIntroduction);
+        //setSelfIntroduction(userData.selfIntroduction);
       }
     };
     fetchData();
@@ -65,7 +68,7 @@ const TagSelectionForEdit = () => {
     event.preventDefault();
     const isAnyTagUnselected = tags.some((tag, index) => !selectedTags[index]);
     if (isAnyTagUnselected) {
-      sweetalert('선택되지않은 테그가 있습니다.');
+      sweetalert('선택되지않은 태그가 있습니다.');
       return;
    }
 
@@ -90,6 +93,15 @@ const TagSelectionForEdit = () => {
     } catch (error) {
       console.error('Error saving user data:', error);
     }
+    axios.put('/editProfile', userData)
+      .then(() => {
+        console.log('User data saved:', userData);
+        navigate('/');
+      })
+      .catch(error => {
+        console.error('Error saving user data:', error);
+      });
+  
   };
 
   return (
@@ -134,15 +146,8 @@ const TagSelectionForEdit = () => {
               required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="selfIntroduction"></label>
-            <textarea
-              id="selfIntroduction"
-              value={selfIntroduction}
-              onChange={(e) => setSelfIntroduction(e.target.value)}
-              placeholder="자기소개를 입력해주세요."
-            />
-          </div>
+          
+        
           <div className="form-group">
             <label htmlFor="profilePicture">프로필 사진 첨부</label>{'   '}
             <input
@@ -152,7 +157,7 @@ const TagSelectionForEdit = () => {
               onChange={(e) => setProfilePicture(e.target.files[0])}
             />
           </div>
-          <button type="submit" className="signup-button" onClick={()=>sweetalert('수정이 완료되었습니다.')}>수정 완료</button>
+          <button type="submit" className="signup-button" onClick={()=>sweetalert('수정이 완료되었습니다.', '', '', '확인')}>수정 완료</button>
         </form>
       </div>
       <div className="tag-containerss">
@@ -170,11 +175,11 @@ const TagSelectionForEdit = () => {
           >
             {content}
           </button>
-            ))}
-          </div>
-          </div>
         ))}
       </div>
+    </div>
+  ))}
+</div>
     </div>
   );
 };

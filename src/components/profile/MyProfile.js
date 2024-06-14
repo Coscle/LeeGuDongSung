@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { openDatabase, getUserData } from '../../db'; // 수정된 경로
 import { useNavigate } from 'react-router';
 import './profile.css';
-import noprofile from '../../images/noprofile.png';
+import me from '../../images/me.png';
 import insta from '../../images/instagram.png';
 import leegudongsung from '../../images/leegudongsung.png'
 import  AuthContext  from '../../AuthContext.js'; // Import AuthContext
@@ -75,10 +75,10 @@ const MyProfile = () => {
       <div className="profile-details">
         <div>
           
-          {posts.profilePicture = <img className="pic" src={leegudongsung} alt="Profile" />
+          {posts.profilePicture = <img className="pic" src={me} alt="Profile" />
           }
           <a className="info">
-            <strong></strong> {user.member_nickname}
+            <strong>수정이구동성</strong> 
           </a>
           <a className={`heart-icon ${heartClicked ? 'clicked' : ''}`} onClick={handleHeartClick}>
             <span role="img" aria-label="heart">❤️</span>
@@ -87,7 +87,7 @@ const MyProfile = () => {
             <img src={insta} className="logo" />
           </a>
           <a className="info">
-            <strong>@Lee_Gu_Dong_Sung</strong> 
+            <strong>@lee_gu</strong> 
           </a>
         </div>
       </div>
@@ -123,11 +123,11 @@ const MyProfile = () => {
       <button className="btn-right2" onClick={()=> navigate('/MessageBoard', { state: { email } })}>쪽지함</button>
       <div className="tags">
         <ul className='tagtop'>
-            <li >활발함</li>
-            <li>자주</li>
+        <li >활발함</li>
+            <li>여행자주</li>
             <li>ISTJ</li>
             <li>즉흥</li>
-            <li>자주</li>
+            <li>음주자주</li>
             <li>뚜벅이</li>
             <li>서로찍기</li>
             <li>더치페이</li>

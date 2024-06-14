@@ -135,7 +135,7 @@ const TagSelection = () => {
         </form>
       </div>
       <div className="tag-containerss">
-      <h2 className="tagtitles">테그를 선택해주세요</h2>
+      <h2 className="tagtitles">태그를 선택해주세요</h2>
   {tags.map((tag, index) => (
     <div key={index} className="tag-row">
       <span className="tagkind">{tag.title}</span>
