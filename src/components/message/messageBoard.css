@@ -1,10 +1,38 @@
 .container-fluid{
-	margin-top : 60px;
-  margin-bottom : 80px;
+  margin-top : 60px;
+  font-family:"YeojuCeramic";
 }
 .noMessage {
   font-size: 70px;
   text-align: center;
   line-height: 1.5; 
   margin-top : 80px;
+  font-family:"YeojuCeramic";
+}
+.messagecompose {
+  display: flex;
+  align-items: flex-end;
+  margin-top: 10px; 
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.messagecompose textarea {
+  flex: 0 0 50%;
+  margin-right: 20px; 
+}
+
+.messagecompose button {
+  padding: 10px 10px;
+  background: linear-gradient(45deg, #746EF4, #FF66C3);
+  border: none;
+  border-radius: 15px;
+  color: white;
+  width: calc(100%-40px);
+  margin-right: 10px;
+  
+}
+.messagecompose button:hover{
+   transform: scale(1.1);
+   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }

@@ -2,7 +2,11 @@
   display: flex;
   margin-right: 30px;
 }
-
+.findmymate{
+  text-align: center;
+  font-size:30px;
+  font-family: "YeojuCeramic";
+}
 .recruit-link-content-container {
   flex-direction: column;
   align-items: flex-end;

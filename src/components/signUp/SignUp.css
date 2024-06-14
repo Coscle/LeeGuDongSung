@@ -1,64 +1,105 @@
-.signup-container {
-  height: 600px;
-  width: 45%;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px; 
-  background-color: #f9f9f9;
-  margin-top: 60px;
-  margin: 0 auto;
-}
-.info-container {
-  height: 400px;
-  width: 45%;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px; 
-  background-color: #f9f9f9;
-  margin-top: 60px;
-  margin-left: 70px;
-}
-.tag-container {
-  width: 45%;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px; 
-  background-color: #f9f9f9;
-  margin-top: 60px;
-  margin-right: 70px;
-  overflow-y: auto; /* 세로 스크롤바 추가 */
-}
 .tag-selection-wrapper {
   display: flex;
   justify-content: space-between;
 }
 
+.tagtitles {
+  font-family: "YeojuCeramic";
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 .tag-row {
   display: flex;
+  align-items: center; 
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.tagkind {
+  text-align: center;
+  font-family: "YeojuCeramic";
+  width: 120px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  margin-bottom: 20px; 
+}
+
+.signup-container{
+  margin:auto;
+  width: 50%;
+  margin: 0 auto;
+  margin-top : 40px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px; 
+  background-color: #f9f9f9;
+}
+
+.tag-buttons-container {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 10px; 
+  max-width: calc(100% - 120px);
+  margin-bottom:18px;
 }
 
 .tag-button {
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-bottom: 10px;
   padding: 8px 16px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 20px; /* 더 둥글게 만들어 봄 */
   cursor: pointer;
+  transition: transform 0.3s;
+  background-color: #fff; /* 배경색을 흰색으로 */
 }
 
 .tag-button.selected {
   background: linear-gradient(45deg, #746EF4, #FF66C3);
   color: white;
-  border: solid white 0.1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: transform 0.3s;
-  text-decoration: none; /* 링크에 밑줄 없애기 */
+  border: none; /* 선택된 버튼 스타일을 수정 */
 }
 
+.tag-button:hover {
+  transform: scale(1.05); /* 확대 효과를 더 부드럽게 변경 */
+}
+
+.info-container {
+  height: 60%;
+  width: 35%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  margin-top: 60px;
+  margin-left: 70px;
+  margin-right:20px;
+}
+
+.tag-containerss {
+  width: 45%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  margin-top: 60px;
+  margin-right: 70px;
+  overflow-y: auto;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  margin-bottom:80px;
+}
+
+.tetle{
+  margin-top:10px;
+  text-align: center;
+  font-family:"YeojuCeramic";
+  font-size:50px;
+}
 .signup-container h2 {
   text-align: center;
+  font-family:"YeojuCeramic";
+  margin : 20px 0;
+  font-size:50px;
 }
 
 .form-group {
@@ -69,6 +110,7 @@ label {
   display: block;
   font-weight: bold;
 }
+
 input[type='text'],
 input[type='email'],
 input[type='password'],
@@ -78,11 +120,9 @@ select {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-top: 10px;
 }
-input[type='text'],
-select{
-	margin-top: 10px;
-}
+
 input[type='tel'],
 select {
   width: calc(33.5% - 20px); 
@@ -90,7 +130,6 @@ select {
   border: 1px solid #ccc;
   border-radius: 5px;
   display: inline-block;
-  margin-top: 0px;
 }
 
 .signup-button {
@@ -101,33 +140,27 @@ select {
   padding: 0.5em 1em;
   border-radius: 25px;
   margin-top: 0.2em;
-  margin-bottom: 1em; 
+  margin-bottom: 1em;
   font-size: 1.2em;
   text-transform: uppercase;
   cursor: pointer;
   transition: transform 0.3s;
   font-family: "YeojuCeramic";
-  text-decoration: none; /* 링크에 밑줄 없애기 */
+  text-decoration: none;
 }
 
 .signup-button:hover {
   transform: scale(1.1);
 }
-#phonePart1{
-	margin-left: 10px;
+
+.adeco {
+  text-decoration: none !important;
 }
-#birthDate{
-	margin-left: 10px;
+
+h3 {
+  text-align: center;
 }
-#gender{
-	margin-left: 10px;
-}
-#snsType{
-	margin-top: 10px;
-}
-.adeco{
-	text-decoration: none !important;
-}
-h3{
-	text-align: center;
+
+#snsType {
+  margin-top: 10px;
 }

@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown } from 'react-bootstrap';
 import './boardWrite.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import  AuthContext  from '../../AuthContext.js'; // Import AuthContext
 
 function BoardWrite({ onSubmit, onCancel, tags, category }) {
   // 임시 데이터, member 테이블에 member_no가 1이라는 데이터가 있어야함
   // 그러면 동작
+  const {user} = useContext(AuthContext);
   const [formData, setFormData] = useState({
     board_title: "",
     board_content: "",
     board_category: category,
-    author_no: 1,
+    author_no: user.member_no,
     cboard_tags: "[]",
     recruit_done: false,
     trip_start: "2024-07-01",
@@ -51,7 +53,7 @@ function BoardWrite({ onSubmit, onCancel, tags, category }) {
       for (let i=0 ; i<tmpTag.length ; i++){
         if(i == tmpTag.length-1){
           for (let j=0 ; j<tmpTag[i].length ; j++){
-            stringJson += ''+tmpTag[i][j][0]+'';
+            stringJson += ''+tmpTag[i][j][0]+'/';
           }
         } else{
           for (let j=0 ; j<tmpTag[i].length ; j++){

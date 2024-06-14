@@ -70,7 +70,7 @@ function BoardModify({ onSubmit, onCancel, tags, category }) {
         for (let i = 0; i < tmpTag.length; i++) {
           if (i === tmpTag.length - 1) {
             for (let j = 0; j < tmpTag[i].length; j++) {
-              stringJson += '' + tmpTag[i][j][0] + '';
+              stringJson += '' + tmpTag[i][j][0] + '/';
             }
           } else {
             for (let j = 0; j < tmpTag[i].length; j++) {

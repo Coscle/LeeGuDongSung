@@ -26,12 +26,11 @@ const EditProfile = () => {
   const handleEditProfile = (event) => {
     event.preventDefault();  
     const phoneNumber = `${phonePart1}${phonePart2}${phonePart3}`;
-    console.log("hi")
 
 
     //navigate('/tagSelectionForEdit', { state: { email, password, phoneNumber, birthDate, gender } });
     console.log(user.member_id, password, phoneNumber, birthDate, gender)
-    axios.post('/editProfile', {
+    axios.put('/editProfile', {
       member_id: user.member_id,
       member_pw: password,
       member_tel: phoneNumber,
@@ -40,13 +39,12 @@ const EditProfile = () => {
 
     }).catch(error => {
       console.error('There was an error updating the profile!', error);
-    });/*
-    .then(() => {
+    }).then(() => {
       navigate('/tagSelectionForEdit', { state: { email, password, phoneNumber, birthDate, gender } });
     })
     .catch(error => {
       console.error('There was an error updating the profile!', error);
-    });*/
+    });
 
   };
   // useEffect(() => {

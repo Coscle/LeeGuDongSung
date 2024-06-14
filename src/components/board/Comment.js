@@ -47,6 +47,7 @@ const Comment = ({ comments, setComments }) => {
       });
     }
   }, [tempList]);
+  console.log(commentList);
 
   //댓글
   const replList = (comment, idx) => {
@@ -56,11 +57,6 @@ const Comment = ({ comments, setComments }) => {
           <div className="comment-profile">
           <div className="comment-picknick-date">
           <div className="comment-nick-date">
-          <img
-            src={comment.profilePic || noprofile}
-            alt="프로필 사진"
-            className="comment-profile-pic"
-          />
           <span className="comment-author">{comment.replauthor_nickname}</span>
         </div>
         <div className="date-container">
@@ -119,11 +115,6 @@ const Comment = ({ comments, setComments }) => {
           >
           <div className="comment-picknick-date">
           <div className="comment-nick-date">
-          <img
-                 src={reply.profilePic || noprofile}
-                 alt="프로필 사진"
-            className="comment-profile-pic"
-               />
           <span className="comment-author">{reply.replauthor_nickname}</span>
         </div>
         <div className="date-container">
@@ -131,7 +122,7 @@ const Comment = ({ comments, setComments }) => {
         </div>
       </div>
             <div className="reply-details">
-              <p className="reply-text">{reply.boardrepl_content.split('|')[1]}</p>
+              <p className="reply-text">{reply.boardrepl_content}</p>
             </div>
           </div>
         ))}
@@ -148,7 +139,7 @@ const Comment = ({ comments, setComments }) => {
     const newCommentObj = {
       replauthor_no: 1,
       boardrepl_content: newComment,
-      replauthor_nickname: '홍시',
+      replauthor_nickname: '이구동성',
       profilePic: '/profile.jpg',
       boardrepl_group: newGroup + 1,
       boardrepl_repl_seq: 0,
@@ -162,7 +153,7 @@ const Comment = ({ comments, setComments }) => {
 
   const handleToggleReply = (commentId) => {
     setReplyingTo(commentId === replyingTo ? null : commentId);
-    setReplyText('@' + commentId + ' | ');
+    setReplyText();
     setReplyInputVisible(true); // 대댓글 입력창 활성화
   };
 
@@ -170,7 +161,7 @@ const Comment = ({ comments, setComments }) => {
     const newCommentObj = {
       replauthor_no: 1,
       boardrepl_content: replyText,
-      replauthor_nickname: '메롱',
+      replauthor_nickname: '이구동성',
       profilePic: '/profile.jpg',
       boardrepl_group: group,
       boardrepl_repl_seq: 1, // 대댓글의 뎁스를 1로 설정

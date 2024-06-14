@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { getUserData, openDatabase, saveUserData } from '../../db'; 
+import Swal from 'sweetalert2'
 import './SignUp.css';
 
 const TagSelectionForEdit = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { email = '', password = '', phoneNumber = '', birthDate = '', gender = '' } = location.state || {};
-  // 기본값을 빈 문자열로 설정
-  // const { email, password, phoneNumber, birthDate, gender } = location.state || {};
+  const { email, password, phoneNumber, birthDate, gender } = location.state || {};
 
   const [selectedTags, setSelectedTags] = useState([]);
   const [nickname, setNickname] = useState('');
   const [snsType, setSnsType] = useState('');
   const [snsAddress, setSnsAddress] = useState('');
   const [profilePicture, setProfilePicture] = useState(null);
+  const [selfIntroduction, setSelfIntroduction] = useState('');
+
+  const sweetalert = (title, contents, icon, confirmButtonText) => {
+        Swal.fire({
+            title: title,
+            text: contents,
+            icon: icon,
+            confirmButtonText: confirmButtonText
+            })
+    }
 
   const tags = [
     { title: '성격', content: ['활발함', '정적임', '중간'] },
@@ -37,42 +46,50 @@ const TagSelectionForEdit = () => {
   };
 
   useEffect(() => {
-    axios.get('/editProfile/'+email)
-      .then(response => {
-        const userData = response.data;
+    const fetchData = async () => {
+      const db = await openDatabase();
+      const userData = await getUserData(db, email);
+      if (userData) {
         setNickname(userData.nickname);
         setSnsType(userData.snsType);
         setSnsAddress(userData.snsAddress);
         setSelectedTags(userData.tags || []);
         setProfilePicture(userData.profilePicture);
-      })
-      .catch(error => {
-        console.error('There was an error fetching the user data!', error);
-      });
+        setSelfIntroduction(userData.selfIntroduction);
+      }
+    };
+    fetchData();
   }, [email]);
 
-   const handleComplete = (event) => {
+  const handleComplete = async (event) => {
     event.preventDefault();
     const isAnyTagUnselected = tags.some((tag, index) => !selectedTags[index]);
-    if (isAnyTagUnselected) return;
+    if (isAnyTagUnselected) {
+      sweetalert('선택되지않은 테그가 있습니다.');
+      return;
+   }
 
     const userData = {
-      member_pw: password,
-      member_birth: birthDate,
-      member_gender: gender,
-      member_nickname: nickname,
-      member_snsurl: snsAddress
+      email,
+      password,
+      phoneNumber,
+      birthDate,
+      gender,
+      nickname,
+      snsType,
+      snsAddress,
+      profilePicture,
+      tags: selectedTags,
+      selfIntroduction
     };
 
-    
-    axios.put('/editProfile/'+email, userData)
-      .then(() => {
-        console.log('User data saved:', userData);
-        navigate('/');
-      })
-      .catch(error => {
-        console.error('Error saving user data:', error);
-      });
+    try {
+      const db = await openDatabase();
+      await saveUserData(db, userData);
+      console.log('User data saved:', userData);
+    } catch (error) {
+      console.error('Error saving user data:', error);
+    }
   };
 
   return (
@@ -118,6 +135,15 @@ const TagSelectionForEdit = () => {
             />
           </div>
           <div className="form-group">
+            <label htmlFor="selfIntroduction"></label>
+            <textarea
+              id="selfIntroduction"
+              value={selfIntroduction}
+              onChange={(e) => setSelfIntroduction(e.target.value)}
+              placeholder="자기소개를 입력해주세요."
+            />
+          </div>
+          <div className="form-group">
             <label htmlFor="profilePicture">프로필 사진 첨부</label>{'   '}
             <input
               type="file"
@@ -126,24 +152,26 @@ const TagSelectionForEdit = () => {
               onChange={(e) => setProfilePicture(e.target.files[0])}
             />
           </div>
-          <button type="submit" className="signup-button" onClick={()=>alert('수정이 완료되었습니다.')}>수정 완료</button>
+          <button type="submit" className="signup-button" onClick={()=>sweetalert('수정이 완료되었습니다.')}>수정 완료</button>
         </form>
       </div>
-      <div className="tag-container">
-        <h2>테그를 선택해주세요</h2>
-        {tags.map((tag, index) => (
-          <div key={index} className="tag-row">
-            <h4>{tag.title}</h4>
-            {tag.content.map((content, tagIndex) => (
-              <button
-                key={tagIndex}
-                type="button"
-                className={`tag-button ${selectedTags[index] === content ? 'selected' : ''}`}
-                onClick={() => handleTagChange(content, index)}
-              >
-                {content}
-              </button>
+      <div className="tag-containerss">
+      <h2 className="tagtitles">태그를 선택해주세요</h2>
+  {tags.map((tag, index) => (
+    <div key={index} className="tag-row">
+      <span className="tagkind">{tag.title}</span>
+      <div className="tag-buttons-container">
+        {tag.content.map((content, tagIndex) => (
+          <button
+            key={tagIndex}
+            type="button"
+            className={`tag-button ${selectedTags[index] === content ? 'selected' : ''}`}
+            onClick={() => handleTagChange(content, index)}
+          >
+            {content}
+          </button>
             ))}
+          </div>
           </div>
         ))}
       </div>

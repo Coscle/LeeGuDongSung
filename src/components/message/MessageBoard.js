@@ -4,6 +4,7 @@ import MessageDetail from './MessageDetail';
 import './messageBoard.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 function MessageBoard() {
   const [messageList, setMessageList] = useState([]);
@@ -11,6 +12,15 @@ function MessageBoard() {
   const [filteredMessages, setFilteredMessages] = useState([]);
   const [newMessageContent, setNewMessageContent] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+
+  const sweetalert = (title, contents, icon, confirmButtonText) => {
+    Swal.fire({
+        title: title,
+        text: contents,
+        icon: icon,
+        confirmButtonText: confirmButtonText
+        })
+  }
 
   const navigate = useNavigate();
 
@@ -48,7 +58,8 @@ function MessageBoard() {
       setMessageList([...messageList, response.data]);
       setNewMessageContent('');
 
-      alert("메세지 전송완료");
+      sweetalert("메세지 전송완료", '','','확인');
+
     } catch (error) {
       console.error('Error sending message:', error);
     }
@@ -101,13 +112,13 @@ function MessageBoard() {
             </div>
           )}
         </div>
-        <div className="message-input">
+        <div className="messagecompose">
               <textarea 
                 value={newMessageContent}
                 onChange={(e) => setNewMessageContent(e.target.value)}
                 placeholder="메시지를 입력하세요..."
               />
-              <button onClick={handleSendMessage}>보내기</button>
+              <button onClick={handleSendMessage} >보내기</button>
         </div>
       </div>
     </div>

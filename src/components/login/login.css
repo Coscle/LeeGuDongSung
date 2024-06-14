@@ -1,6 +1,5 @@
 .login-container {
   width: 490px; 
-  height: 400px;
   margin: 0 auto;
   margin-top : 150px;
   padding: 20px;
@@ -62,18 +61,19 @@ input[type='password'] {
 }
 .btn-second {
   width: calc(35% - 15px);
-  margin-top: 5px;
+  margin-top: 15px;
   border-radius: 20px;
 }
 .btn-space{
-	margin-right: 6px;
+   margin-right: 6px;
 }
 .btn-space2{
-	margin-left: 10px;
+   margin-left: 10px;
 }
 .btn-third{
   width: calc(100% - 40px);
   border-radius: 20px;
+  margin-left: 20px;
 }
 
 .link {

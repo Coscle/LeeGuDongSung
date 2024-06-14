@@ -90,14 +90,13 @@
 
 
 .boardTag.active {
-  background-color: #007bff;
+  background: linear-gradient(45deg, #746EF4, #FF66C3);
   color: white;
-  border: 1px solid #007bff;
 }
 
 
 .boardTag:hover {
-  background-color: #007bff;
+  background: linear-gradient(45deg, #746EF4, #FF66C3);
   color: white;
-  border: 1px solid #007bff;
+  transform: scale(1.1);
 }

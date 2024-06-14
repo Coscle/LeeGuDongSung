@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import './profile.css';
 import noprofile from '../../images/noprofile.png';
 import insta from '../../images/instagram.png';
-
+import leegudongsung from '../../images/leegudongsung.png'
 import  AuthContext  from '../../AuthContext.js'; // Import AuthContext
 import axios from 'axios';
 const ITEMS_PER_PAGE = 10; // 페이지당 아이템 수
@@ -75,11 +75,8 @@ const MyProfile = () => {
       <div className="profile-details">
         <div>
           
-          {posts.profilePicture ? (
-            <img className="pic" src={posts.profilePicture} alt="Profile" />
-          ) : (
-            <div className="pic-placeholder" src={noprofile.png} alt="noProfile"></div>
-          )}
+          {posts.profilePicture = <img className="pic" src={leegudongsung} alt="Profile" />
+          }
           <a className="info">
             <strong></strong> {user.member_nickname}
           </a>
@@ -125,10 +122,18 @@ const MyProfile = () => {
       <button className="btn-right1" onClick={handleEditProfile}>회원정보 수정</button>
       <button className="btn-right2" onClick={()=> navigate('/MessageBoard', { state: { email } })}>쪽지함</button>
       <div className="tags">
-        <ul>
-          {posts.tags.map((tag) => (
-            <li key={tag}>{tag}</li>
-          ))}
+        <ul className='tagtop'>
+            <li >활발함</li>
+            <li>자주</li>
+            <li>ISTJ</li>
+            <li>즉흥</li>
+            <li>자주</li>
+            <li>뚜벅이</li>
+            <li>서로찍기</li>
+            <li>더치페이</li>
+            <li>각자먹기</li>
+            <li>쇼핑좋음</li>
+            <li>남자</li>
         </ul>
       </div>
     </div>

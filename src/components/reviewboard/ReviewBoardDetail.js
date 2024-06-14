@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import './reviewBoardDetail.css';
 import Comment from '../board/Comment';
+import chanho from '../../images/chanho.jpeg'
 import axios from 'axios';
 
 const ReviewBoardDetail = () => {
@@ -56,7 +57,7 @@ const ReviewBoardDetail = () => {
             </div>
            <div className="author-profile">
                 <Link to={`/userProfile/${boardData?.author_no}`} className="author-profile-link">
-                  <img src={boardData?.MEMBER_PROFILE_PICTURE} alt="Profile" className="profile-picture" />
+                  <img src={chanho} alt="Profile" className="profile-picture" />
                   {boardData?.member_nickname}
                 </Link>
               </div>

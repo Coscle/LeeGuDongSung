@@ -7,8 +7,8 @@
   background-color: white;
   display: inline-block;
   position: relative; 
-  margin-top: 30px;
-  margin-left: 200px;
+  margin-top: 90px;
+  margin-left: 45px;
   margin-bottom:80px;
 }
 .profile-details {
@@ -62,9 +62,9 @@
   background-color: #F0F0F0;
   border: 1px solid white;
   height: 50px;
-  padding: 0;
+  padding: 0 25px;
   border-radius: 1.0rem;
-  width: 200px;
+  width: auto;
   text-align: center;
   line-height: 50px;
   float: left;
@@ -187,6 +187,7 @@
   list-style-type: none;
   display: inline-block; 
   border: 2px solid white;
+  
   border-radius: 20px;
   padding: 5px 10px;
   margin: 5px;
@@ -199,4 +200,9 @@
 a{
    text-decoration: none !important;
    color: gray !important;
+}
+
+.tagtop{
+  margin-left: 1px;
+  margin-top: 15px;
 }

@@ -17,7 +17,6 @@
 }
 
 .chat-ib {
-  display: flex;
   flex-direction: column;
 }
 
@@ -33,11 +32,39 @@
 }
 
 .message-content {
-  margin-top: 5px;
+  margin-top: 1px;
 }
 
 .delete-button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+.chat-container {
+  padding-bottom: 7px;
+  border-bottom: solid 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.chat-sender {
+  text-align: left !important;
+  font-size: 1.5em; /* sender 크기 크게 */
+  margin-right: 20px; /* sender와 date 사이 간격 조정 */
+}
+
+.chat-date {
+  text-align: right !important;
+  font-size: 0.8em; /* date 크기 작게 */
+}
+
+.message-content {
+  padding: 4px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 0.01px;
 }

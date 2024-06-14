@@ -3,12 +3,13 @@ import { Link, useParams, useNavigate, redirect } from 'react-router-dom';
 import './recruitBoardDetail.css';
 import Comment from '../board/Comment';
 import axios from 'axios';
+import gganggan from '../../images/gganggan.jpeg'
 
 
 const RecruitBoardDetail = () => {
   const { boardNo } = useParams();
   const [liked, setLiked] = useState(false); 
-  const [likedCount, setLikedCount] = useState(0); 
+  const [likedCount, setLikedCount] = useState(13); 
   const [isScrapped, setIsScrapped] = useState(false);
   const [tags, setTags] = useState({})
   const [boardData, setBoardData] = useState([]);
@@ -24,6 +25,17 @@ const RecruitBoardDetail = () => {
       setTags(boardData.cboard_tags.split('/'));
     }
   },[boardData]);
+  
+    const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+  };
+  
   
   const loggedInUserId = "user123"; // 임시아이디
   const navigate = useNavigate();
@@ -64,16 +76,18 @@ const RecruitBoardDetail = () => {
                   {boardData?.board_title}
                   <span className="recruitment-status">{boardData?.recruit_done ? '구인 완료' : '구인중'}</span>
                 </h2>
-                <div className="board-detail-item tag-list">
-                  {Array.isArray(tags) && tags.map((tag, index) => (
-                    <React.Fragment key={index}>
-                      {tag && <span className="tag">{tag}</span>}
-                    </React.Fragment>
-                  ))}
-                </div>
+                <div className="board-detail-item sidetag-list">
+              <div className="sidetag-container">
+                {Array.isArray(tags) && tags.map((tag, index) => (
+                  <React.Fragment key={index}>
+                    {tag && <span className="sidetag-item">{tag}</span>}
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
                 <div className="author-profile">
                 <Link to={`/userProfile/${boardData?.author_no}`} className="author-profile-link">
-                  <img src={boardData?.MEMBER_PROFILE_PICTURE} alt="Profile" className="profile-picture" />
+                  <img src={gganggan} alt="Profile" className="profile-picture" />
                   {boardData?.member_nickname}
                 </Link>
               </div>
@@ -87,6 +101,10 @@ const RecruitBoardDetail = () => {
                   <img src={boardData.photo} alt="Board" className="board-photo" />
                 </div>
               )}
+              <div className="board-detail-item date-info">
+                   <span className="date-info-label">작성일 | </span>
+                   <span className="date-info-value">{formatDate(boardData?.board_writeday)}</span>
+              </div>
               <div className="button-container">
                 <div className="left-buttons">
                   <button className="like-button" onClick={toggleLike}>

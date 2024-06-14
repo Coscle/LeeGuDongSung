@@ -42,7 +42,7 @@
   transition: transform 0.3s;
   width: 150px;
   font-family: "YeojuCeramic";
-  text-decoration: none; /* 링크에 밑줄 없애기 */
+  text-decoration: none; 
 }
 
 .joinButton:hover {
@@ -58,6 +58,7 @@
   text-align: center;
   font-family: "YeojuCeramic";
   font-size: max(14px, 3vw);
+  margin: auto 0;
 }
 
 .button {

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './recruitBoardContent.css';
 import axios from 'axios';
 
-const ITEMS_PER_PAGE = 10; // 페이지당 아이템 수
+const ITEMS_PER_PAGE = 12; // 페이지당 아이템 수
 
 const RecruitBoardContent = (filtering, setFilter) => {
   const navigate = useNavigate();

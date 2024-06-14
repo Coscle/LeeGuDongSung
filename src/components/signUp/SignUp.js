@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './SignUp.css';
 import Swal from 'sweetalert2'
-
+import './SignUp.css';
 
 const SignUp = () => {
   const navigate = useNavigate(); 
@@ -16,65 +14,46 @@ const SignUp = () => {
   const [birthDate, setBirthDate] = useState('');
   const [gender, setGender] = useState('');
   const [error, setError] = useState('');
-
   const sweetalert = (title, contents, icon, confirmButtonText) => {
-    Swal.fire({
-        title: title,
-        text: contents,
-        icon: icon,
-        confirmButtonText: confirmButtonText
-        })
-  }
+        Swal.fire({
+            title: title,
+            text: contents,
+            icon: icon,
+            confirmButtonText: confirmButtonText
+            })
+    }
 
-  const handleSignUp = async (event) => {
-     event.preventDefault();	//기본 제출 동작을 막음
-     // 비밀번호 확인
-     if(phonePart1.length != 3 || phonePart1 !== '010'){
+
+  const handleSignUp = (event) => {
+    event.preventDefault();   //기본 제출 동작을 막음
+    // 비밀번호 확인
+    if(phonePart1.length != 3 || phonePart1 !== '010'){
         setError('전화번호 첫 부분 형식이 맞지 않습니다. 010으로 입력해주세요!');
         return;
-     }
-     if(phonePart2.length != 4){
+   }
+   if(phonePart2.length != 4){
         setError('전화번호 두 번째 부분 형식이 올바르지 않습니다. 4자리로 입력해주세요!');
         return;
-     }
-    if(phonePart3.length != 4){
+   }
+   if(phonePart3.length != 4){
         setError('전화번호 세 번째 부분 형식이 올바르지 않습니다. 4자리로 입력해주세요!');
         return;
-    }
+   }
     if (password !== confirmPassword) {
-      sweetalert("비밀번호가 일치하지 않습니다.",'','','확인');
+      sweetalert("비밀번호가 일치하지 않습니다.");
       return;
     }
-    
-    
     // 회원가입 로직
     const phoneNumber = `${phonePart1}${phonePart2}${phonePart3}`;
-    const userData = {
-      member_id: email,
-      member_pw: password,
-      member_birth: birthDate,
-      member_gender: gender === 'male' ? 1 : 2,
-      member_tel: phoneNumber,
-    };
     console.log('회원가입 시도:', email, password, confirmPassword, phoneNumber, birthDate, gender);
-  
-    try {
-      const response = await axios.post('/member', userData);
-      if (response.status === 201) {
-        console.log('다음페이지로 이동:', response.data);
-        navigate('/SignUp/TagSelection', { state: { email, phoneNumber, birthDate, gender, password } });
-      } else {
-        console.error('회원가입 실패:', response.data);
-      }
-    } catch (error) {
-      console.error('회원가입 중 에러 발생:', error);
-    }
-      // 테그 선택 페이지로 이동
+    // 테그 선택 페이지로 이동
+    navigate('/SignUp/TagSelection', {state: {email, phoneNumber, birthDate, gender, password}}); // password 추가
   };
 
   return (
+    <>
+        <div className="tetle">회원가입</div>
       <div className="signup-container">
-        <h2>회원가입</h2>
         <form onSubmit={handleSignUp}>
           <div className="form-group">
             <label htmlFor="email"></label>
@@ -110,38 +89,38 @@ const SignUp = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="phoneNumber"></label>
-            <div className="phone-inputs">
-              <input
-                type="tel"
-                id="phonePart1"
-                value={phonePart1}
-                onChange={(event) => setPhonePart1(event.target.value)}
-                maxLength="3"
-                placeholder="010"
-                required
-              /> -
-              {' '}
-              <input
-                type="tel"
-                id="phonePart2"
-                value={phonePart2}
-                onChange={(event) => setPhonePart2(event.target.value)}
-                maxLength="4"
-                placeholder="1234"
-                required
-              /> -
-              {' '}
-              <input
-                type="tel"
-                id="phonePart3"
-                value={phonePart3}
-                onChange={(event) => setPhonePart3(event.target.value)}
-                maxLength="4"
-                placeholder="5678"
-                required
-              />
-            </div>
+               <label htmlFor="phoneNumber"></label>
+               <div className="phone-inputs">
+                 <input
+                   type="tel"
+                   id="phonePart1"
+                   value={phonePart1}
+                   onChange={(event) => setPhonePart1(event.target.value)}
+                   maxLength="3"
+                   placeholder="010"
+                   required
+                 /> -
+                 {' '}
+                 <input
+                   type="tel"
+                   id="phonePart2"
+                   value={phonePart2}
+                   onChange={(event) => setPhonePart2(event.target.value)}
+                   maxLength="4"
+                   placeholder="1234"
+                   required
+                 /> -
+                 {' '}
+                 <input
+                   type="tel"
+                   id="phonePart3"
+                   value={phonePart3}
+                   onChange={(event) => setPhonePart3(event.target.value)}
+                   maxLength="4"
+                   placeholder="5678"
+                   required
+                 />
+               </div>
           </div>
           <div className="form-group">
             <label htmlFor="birthDate"></label>
@@ -171,6 +150,7 @@ const SignUp = () => {
         </form>
         {error && <span style={{ color: 'red' }}>{error}</span>}
       </div>
+      </>
   );
 };
 

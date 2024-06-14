@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './reviewBoardContent.css';
 import axios from 'axios';
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 12;
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);

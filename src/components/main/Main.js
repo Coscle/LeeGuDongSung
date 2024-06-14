@@ -55,7 +55,7 @@ function Main() {
           <div className='logo-container'>
 	          <a href="https://www.instagram.com/29dongsung?igsh=bnpyZGQ0Ym8zc2I1" target="_blank" className="logo-link">
 	            <img src={instagramLogo} className="logo" />
-	          </a><a href="https://www.facebook.com/profile.php?id=61560562423396&mibextid=ZbWKwL" target="_blank" className="logo-link">
+	          </a><a href="https://www.facebook.com/profile.php?id=61560642133003&mibextid=ZbWKwL" target="_blank" className="logo-link">
 	            <img src={facebookLogo} className="logo" />
 	          </a>
 	       </div>

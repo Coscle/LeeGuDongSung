@@ -50,7 +50,7 @@ const TagSelection = () => {
     event.preventDefault();
     const isAnyTagUnselected = tags.some((tag, index) => !selectedTags[index]);
     if (isAnyTagUnselected) 
-      sweetalert('선택되지않은 테그가 있습니다.','','','확인');
+      sweetalert('선택되지않은 태그가 있습니다.','','','확인');
     /*
     const userData = {
       member_nickname: nickname,
@@ -67,6 +67,7 @@ const TagSelection = () => {
       });
       if (response.status === 201) {
         console.log('User data saved:', response.data);
+        sweetalert('회원가입이 완료되었습니다.','','','확인');
         navigate('/');
       } else {
         console.error('Saving user data failed:', response.data);
@@ -77,13 +78,15 @@ const TagSelection = () => {
 
   };
 
+
+
   return (
     <div className="tag-selection-wrapper">
       <div className='info-container'>
-        <h2>개인정보 입력</h2>
+        <h2 className="tagtitles">개인정보 입력</h2>
         <form onSubmit={handleComplete}>
           <div className="form-group">
-            <label htmlFor="nickname"></label>
+            <label htmlFor="nickname">닉네임</label>
             <input
               type="text"
               id="nickname"
@@ -94,12 +97,12 @@ const TagSelection = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="snsType"></label>
+            <label htmlFor="snsType">SNS 타입</label>
             <select
               id="snsType"
               value={snsType}
               onChange={(e) => setSnsType(e.target.value)}
-              style={{ width: '97%' }}
+              style={{ width: '100%' }}
               required
             >
               <option value="">SNS 타입을 선택해주세요</option>
@@ -109,7 +112,7 @@ const TagSelection = () => {
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="snsAddress"></label>
+            <label htmlFor="snsAddress">SNS 주소</label>
             <input
               type="text"
               id="snsAddress"
@@ -120,7 +123,7 @@ const TagSelection = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="profilePicture">프로필 사진 첨부</label>{'   '}
+            <label htmlFor="profilePicture">프로필 사진 첨부</label>
             <input
               type="file"
               id="profilePicture"
@@ -128,27 +131,29 @@ const TagSelection = () => {
               onChange={(e) => setProfilePicture(e.target.files[0])}
             />
           </div>
-          <button type="submit" className="signup-button">가입 완료</button>
+          <button type="submit" className="signup-button" >가입 완료</button>
         </form>
       </div>
-      <div className="tag-container">
-        <h2>테그를 선택해주세요</h2>
-        {tags.map((tag, index) => (
-          <div key={index} className="tag-row">
-            <h4>{tag.title}</h4>
-            {tag.content.map((content, tagIndex) => (
-              <button
-                key={tagIndex}
-                type="button" // 기본 제출 동작 막음
-                className={`tag-button ${selectedTags[index] === content ? 'selected' : ''}`}
-                onClick={() => handleTagChange(content, index)}
-              >
-                {content}
-              </button>
-            ))}
-          </div>
+      <div className="tag-containerss">
+      <h2 className="tagtitles">테그를 선택해주세요</h2>
+  {tags.map((tag, index) => (
+    <div key={index} className="tag-row">
+      <span className="tagkind">{tag.title}</span>
+      <div className="tag-buttons-container">
+        {tag.content.map((content, tagIndex) => (
+          <button
+            key={tagIndex}
+            type="button"
+            className={`tag-button ${selectedTags[index] === content ? 'selected' : ''}`}
+            onClick={() => handleTagChange(content, index)}
+          >
+            {content}
+          </button>
         ))}
       </div>
+    </div>
+  ))}
+</div>
     </div>
   );
 };
